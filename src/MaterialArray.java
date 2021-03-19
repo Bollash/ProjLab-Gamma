@@ -1,3 +1,5 @@
+import exceptions.NotEnoughMaterialException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,14 @@ public class MaterialArray {
         this.materials = materials;
     }
 
-    public TpGate[] buildGates(){
+    public TpGate[] buildGates()throws NotEnoughMaterialException {
         asd;
         asd;
     }
 
-    public Robot buildRobot(){}
+    public void addMaterial(Material mat){}
+
+    public Robot buildRobot()throws NotEnoughMaterialException{}
 
     public boolean canBuildBase(){}
 

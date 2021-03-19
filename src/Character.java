@@ -16,7 +16,7 @@ public abstract class Character {
         ast.addCharacter(this);
     }
 
-    public abstract void act();
+    public void act(){};
 
     public abstract void die();
 

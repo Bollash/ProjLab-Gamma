@@ -1,23 +1,51 @@
-public class Settler extends Character{
-    private MaterialArray materials;
-    private TpGate[] tpGates;
+import exceptions.CantBeMinedException;
+import exceptions.CoreFullException;
+import exceptions.NotEnoughMaterialException;
 
-    public void mine(){
-        Material material = currentAsteroid.getMined();
-        if(materials.getMaterials().size() < 10){
-            materials.addMaterial(material);
-        }
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Settler extends Character{
+    /**
+     * Telepes nyersanyagai
+     */
+    private MaterialArray materials;
+
+    /**
+     * Telepes teleportkapui. Nullától kettőig terjedhet a márete.
+     */
+    private List<TpGate> tpGates;
+
+    public Settler(){
+        materials = new MaterialArray();
+        tpGates = new ArrayList<>();
     }
 
+    /**
+     * Kibányássza az asteroida magját, és beteszi a nyersanyagok közé, ha ott még 10 nél kevesebb darab van.
+     */
+    public void mine(){
+        Material material;
+        try {
+            material = currentAsteroid.getMined();
+            if(materials.getMaterials().size() < 10){
+                materials.addMaterial(material);
+            }
+        } catch (CantBeMinedException e) {
+            System.out.println("Asteroid cant be mined");
+        }
+
+    }
+
+    /**
+     * Radioaktív robbbanás következtében felrobban és meghal a telepes.
+     */
     @Override
     public void radExplode() {
         die();
     }
 
-    @Override
-    public void act() {
-        //TODO: Ki kéne találni ide mi jöjjön
-    }
 
     @Override
     public void die() {
@@ -25,17 +53,58 @@ public class Settler extends Character{
         space.setAliveSettlerCnt(space.getAliveSettlerCnt() - 1);
     }
 
-    public void buildBase(){}
+    public void buildBase(){
+        if(currentAsteroid.countMaterialOnSurface().canBuildBase()){
+            space.setGameOver(true);
+        }
+    }
 
-    public void craftGates(){}
+    public void craftGates(){
+        if(tpGates.size() == 0){
+            TpGate[] gates;
+            try {
+                gates = materials.buildGates();
+                tpGates.addAll(Arrays.asList(gates));
+            } catch (NotEnoughMaterialException e) {
+                System.out.println("Not enough material to craft");
+            }
 
-    public void craftRobots(){}
+        }
+    }
 
-    public void putMaterialBack(Material mat){}
+    public void craftRobots(){
+        try{
+            Robot r = materials.buildRobot();
+            space.addCharacter(r);
+            currentAsteroid.addCharacter(r);
+        }catch(NotEnoughMaterialException e){
+            System.out.println("Not enough material to craft");
+        }
+    }
 
-    public void putTpGateDown(){}
+    public void putMaterialBack(Material mat){
+        if(materials.getMaterials().contains(mat)){
+            try {
+                currentAsteroid.addCore(mat);
+                materials.getMaterials().remove(mat);
+            } catch (CoreFullException e) {
+                System.out.println("The asteroid core is not empty");
+            }
 
-    public void removeMaterial(Material mat){}
 
-    public void countMaterials(MaterialArray ma){}
+
+        }
+    }
+
+    public void putTpGateDown(){
+        if(tpGates.size() > 0){
+            tpGates.get(0).setOnAsteroid(currentAsteroid);
+            currentAsteroid.addNeighbour(tpGates.get(0));
+            tpGates.remove(0);
+        }
+    }
+
+    public MaterialArray getMaterials() {
+        return materials;
+    }
 }
