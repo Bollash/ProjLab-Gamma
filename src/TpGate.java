@@ -4,6 +4,7 @@ public class TpGate implements IAsteroid {
 
     private Asteroid onAsteroid;
 
+    public void
 
     @Override
     public void addCharacter(Character character) {
