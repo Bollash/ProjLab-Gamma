@@ -12,7 +12,9 @@ public class MaterialArray {
         this.materials = materials;
     }
 
-    public TpGate[] buildGates(){}
+    public TpGate[] buildGates(){
+        asd;
+    }
 
     public Robot buildRobot(){}
 
