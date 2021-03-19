@@ -14,7 +14,6 @@ public class MaterialArray {
 
     public TpGate[] buildGates(){
         asd;
-        asd;
     }
 
     public Robot buildRobot(){}
