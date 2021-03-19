@@ -1,10 +1,15 @@
+package modell;
+
+import modell.exceptions.MoveFailedException;
+
+import java.util.List;
 import java.util.Random;
 
 public class Robot extends Character{
 
     @Override
     public void radExplode() {
-        IAsteroid[] destination = currentAsteroid.getNeighbours();
+        List<IAsteroid> destination = currentAsteroid.getNeighbours();
 
         Random rnd = new Random(System.currentTimeMillis());
 
@@ -12,7 +17,7 @@ public class Robot extends Character{
         //TODO: rendesen megoldani ezt
         while(true){
             try{
-                destination[rnd.nextInt(destination.length)].addCharacter(this);
+                destination.get(rnd.nextInt(destination.size())).addCharacter(this);
                 break;
             }catch(MoveFailedException ignored){
             }

@@ -1,3 +1,5 @@
+package modell;
+
 public abstract class Character {
     protected Space space;
     protected Asteroid currentAsteroid;

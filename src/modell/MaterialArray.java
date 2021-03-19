@@ -1,4 +1,6 @@
-import exceptions.NotEnoughMaterialException;
+package modell;
+
+import modell.exceptions.NotEnoughMaterialException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +17,6 @@ public class MaterialArray {
     }
 
     public TpGate[] buildGates()throws NotEnoughMaterialException {
-        asd;
-        asd;
     }
 
     public void addMaterial(Material mat){}

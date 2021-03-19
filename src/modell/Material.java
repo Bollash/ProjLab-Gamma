@@ -1,3 +1,5 @@
+package modell;
+
 public abstract class Material {
     public void closeToSunAction(Asteroid ast){}
 

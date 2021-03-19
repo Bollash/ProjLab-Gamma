@@ -1,3 +1,5 @@
+package modell;
+
 public class Ice extends Material{
     @Override
     public MaterialType getType() {

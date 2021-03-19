@@ -1,3 +1,5 @@
+package modell;
+
 public class Uran extends Material{
     @Override
     public MaterialType getType() {

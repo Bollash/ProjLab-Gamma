@@ -1,6 +1,8 @@
-import exceptions.CantBeMinedException;
-import exceptions.CoreFullException;
-import exceptions.NotEnoughMaterialException;
+package modell;
+
+import modell.exceptions.CantBeMinedException;
+import modell.exceptions.CoreFullException;
+import modell.exceptions.NotEnoughMaterialException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +35,7 @@ public class Settler extends Character{
                 materials.addMaterial(material);
             }
         } catch (CantBeMinedException e) {
-            System.out.println("Asteroid cant be mined");
+            System.out.println("modell.Asteroid cant be mined");
         }
 
     }

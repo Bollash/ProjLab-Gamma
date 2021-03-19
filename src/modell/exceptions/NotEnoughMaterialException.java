@@ -1,4 +1,4 @@
-package exceptions;
+package modell.exceptions;
 
 public class NotEnoughMaterialException extends Exception{
     public NotEnoughMaterialException(String errorMessage){

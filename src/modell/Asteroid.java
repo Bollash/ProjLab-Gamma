@@ -1,5 +1,7 @@
-import exceptions.CantBeMinedException;
-import exceptions.CoreFullException;
+package modell;
+
+import modell.exceptions.CantBeMinedException;
+import modell.exceptions.CoreFullException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,5 +72,10 @@ public class Asteroid implements IAsteroid {
 
     public void setCoreMaterial(Material coreMaterial) {
         this.coreMaterial = coreMaterial;
+    }
+    
+    public Asteroid getDrillableNeighbour(){}
+
+    public List<IAsteroid> getNeighbours() {
     }
 }

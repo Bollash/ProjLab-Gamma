@@ -1,5 +1,7 @@
+package modell;
+
 /**
- * Ez az osztály írja le, hogy a TpGate-et hogyan tudjuk használni
+ * Ez az osztály írja le, hogy a modell.TpGate-et hogyan tudjuk használni
  */
 public class TpGate implements IAsteroid {
 
@@ -7,48 +9,46 @@ public class TpGate implements IAsteroid {
     private Asteroid onAsteroid;
 
     /**
-     * TpGate konstruktora
+     * modell.TpGate konstruktora
      */
-    public void TpGate(){
-
-    }
+    public void TpGate(){ }
 
     /**
-     * Annak az aszteroidának a lekérdezése, amelyiken az adott TpGate van
-     * @return      Az az aszteroida, amelyiken az adott TpGate van
+     * Annak az aszteroidának a lekérdezése, amelyiken az adott modell.TpGate van
+     * @return      Az az aszteroida, amelyiken az adott modell.TpGate van
      */
     public Asteroid getOnAsteroid() {
         return onAsteroid;
     }
 
     /**
-     * Az adott TpGate párjának lekérdezésa
-     * @return      Az adott TpGate párja
+     * Az adott modell.TpGate párjának lekérdezésa
+     * @return      Az adott modell.TpGate párja
      */
     public TpGate getLinkedTpGate() {
         return linkedTpGate;
     }
 
     /**
-     * Beállítja, hogy a TpGate melyik aszteroidára lett lehelyezve
-     * @param Asteroid       az aszteroida, amire tesszük a TpGate-et
+     * Beállítja, hogy a modell.TpGate melyik aszteroidára lett lehelyezve
+     * @param Asteroid       az aszteroida, amire tesszük a modell.TpGate-et
      */
     public void setOnAsteroid(Asteroid Asteroid) {
         onAsteroid = Asteroid;
     }
 
     /**
-     * Beállítja a TpGate párját
-     * @param TpGate       a TpGate-ünk párja
+     * Beállítja a modell.TpGate párját
+     * @param TpGate       a modell.TpGate-ünk párja
      */
     public void setLinkedTpGate(TpGate TpGate) {
         linkedTpGate = TpGate;
     }
 
     /**
-     * Ha egy karakter átlép egy olyan aszteroidára, amelyiken a TpGate párja van,
+     * Ha egy karakter átlép egy olyan aszteroidára, amelyiken a modell.TpGate párja van,
      * akkor levesszük az előző aszteroidáról, és áttesszük az újra
-     * @param character       a karakter, aki használja a TpGate-et
+     * @param character       a karakter, aki használja a modell.TpGate-et
      */
     @Override
     public void addCharacter(Character character) {
@@ -57,9 +57,9 @@ public class TpGate implements IAsteroid {
     }
 
     /**
-     * Ha egy egy olyan aszteroida felrobban, amelyiken a TpGate párja van,
+     * Ha egy egy olyan aszteroida felrobban, amelyiken a modell.TpGate párja van,
      * akkor levesszük kivesszük az adott aszteroida szomszédai közül
-     * @param asteroid       a karakter, aki használja a TpGate-et
+     * @param asteroid       a karakter, aki használja a modell.TpGate-et
      */
     @Override
     public void removeNeighbour(Asteroid asteroid) {
