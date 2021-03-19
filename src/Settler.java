@@ -1,6 +1,6 @@
 public class Settler extends Character{
     private MaterialArray materials;
-    private Tpgate[] tpGates;
+    private TpGate[] tpGates;
 
     public void mine(){
         Material material = currentAsteroid.getMined();

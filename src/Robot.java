@@ -4,7 +4,7 @@ public class Robot extends Character{
 
     @Override
     public void radExplode() {
-        IAddCharacter[] destination = currentAsteroid.getNeighbours();
+        IAsteroid[] destination = currentAsteroid.getNeighbours();
 
         Random rnd = new Random(System.currentTimeMillis());
 

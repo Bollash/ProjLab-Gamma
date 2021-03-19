@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Asteroid implements IAddCharacter{
+public class Asteroid implements IAsteroid {
 
-    private List<IAddCharacter> neighbours;
+    private List<IAsteroid> neighbours;
 
     private List<Character> charactersOnSurface;
 
@@ -28,7 +28,7 @@ public class Asteroid implements IAddCharacter{
 
     public Material getMined(){}
 
-    public void addNeighbour(IAddCharacter neighbour){}
+    public void addNeighbour(IAsteroid neighbour){}
 
     public MaterialArray countMaterialOnSurface(){}
 

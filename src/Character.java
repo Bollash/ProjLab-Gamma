@@ -12,7 +12,7 @@ public abstract class Character {
         currentAsteroid.getDrilled();
     }
 
-    public void move(IAddCharacter ast){
+    public void move(IAsteroid ast){
         ast.addCharacter(this);
     }
 

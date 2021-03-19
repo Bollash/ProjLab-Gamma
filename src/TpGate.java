@@ -1,4 +1,4 @@
-public class TpGate implements IAddCharacter{
+public class TpGate implements IAsteroid {
 
     private TpGate linkedTpGate;
 
