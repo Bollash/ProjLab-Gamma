@@ -3,6 +3,10 @@ package modell;
 import modell.exceptions.CantBeMinedException;
 
 public class Ice extends Material{
+    /**
+     * Ez a függvény visszaadja, hogy az adott material Ice
+     * @return az adott material Ice típusú
+     */
     @Override
     public MaterialType getType() {
         System.out.println("Belépett a getType-ba");
