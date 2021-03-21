@@ -89,7 +89,7 @@ public class Main {
         s.move(a2);
     }
 
-    public settlerUsesTpGate() {
+    public void settlerUsesTpGate() {
         Settler s = new Settler();
         Asteroid a1 = new Asteroid();
         Asteroid a2 = new Asteroid();
