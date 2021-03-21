@@ -49,7 +49,23 @@ public class Main {
         }
     }
 
-
+    public static void uranExplodes() {
+        ArrayList<Asteroid> astList = new ArrayList<Asteroid>();
+        Asteroid a1 = new Asteroid(0,5,0, null);
+        Asteroid a2 = new Asteroid();
+        Robot r = new Robot();
+        Uran u = new Uran();
+        a1.addNeighbour(a2);
+        a2.addNeighbour(a1);
+        a1.setCoreMaterial(u);
+        a1.addCharacter(r);
+        astList.add(a1);
+        astList.add(a2);
+        r.setCurrentAsteroid(a1);
+        Space s = new Space(0,5,5,astList,null);
+        System.out.println("------------test starts now----------------");
+        a1.handleCountDown();
+    }
 
     public static void craftRobot(){
         Settler s = new Settler();
@@ -109,6 +125,7 @@ public class Main {
         Settler s = new Settler();
         Asteroid a = new Asteroid();
         TpGate tpg1 = new TpGate();
+        s.set
         s.setCurrentAsteroid(a);
         a.addCharacter(s);
         s.addTpGate(tpg1);
