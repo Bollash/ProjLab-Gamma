@@ -94,7 +94,7 @@ public class Space {
     }
 
     /**
-     * Csükkenti a napviharszámlálót. Ha az elérte a nullát, akkor napvihar söpör végig a pályán, és a számláló a sunStormFreq értékre áll vissza.
+     * Csökkenti a napviharszámlálót. Ha az elérte a nullát, akkor napvihar söpör végig a pályán, és a számláló a sunStormFreq értékre áll vissza.
      */
     public void handleCountDown(){
         System.out.println("Belépett a handleCountDown-ba");
