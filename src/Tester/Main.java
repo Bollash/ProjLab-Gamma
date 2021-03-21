@@ -33,6 +33,7 @@ public class Main {
         s.setCurrentAsteroid(a);
         s.mine();
     }
+
     public void craftGates() {
         Settler s = new Settler();
         Asteroid a = new Asteroid();
