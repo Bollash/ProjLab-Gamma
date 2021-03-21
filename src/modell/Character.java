@@ -24,5 +24,7 @@ public abstract class Character {
 
     public abstract void die();
 
-    public void countMaterials(MaterialArray ma){}
+    public MaterialArray getMaterials(){
+        return new MaterialArray();
+    }
 }

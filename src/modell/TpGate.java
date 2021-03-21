@@ -66,4 +66,9 @@ public class TpGate implements IAsteroid {
         if(getLinkedTpGate().getOnAsteroid() == asteroid)
             getLinkedTpGate().getOnAsteroid().removeNeighbour(asteroid);
     }
+
+    @Override
+    public int getLayer() {
+        return linkedTpGate.getOnAsteroid().getLayer();
+    }
 }

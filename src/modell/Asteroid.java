@@ -2,6 +2,7 @@ package modell;
 
 import modell.exceptions.CantBeMinedException;
 import modell.exceptions.CoreFullException;
+import modell.exceptions.NoDrillableNeighbourException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +41,11 @@ public class Asteroid implements IAsteroid {
         }
         System.out.println("Kilépett a getDrilled-ből");
     }
+
     /**
-    * Ha már át lett fúrva a kéreg, akkor kiveszi a materialt és a meghívó megkapja azt.
+     * Ha már át lett fúrva a kéreg, akkor kiveszi a materialt és a meghívó megkapja azt.
+     * @return
+     * @throws CantBeMinedException
      */
     public Material getMined()throws CantBeMinedException {
         System.out.println("Belépett a getMined-be");
@@ -53,6 +57,7 @@ public class Asteroid implements IAsteroid {
                 return coreMaterial;
             }
             else{
+            System.out.println("CantBeMinedException exception-t dobott");
                 throw new CantBeMinedException("Layer is not 0");
             }
 
@@ -73,20 +78,21 @@ public class Asteroid implements IAsteroid {
      * Az aszteroidán lévő karakterek nyersanyagait összegyűjti és visszatér egy MaterialArray-el
      * amiben ezek vannak.
      */
-    //TODO
     public MaterialArray countMaterialsOnSurface(){
         System.out.println("Belépett a countMaterialOnSurface-be");
         MaterialArray materialArray = new MaterialArray();
         for (Character character : charactersOnSurface) {
-
-
+            materialArray = materialArray.plus(character.getMaterials());
         }
         System.out.println("Kilépett a countMaterialOnSurface-ből");
         return materialArray;
     }
 
+
     /**
      * Ha az aszteroida magja üres, akkor a kapott nyersanyagot beteszi a magjába, egyébként kivételt dob.
+     * @param material Ezt teszi be a magba
+     * @throws CoreFullException Már van material a magba
      */
     public void addCore(Material material)throws CoreFullException {
         System.out.println("Belépett az addCore-ba");
@@ -183,7 +189,17 @@ public class Asteroid implements IAsteroid {
         this.coreMaterial = coreMaterial;
     }
     //TODO
-    public Asteroid getDrillableNeighbour(){}
+    public IAsteroid getDrillableNeighbour()throws NoDrillableNeighbourException {
+        System.out.println("Belépett a getDrillableNeighbour-be");
+        for(IAsteroid ast: neighbours){
+            if(ast.getLayer() != 0){
+                System.out.println("Kilépett a getDrillableNeighbour-ból");
+                return ast;
+            }
+        }
+        System.out.println("NoDrillableNeighbourException exception-t dobott");
+        throw new NoDrillableNeighbourException("");
+    }
 
 
     public List<IAsteroid> getNeighbours() {
