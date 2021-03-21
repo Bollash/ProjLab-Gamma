@@ -75,6 +75,14 @@ public class Space {
         }
     }
 
+    public Space(int settlerCnt, int turnsTillSunStorm, int sunStormFreq, List<Asteroid> asteroids, List<Character> characters){
+        this.aliveSettlerCnt = settlerCnt;
+        this.turnsTillSunStorm = turnsTillSunStorm;
+        this.sunStormFreq = sunStormFreq;
+        this.asteroids = asteroids;
+        this.characters = characters;
+    }
+
     /**
      * Karakter kivevése az aktív karakterek közül
      * @param character Ez a karakter halt meg

@@ -51,10 +51,6 @@ public class MaterialArray {
         return mats;
     }
 
-    public void addMaterial(Material mat){
-        materials.add(mat);
-    }
-
     public Robot buildRobot()throws NotEnoughMaterialException{
         Map<MaterialType, Integer> mats = countMaterials();
 

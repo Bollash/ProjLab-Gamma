@@ -34,19 +34,22 @@ public class Asteroid implements IAsteroid {
      * A kéreg mérete 1-gyel csökken, ha pedig már 0 a méret, akkor nem történik semmi.
      */
     public void getDrilled(){
-        if(layer == 0){
-            return;
-        }
-        else {
+        System.out.println("Belépett a getDrilled-be");
+        if(layer != 0) {
             layer = layer-1;
         }
-
+        System.out.println("Kilépett a getDrilled-ből");
     }
     /**
     * Ha már át lett fúrva a kéreg, akkor kiveszi a materialt és a meghívó megkapja azt.
      */
     public Material getMined()throws CantBeMinedException {
-            if (layer == 0) {
+        System.out.println("Belépett a getMined-be");
+        if (layer == 0) {
+            if(coreMaterial == null){
+                throw new CantBeMinedException("No core material");
+            }
+                System.out.println("kilépett a getMined-ból");
                 return coreMaterial;
             }
             else{
@@ -59,9 +62,11 @@ public class Asteroid implements IAsteroid {
      * Ha a  paraméterként kapott objektum még nincs a szomszédok között, akkor bekerül oda.
      */
     public void addNeighbour(IAsteroid neighbour){
+        System.out.println("Belépett az addNeighbour-ba");
         if (!neighbours.contains(neighbour)){
             neighbours.add(neighbour);
         }
+        System.out.println("Kilépett az addNeighbour-ből");
     }
 
     /**
@@ -69,12 +74,14 @@ public class Asteroid implements IAsteroid {
      * amiben ezek vannak.
      */
     //TODO
-    public MaterialArray countMaterialOnSurface(){
+    public MaterialArray countMaterialsOnSurface(){
+        System.out.println("Belépett a countMaterialOnSurface-be");
         MaterialArray materialArray = new MaterialArray();
         for (Character character : charactersOnSurface) {
 
 
         }
+        System.out.println("Kilépett a countMaterialOnSurface-ből");
         return materialArray;
     }
 
@@ -82,8 +89,10 @@ public class Asteroid implements IAsteroid {
      * Ha az aszteroida magja üres, akkor a kapott nyersanyagot beteszi a magjába, egyébként kivételt dob.
      */
     public void addCore(Material material)throws CoreFullException {
+        System.out.println("Belépett az addCore-ba");
         if( coreMaterial == null){
             coreMaterial = material;
+            System.out.println("Kilépett az addCore-ből");
         }
         else{
             throw new CoreFullException("Core is already full");
@@ -94,18 +103,20 @@ public class Asteroid implements IAsteroid {
      * Radioaktív robbanás következtében meghívja minden rajta tartózkodó radExplode() metódusát.
      */
     public void explode(){
+        System.out.println("Belépett a explode-ba");
         for (Character character : charactersOnSurface) {
             character.radExplode();
         }
+        System.out.println("Kilépett az explode-ból");
     }
 
     /**
      * Ha a kapott karakter szerepel az aszteroidán lévők listájában, akkor kiveszi onnan.
      */
     public void removeCharacter(Character character){
-        if (charactersOnSurface.contains(character)){
-            charactersOnSurface.remove(character);
-        }
+        System.out.println("Belépett a removeCharacter-be");
+        charactersOnSurface.remove(character);
+        System.out.println("Kilépett a removeCharacter-ből");
     }
 
     /**
@@ -113,6 +124,7 @@ public class Asteroid implements IAsteroid {
      * a magban lévő nyersanyag closeToSunAction-jét, majd visszaállítja a számlálót.
      */
     public void handleCountDown(){
+        System.out.println("Belépett a handleCountDown-ba");
         turnsTillCloseToSun = turnsTillCloseToSun -1;
         if(turnsTillCloseToSun ==0){
             if(layer ==0){
@@ -121,6 +133,7 @@ public class Asteroid implements IAsteroid {
             }
             turnsTillCloseToSun = closeToSunFreq;
         }
+        System.out.println("Kilépett a handleCountDown-ból");
     }
 
     /**
@@ -128,9 +141,11 @@ public class Asteroid implements IAsteroid {
      */
     @Override
     public void addCharacter(Character character) {
+        System.out.println("Belépett az addCharacter-be");
         if(!charactersOnSurface.contains(character)){
             charactersOnSurface.add(character);
         }
+        System.out.println("Kilépett az addCharacter-ből");
     }
 
     /**
@@ -138,22 +153,33 @@ public class Asteroid implements IAsteroid {
      */
     @Override
     public void removeNeighbour(Asteroid asteroid) {
+        System.out.println("Belépett a removeNeighbour-ba");
         neighbours.remove(asteroid);
+        System.out.println("Kilépett a removeNeighbour-ból");
     }
 
     public int getLayer() {
+        System.out.println("Belépett a getLayer-be");
+        System.out.println("Kilépett a getLayer-ből");
         return layer;
+
     }
 
     public void setLayer(int layer) {
+        System.out.println("Belépett a setLayer-be");
+        System.out.println("Kilépett a setLayer-ből");
         this.layer = layer;
     }
 
     public Material getCoreMaterial() {
+        System.out.println("Belépett a getCoreMaterial-ba");
+        System.out.println("Kilépett a getCoreMaterial-ból");
         return coreMaterial;
     }
 
     public void setCoreMaterial(Material coreMaterial) {
+        System.out.println("Belépett a setCoreMaterial-ba");
+        System.out.println("Kilépett a getCoreMaterial-ból");
         this.coreMaterial = coreMaterial;
     }
     //TODO
@@ -161,6 +187,8 @@ public class Asteroid implements IAsteroid {
 
 
     public List<IAsteroid> getNeighbours() {
+        System.out.println("Belépett a getNeighbour-ba");
+        System.out.println("Kilépett a getNeighbour-ből");
         return neighbours;
     }
 }

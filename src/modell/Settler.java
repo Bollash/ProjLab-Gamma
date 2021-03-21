@@ -56,7 +56,7 @@ public class Settler extends Character{
     }
 
     public void buildBase(){
-        if(currentAsteroid.countMaterialOnSurface().canBuildBase()){
+        if(currentAsteroid.countMaterialsOnSurface().canBuildBase()){
             space.setGameOver(true);
         }
     }
@@ -66,6 +66,8 @@ public class Settler extends Character{
             TpGate[] gates;
             try {
                 gates = materials.buildGates();
+                gates[0].setLinkedTpGate(gates[1]);
+                gates[1].setLinkedTpGate(gates[0]);
                 tpGates.addAll(Arrays.asList(gates));
             } catch (NotEnoughMaterialException e) {
                 System.out.println("Not enough material to craft");
@@ -92,9 +94,6 @@ public class Settler extends Character{
             } catch (CoreFullException e) {
                 System.out.println("The asteroid core is not empty");
             }
-
-
-
         }
     }
 

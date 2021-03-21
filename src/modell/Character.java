@@ -1,5 +1,7 @@
 package modell;
 
+import modell.exceptions.MoveFailedException;
+
 public abstract class Character {
     protected Space space;
     protected Asteroid currentAsteroid;
@@ -14,7 +16,7 @@ public abstract class Character {
         currentAsteroid.getDrilled();
     }
 
-    public void move(IAsteroid ast){
+    public void move(IAsteroid ast) throws MoveFailedException {
         ast.addCharacter(this);
     }
 
