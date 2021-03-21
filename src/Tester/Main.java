@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        craftRobot();
     }
 
     public static void craftRobot(){
@@ -36,6 +35,7 @@ public class Main {
     public void settlerDrill(){
         Settler s = new Settler();
         Asteroid a = new Asteroid();
+        s.setCurrentAsteroid(a);
         System.out.println("------------test starts now----------------");
         s.drill();
     }
