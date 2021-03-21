@@ -125,7 +125,6 @@ public class Main {
         Settler s = new Settler();
         Asteroid a = new Asteroid();
         TpGate tpg1 = new TpGate();
-        s.set
         s.setCurrentAsteroid(a);
         a.addCharacter(s);
         s.addTpGate(tpg1);
