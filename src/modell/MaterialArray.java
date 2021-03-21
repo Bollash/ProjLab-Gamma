@@ -89,8 +89,8 @@ public class MaterialArray {
 
     public List<Material> getMaterials() {
         System.out.println("Belépett a getMaterials-ba");
-        return materials;
         System.out.println("Kilépett a getMaterials-ból");
+        return materials;
     }
 
     public MaterialArray plus(MaterialArray ma){
