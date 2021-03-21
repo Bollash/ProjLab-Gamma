@@ -141,4 +141,8 @@ public class Settler extends Character{
     public void setMaterialArray(MaterialArray arr) {
         materials = arr;
     }
+
+    public void addTpGate(TpGate tpg1) {
+        tpGates.add(tpg1);
+    }
 }

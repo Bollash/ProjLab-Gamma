@@ -66,8 +66,9 @@ public class TpGate implements IAsteroid {
         if(linkedTpGate.getOnAsteroid() == null){
             throw new MoveFailedException("TpGate not on asteroid");
         }
-        linkedTpGate.getOnAsteroid().addCharacter(character);
-        linkedTpGate.getOnAsteroid().removeCharacter(character);
+        Asteroid ast = linkedTpGate.getOnAsteroid();
+        ast.addCharacter(character);
+        ast.removeCharacter(character);
         System.out.println("Kilépett az addCharacter-ból");
     }
 

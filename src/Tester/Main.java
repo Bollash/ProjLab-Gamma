@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        sunStorm();
+        settlerUsesTpGate();
     }
 
     public static void craftRobot(){
@@ -34,7 +34,7 @@ public class Main {
         s.craftRobot();
     }
 
-    public void settlerDrill(){
+    public static void settlerDrill(){
         Settler s = new Settler();
         Asteroid a = new Asteroid();
         s.setCurrentAsteroid(a);
@@ -42,16 +42,17 @@ public class Main {
         s.drill();
     }
 
-    public void settlerMine(){
+    public static void settlerMine(){
         Settler s = new Settler();
         Iron irn = new Iron();
         Asteroid a = new Asteroid(0,5, 5, irn);
         a.addCharacter(s);
         s.setCurrentAsteroid(a);
+        System.out.println("------------test starts now----------------");
         s.mine();
     }
 
-    public void craftGates() {
+    public static void craftGates() {
         Settler s = new Settler();
         Iron i1 = new Iron();
         Iron i2 = new Iron();
@@ -61,15 +62,18 @@ public class Main {
         s.getMaterials().addMaterial(i2);
         s.getMaterials().addMaterial(ic);
         s.getMaterials().addMaterial(u);
+        System.out.println("------------test starts now----------------");
         s.craftGates();
     }
 
-    public void putTpGateDown() {
+    public static void putTpGateDown() {
         Settler s = new Settler();
         Asteroid a = new Asteroid();
         TpGate tpg1 = new TpGate();
         s.setCurrentAsteroid(a);
         a.addCharacter(s);
+        s.addTpGate(tpg1);
+        System.out.println("------------test starts now----------------");
         s.putTpGateDown();
     }
 
@@ -81,10 +85,11 @@ public class Main {
         a1.addCharacter(s);
         a1.addNeighbour(a2);
         a2.addNeighbour(a1);
+        System.out.println("------------test starts now----------------");
         s.move(a2);
     }
 
-    public void settlerUsesTpGate() {
+    public static void settlerUsesTpGate() {
         Settler s = new Settler();
         Asteroid a1 = new Asteroid();
         Asteroid a2 = new Asteroid();
@@ -94,6 +99,16 @@ public class Main {
         t2.setLinkedTpGate(t1);
         a1.addCharacter(s);
         s.setCurrentAsteroid(a1);
+
+        t1.setOnAsteroid(a1);
+        t2.setOnAsteroid(a2);
+        try {
+            System.out.println("------------test starts now----------------");
+            s.move(t1);
+        } catch (MoveFailedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void sunStorm(){
@@ -110,5 +125,22 @@ public class Main {
 
         System.out.println("------------test starts now----------------");
         space.handleCountDown();
+    }
+
+    public static void iceGetsCloseToSun() {
+        Ice i = new Ice();
+        Asteroid a = new Asteroid(0, 5, 0, i);
+        System.out.println("------------test starts now----------------");
+        a.handleCountDown();
+    }
+    public static void settlerPutsMaterialBack() {
+        Settler s = new Settler();
+        Asteroid a = new Asteroid(0, 5, 5, null);
+        s.setCurrentAsteroid(a);
+        a.addCharacter(s);
+        Ice i = new Ice();
+        s.getMaterials().addMaterial(i);
+        System.out.println("------------test starts now----------------");
+        s.putMaterialBack(i);
     }
 }
