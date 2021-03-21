@@ -1,5 +1,7 @@
 package modell;
 
+import modell.exceptions.CantBeMinedException;
+
 public class Ice extends Material{
     @Override
     public MaterialType getType() {
@@ -8,6 +10,9 @@ public class Ice extends Material{
 
     @Override
     public void closeToSunAction(Asteroid ast) {
-        ast.getMined();
+        try {
+            ast.getMined();
+        } catch (CantBeMinedException ignored) {
+        }
     }
 }
