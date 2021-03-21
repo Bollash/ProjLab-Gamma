@@ -21,6 +21,19 @@ public class Asteroid implements IAsteroid {
 
     private Material coreMaterial;
 
+    /**
+     * constructor with default parameter
+     */
+    public Asteroid(){
+        neighbours = new ArrayList<>();
+        charactersOnSurface = new ArrayList<>();
+
+        layer = 3;
+        closeToSunFreq = 3;
+        turnsTillCloseToSun = 3;
+        coreMaterial = new Iron();
+    }
+
     public Asteroid(int layer, int closeToSunFreq, int turnsTillCloseToSun, Material core){
         neighbours = new ArrayList<>();
         charactersOnSurface = new ArrayList<>();
