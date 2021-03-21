@@ -17,6 +17,7 @@ public abstract class Character {
     }
 
     public void move(IAsteroid ast) throws MoveFailedException {
+        System.out.println("Belépett a move-ba");
         ast.addCharacter(this);
     }
 
