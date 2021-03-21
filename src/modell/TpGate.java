@@ -1,5 +1,7 @@
 package modell;
 
+import modell.exceptions.MoveFailedException;
+
 /**
  * Ez az osztály írja le, hogy a modell.TpGate-et hogyan tudjuk használni
  */
@@ -59,10 +61,13 @@ public class TpGate implements IAsteroid {
      * @param character       a karakter, aki használja a modell.TpGate-et
      */
     @Override
-    public void addCharacter(Character character) {
+    public void addCharacter(Character character) throws MoveFailedException {
         System.out.println("Belépett az addCharacter-ba");
-        getLinkedTpGate().getOnAsteroid().addCharacter(character);
-        getLinkedTpGate().getOnAsteroid().removeCharacter(character);
+        if(linkedTpGate.getOnAsteroid() == null){
+            throw new MoveFailedException("TpGate not on asteroid");
+        }
+        linkedTpGate.getOnAsteroid().addCharacter(character);
+        linkedTpGate.getOnAsteroid().removeCharacter(character);
         System.out.println("Kilépett az addCharacter-ból");
     }
 

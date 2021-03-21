@@ -8,6 +8,9 @@ import java.util.Random;
 
 public class Robot extends Character{
 
+    /**
+     * Radioaktív robbanás miatt egy szomszédos aszteroidán landol a robot
+     */
     @Override
     public void radExplode() {
         System.out.println("Belépett a radExplode-be");
@@ -27,8 +30,11 @@ public class Robot extends Character{
         }
     }
 
+    /**
+     * Ha a current asteroid még nincs átfúrva akkor fúr. Ha át van akkor egy nem átfúrt szomszédra mozog
+     */
     @Override
-    public void act() throws NoDrillableNeighbourException, MoveFailedException {
+    public void act(){
         System.out.println("Belépett az act-ba");
         if(currentAsteroid.getLayer() > 0){
             currentAsteroid.getDrilled();
@@ -39,10 +45,17 @@ public class Robot extends Character{
             currentAsteroid.getDrillableNeighbour().addCharacter(this);
         }catch (NoDrillableNeighbourException ex){
             Random rnd = new Random(System.currentTimeMillis());
-            currentAsteroid.getNeighbours().get(rnd.nextInt(currentAsteroid.getNeighbours().size()));
+            try {
+                currentAsteroid.getNeighbours().get(rnd.nextInt(currentAsteroid.getNeighbours().size())).addCharacter(this);
+            } catch (MoveFailedException e) {
+                e.printStackTrace();
+            }
         }catch (MoveFailedException ignored){}
     }
 
+    /**
+     * a robot meghal
+     */
     @Override
     public void die() {
         System.out.println("Belépett a die-ba");
