@@ -43,12 +43,6 @@ public class Main {
 
     public void settlerMine(){
         Settler s = new Settler();
-        Asteroid a = new Asteroid();
-        s.mine();
-    }
-
-    public void settlerMine(){
-        Settler s = new Settler();
         Iron irn = new Iron();
         Asteroid a = new Asteroid(0,5, 5, irn);
         a.addCharacter(s);
