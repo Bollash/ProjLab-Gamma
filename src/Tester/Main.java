@@ -10,42 +10,57 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        System.out.println("1 -> craftRobot\n" +
-                "2 -> settlerDrill\n" +
-                "3 -> settlerMine\n" +
-                "4 -> craftGates\n" +
-                "5 -> putTpGateDown\n" +
-                "6 -> settlerMoves\n" +
-                "7 -> settlerUsesTpGate\n" +
-                "8 -> sunStorm\n" +
-                "9 -> iceGetsCloseToSun\n" +
-                "10 -> settlerPutsMaterialBack\n" +
-                "11 -> _2ndToLastSettlerDies\n" +
-                "12 -> aiControllsRobot\n" +
-                "13 -> uranExplodes\n" +
-                "14 -> buildBase\n" +
-                "15 -> exit\n" +
-                "-----------------------------------\n" +
-                "Válasszon egy tesztesetet!");
         while(true){
+            System.out.println("1 -> craftRobot\n" +
+                    "2 -> settlerDrill\n" +
+                    "3 -> settlerMine\n" +
+                    "4 -> craftGates\n" +
+                    "5 -> putTpGateDown\n" +
+                    "6 -> settlerMoves\n" +
+                    "7 -> settlerUsesTpGate\n" +
+                    "8 -> sunStorm\n" +
+                    "9 -> iceGetsCloseToSun\n" +
+                    "10 -> settlerPutsMaterialBack\n" +
+                    "11 -> _2ndToLastSettlerDies\n" +
+                    "12 -> aiControllsRobot\n" +
+                    "13 -> uranExplodes\n" +
+                    "14 -> buildBase\n" +
+                    "15 -> exit\n" +
+                    "-----------------------------------\n" +
+                    "Válasszon egy tesztesetet!");
             Scanner input = new Scanner(System.in);
             int testcase = input.nextInt();
             switch (testcase) {
-                case 1 -> craftRobot();
-                case 2 -> settlerDrill();
-                case 3 -> settlerMine();
-                case 4 -> craftGates();
-                case 5 -> putTpGateDown();
-                case 6 -> settlerMoves();
-                case 7 -> settlerUsesTpGate();
-                case 8 -> sunStorm();
-                case 9 -> iceGetsCloseToSun();
-                case 10 -> settlerPutsMaterialBack();
-                case 11 -> _2ndToLastSettlerDies();
-                case 12 -> aiControllsRobot();
-                case 13 -> uranExplodes();
-                case 14 -> buildBase();
-                case 15 -> System.exit(0);
+                case 1 : craftRobot();
+                break;
+                case 2 : settlerDrill();
+                break;
+                case 3 : settlerMine();
+                break;
+                case 4 : craftGates();
+                break;
+                case 5 : putTpGateDown();
+                break;
+                case 6 : settlerMoves();
+                break;
+                case 7 : settlerUsesTpGate();
+                break;
+                case 8 : sunStorm();
+                break;
+                case 9 : iceGetsCloseToSun();
+                break;
+                case 10 : settlerPutsMaterialBack();
+                break;
+                case 11 : _2ndToLastSettlerDies();
+                break;
+                case 12 : aiControllsRobot();
+                break;
+                case 13 : uranExplodes();
+                break;
+                case 14 : buildBase();
+                break;
+                case 15 : System.exit(0);
+                break;
             }
             System.out.println("------------test ended----------------");
 
