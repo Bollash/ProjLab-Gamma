@@ -48,9 +48,24 @@ public class Settler extends Character{
     public boolean radExplode() {
         System.out.println("Belépett a radExplode-ba");
         space.removeCharacter(this);
-        space.setAliveSettlerCnt(space.getAliveSettlerCnt() - 1);
+        int value = space.getAliveSettlerCnt() - 1;
+        space.setAliveSettlerCnt(value);
+        if(value <= 1) space.setGameOver(true);
         System.out.println("Kilépett a radexplode-ból");
         return true;
+    }
+
+    @Override
+    public boolean getSunStormed(){
+        System.out.println("Belépett a getSunStormed-ba");
+        System.out.println("Kilépett a getSunStromed-ból");
+        if(currentAsteroid.getLayer() != 0 || currentAsteroid.getCoreMaterial() != null){
+            currentAsteroid.removeCharacter(this);
+            int value = space.getAliveSettlerCnt() - 1;
+            space.setAliveSettlerCnt(value);
+            if(value <= 1) space.setGameOver(true);
+        }
+        return false;
     }
 
     //Todo
