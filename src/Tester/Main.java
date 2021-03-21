@@ -132,7 +132,7 @@ public class Main {
         s.putTpGateDown();
     }
 
-    public static void settlerMoves() throws MoveFailedException {
+    public void settlerMoves() throws MoveFailedException {
         Settler s = new Settler();
         Asteroid a1 = new Asteroid();
         Asteroid a2 = new Asteroid();
@@ -198,4 +198,100 @@ public class Main {
         System.out.println("------------test starts now----------------");
         s.putMaterialBack(i);
     }
+
+    public static void _2ndToLastSettlerDies(){
+        Settler s1 = new Settler();
+        Settler s2 = new Settler();
+
+        List<Character> chars = new ArrayList<>();
+        chars.add(s1);
+        chars.add(s2);
+
+        Space space = new Space(2, 3, 3, new ArrayList<Asteroid>(), chars);
+
+        Asteroid ast = new Asteroid();
+        s1.setSpace(space);
+        s1.setCurrentAsteroid(ast);
+        s2.setSpace(space);
+        s2.setCurrentAsteroid(ast);
+
+        System.out.println("------------test starts now----------------");
+        s1.radExplode();
+    }
+
+    public static void AiControllsRobot(){
+        Robot r = new Robot();
+        Asteroid a1 = new Asteroid(0, 3, 3, null);
+        Asteroid a2 = new Asteroid();
+        a1.addNeighbour(a2);
+        a2.addNeighbour(a1);
+        r.setCurrentAsteroid(a1);
+        a1.addCharacter(r);
+        System.out.println("------------test starts now----------------");
+        r.act();
+    }
+
+    public static void buildBase(){
+        Asteroid ast = new Asteroid();
+
+        Settler s1 = new Settler();
+        s1.setCurrentAsteroid(ast);
+        ast.addCharacter(s1);
+
+        Iron iron1 = new Iron();
+        Iron iron2 = new Iron();
+        Iron iron3 = new Iron();
+
+        Coal coal1 = new Coal();
+        Coal coal2 = new Coal();
+        Coal coal3 = new Coal();
+
+        Ice ice1 = new Ice();
+        Ice ice2 = new Ice();
+        Ice ice3 = new Ice();
+
+        MaterialArray arr1 = new MaterialArray();
+
+        arr1.addMaterial(iron1);
+        arr1.addMaterial(iron2);
+        arr1.addMaterial(iron3);
+        arr1.addMaterial(coal1);
+        arr1.addMaterial(coal2);
+        arr1.addMaterial(coal3);
+        arr1.addMaterial(ice1);
+        arr1.addMaterial(ice2);
+        arr1.addMaterial(ice3);
+
+        s1.setMaterialArray(arr1);
+
+        Settler s2 = new Settler();
+        s2.setCurrentAsteroid(ast);
+        ast.addCharacter(s2);
+
+        Uran uran1 = new Uran();
+        Uran uran2 = new Uran();
+        Uran uran3 = new Uran();
+
+        MaterialArray arr2 = new MaterialArray();
+        arr2.addMaterial(uran1);
+        arr2.addMaterial(uran2);
+        arr2.addMaterial(uran3);
+
+        s2.setMaterialArray(arr2);
+
+        List<Character> chars = new ArrayList<>();
+        chars.add(s1);
+        chars.add(s2);
+
+        List<Asteroid> asts = new ArrayList<>();
+        asts.add(ast);
+
+        Space space = new Space(2, 3, 3, asts, chars);
+        s1.setSpace(space);
+        s2.setSpace(space);
+
+        s1.buildBase();
+    }
+
+
 }
