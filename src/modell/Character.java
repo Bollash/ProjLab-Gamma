@@ -1,6 +1,7 @@
 package modell;
 
 import modell.exceptions.MoveFailedException;
+import modell.exceptions.NoDrillableNeighbourException;
 
 public abstract class Character {
     protected Space space;
@@ -37,7 +38,7 @@ public abstract class Character {
         System.out.println("Kilépett a move-ból");
     }
 
-    public abstract void act();
+    public abstract void act() throws NoDrillableNeighbourException;
 
     public abstract void die();
 
