@@ -48,6 +48,11 @@ public class Settler extends Character{
         die();
     }
 
+    @Override
+    public void act() {
+
+    }
+
 
     @Override
     public void die() {
