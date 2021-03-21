@@ -123,9 +123,7 @@ public class Asteroid implements IAsteroid {
      */
     public void explode(){
         System.out.println("Belépett a explode-ba");
-        for (Character character : charactersOnSurface) {
-            character.radExplode();
-        }
+        charactersOnSurface.removeIf(Character::radExplode);
         System.out.println("Kilépett az explode-ból");
     }
 

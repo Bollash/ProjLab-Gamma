@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
+        sunStorm();
     }
 
     public static void craftRobot(){
@@ -93,5 +94,21 @@ public class Main {
         t2.setLinkedTpGate(t1);
         a1.addCharacter(s);
         s.setCurrentAsteroid(a1);
+    }
+
+    public static void sunStorm(){
+        Settler s = new Settler();
+        List<Character> chars = new ArrayList<>();
+        chars.add(s);
+        Asteroid a = new Asteroid();
+        List<Asteroid> asts = new ArrayList<>();
+        asts.add(a);
+        Space space = new Space(1, 1, 10, asts, chars);
+        s.setSpace(space);
+        s.setCurrentAsteroid(a);
+        a.addCharacter(s);
+
+        System.out.println("------------test starts now----------------");
+        space.handleCountDown();
     }
 }

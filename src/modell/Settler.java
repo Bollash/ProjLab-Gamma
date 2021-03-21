@@ -45,28 +45,17 @@ public class Settler extends Character{
      * Radioaktív robbbanás következtében felrobban és meghal a telepes.
      */
     @Override
-    public void radExplode() {
+    public boolean radExplode() {
         System.out.println("Belépett a radExplode-ba");
-        die();
-        System.out.println("Kilépett a mine-ból");
+        space.removeCharacter(this);
+        space.setAliveSettlerCnt(space.getAliveSettlerCnt() - 1);
+        System.out.println("Kilépett a radexplode-ból");
+        return true;
     }
 
     //Todo
     @Override
     public void act() {
-    }
-
-
-    /**
-     * A telepes meghal. Kiveszi magát a space-ből és a currentAsteroid-ból
-     */
-    @Override
-    public void die() {
-        System.out.println("Belépett a die-ba");
-        space.removeCharacter(this);
-        space.setAliveSettlerCnt(space.getAliveSettlerCnt() - 1);
-        currentAsteroid.removeCharacter(this);
-        System.out.println("Kilépett a die-ból");
     }
 
     /**

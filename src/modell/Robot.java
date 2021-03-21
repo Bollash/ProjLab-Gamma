@@ -12,7 +12,7 @@ public class Robot extends Character{
      * Radioaktív robbanás miatt egy szomszédos aszteroidán landol a robot
      */
     @Override
-    public void radExplode() {
+    public boolean radExplode() {
         System.out.println("Belépett a radExplode-be");
         List<IAsteroid> destination = currentAsteroid.getNeighbours();
 
@@ -24,7 +24,7 @@ public class Robot extends Character{
             try{
                 destination.get(rnd.nextInt(destination.size())).addCharacter(this);
                 System.out.println("Kilépett a radExplode-ból");
-                return;
+                return false;
             }catch(MoveFailedException ignored){
             }
         }
@@ -51,15 +51,5 @@ public class Robot extends Character{
                 e.printStackTrace();
             }
         }catch (MoveFailedException ignored){}
-    }
-
-    /**
-     * a robot meghal
-     */
-    @Override
-    public void die() {
-        System.out.println("Belépett a die-ba");
-        space.removeCharacter(this);
-        System.out.println("Kilépett a die-ból");
     }
 }

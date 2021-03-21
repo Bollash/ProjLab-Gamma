@@ -1,6 +1,7 @@
 package modell;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -101,9 +102,7 @@ public class Space {
         turnsTillSunStorm--;
 
         if(turnsTillSunStorm == 0){
-            for (Character character: characters) {
-                character.getSunStormed();
-            }
+            characters.removeIf(Character::getSunStormed);
             turnsTillSunStorm = sunStormFreq;
         }
         System.out.println("Kilépett a handleCountDown-ba");

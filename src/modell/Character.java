@@ -7,15 +7,15 @@ public abstract class Character {
     protected Space space;
     protected Asteroid currentAsteroid;
 
-    public abstract void radExplode();
+    public abstract boolean radExplode();
 
     /**
      * Napvihar éri a karaktert és ha nem tud elbújni meghal
      */
-    public void getSunStormed(){
+    public boolean getSunStormed(){
         System.out.println("Belépett a getSunStormed-ba");
-        if(currentAsteroid.getLayer() != 0 || currentAsteroid.getCoreMaterial() != null) die();
         System.out.println("Kilépett a getSunStromed-ból");
+        return currentAsteroid.getLayer() != 0 || currentAsteroid.getCoreMaterial() != null;
     }
 
     /**
@@ -39,8 +39,6 @@ public abstract class Character {
     }
 
     public abstract void act() throws NoDrillableNeighbourException;
-
-    public abstract void die();
 
     public MaterialArray getMaterials(){
         System.out.println("Belépett a getMaterials-ba");
