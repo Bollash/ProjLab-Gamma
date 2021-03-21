@@ -188,7 +188,7 @@ public class Asteroid implements IAsteroid {
 
     public void setCoreMaterial(Material coreMaterial) {
         System.out.println("Belépett a setCoreMaterial-ba");
-        System.out.println("Kilépett a getCoreMaterial-ból");
+        System.out.println("Kilépett a setCoreMaterial-ból");
         this.coreMaterial = coreMaterial;
     }
 
