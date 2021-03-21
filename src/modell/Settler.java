@@ -148,4 +148,8 @@ public class Settler extends Character{
     public MaterialArray getMaterials() {
         return materials;
     }
+
+    public void setMaterialArray(MaterialArray arr) {
+        materials = arr;
+    }
 }

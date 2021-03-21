@@ -51,4 +51,8 @@ public abstract class Character {
     public void setCurrentAsteroid(Asteroid ast){
         currentAsteroid = ast;
     }
+
+    public void setSpace(Space space) {
+        this.space = space;
+    }
 }
