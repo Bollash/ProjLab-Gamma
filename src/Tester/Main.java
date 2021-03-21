@@ -10,4 +10,16 @@ public class Main {
         Settler s = new Settler();
         Asteroid a = new Asteroid();
     }
+
+    public void settlerDrill(){
+        Settler s = new Settler();
+        Asteroid a = new Asteroid();
+        s.drill();
+    }
+
+    public void settlerMine(){
+        Settler s = new Settler();
+        Asteroid a = new Asteroid();
+        s.mine();
+    }
 }

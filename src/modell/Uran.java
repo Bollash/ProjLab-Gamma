@@ -1,6 +1,10 @@
 package modell;
 
 public class Uran extends Material{
+    /**
+     * Ez a függvény visszaadja, hogy az adott material Uran
+     * @return az adott material Uran típusú
+     */
     @Override
     public MaterialType getType() {
         System.out.println("Belépett a getType-ba");
