@@ -14,6 +14,11 @@ public class Ice extends Material{
         return MaterialType.Ice;
     }
 
+    /**
+     * Ha napközelben van és az aszteroida kérge ki van fúrva, akkor kikerül a magban lévő nyersanyag
+     * a getMined() függvény segítségével.
+     * @param ast az adott aszteroidán lévő Ice
+     */
     @Override
     public void closeToSunAction(Asteroid ast) {
         System.out.println("Belépett a closeToSunAction-be");

@@ -12,6 +12,10 @@ public class Uran extends Material{
         return MaterialType.Uran;
     }
 
+    /**
+     * Radioaktív robbanás következik be és meghívja az aszteroida explode metódusát.
+     * @param ast az adott aszteroida, amiben az Uran van.
+     */
     @Override
     public void closeToSunAction(Asteroid ast) {
         System.out.println("Belépett a closeToSunAction-be");
