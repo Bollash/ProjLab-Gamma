@@ -18,6 +18,11 @@ public class MaterialArray {
         this.materials = materials;
     }
 
+    /**
+     * Épít 2 teleport kaput
+     * @return A készített teleport kapuk
+     * @throws NotEnoughMaterialException Nincs elég nyersanyag az építésre
+     */
     public TpGate[] buildGates()throws NotEnoughMaterialException {
         System.out.println("Belépett a buildGates-be.");
         Map<MaterialType, Integer> mats = countMaterials();
@@ -35,6 +40,10 @@ public class MaterialArray {
         }
     }
 
+    /**
+     * Kiveszi a kapott materialt a materialok közül
+     * @param type Kivevendő material
+     */
     private void removeMaterial(MaterialType type){
         System.out.println("Belépett a removeMateria-ba");
         for(Material mat: materials){
@@ -46,6 +55,10 @@ public class MaterialArray {
         }
     }
 
+    /**
+     * Egy map-ba összegyűjti a nyersanyagokat
+     * @return A nyersanyagok kollekciója
+     */
     private Map<MaterialType, Integer> countMaterials(){
         System.out.println("Belépett a countMaterials-ba");
         Map<MaterialType, Integer> mats = new HashMap<>();
@@ -59,12 +72,21 @@ public class MaterialArray {
         return mats;
     }
 
+    /**
+     * A paraméterként kapott materialt beletesz a collection-be
+     * @param mat A felvevendő material
+     */
     public void addMaterial(Material mat){
         System.out.println("Belépett az addMaterials-ba");
         materials.add(mat);
         System.out.println("Kilépett az addMaterials-ba");
     }
 
+    /**
+     * Egy robot gyártása ha van elég nyersanyag
+     * @return gyártott robot
+     * @throws NotEnoughMaterialException nincs elég nyersanyag
+     */
     public Robot buildRobot()throws NotEnoughMaterialException{
         System.out.println("Belépett a buildRobot-ba");
         Map<MaterialType, Integer> mats = countMaterials();
@@ -80,6 +102,10 @@ public class MaterialArray {
 
     }
 
+    /**
+     * Lehet-e bázist építeni a nyersanyagokból
+     * @return válasz
+     */
     public boolean canBuildBase(){
         System.out.println("Belépett a canBuildBase-be");
         Map<MaterialType, Integer> mats = countMaterials();
@@ -87,12 +113,18 @@ public class MaterialArray {
         return (mats.get(MaterialType.Iron) >= 3 && mats.get(MaterialType.Coal) >= 3 && mats.get(MaterialType.Uran) >= 3 && mats.get(MaterialType.Ice) >= 3);
     }
 
+
     public List<Material> getMaterials() {
         System.out.println("Belépett a getMaterials-ba");
         System.out.println("Kilépett a getMaterials-ból");
         return materials;
     }
 
+    /**
+     * Két MaterialArrayt összeadunk
+     * @param ma egyik materialarray
+     * @return az összeg
+     */
     public MaterialArray plus(MaterialArray ma){
         System.out.println("Belépett a MaterialArray plus függvényébe");
         materials.addAll(ma.getMaterials());
