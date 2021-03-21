@@ -47,4 +47,8 @@ public abstract class Character {
         System.out.println("Kilépett a getMaterials-ból");
         return new MaterialArray();
     }
+
+    public void setCurrentAsteroid(Asteroid ast){
+        currentAsteroid = ast;
+    }
 }
