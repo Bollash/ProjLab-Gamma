@@ -10,42 +10,45 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        System.out.println("Írjon be egy teszteset számot !");
+        System.out.println("1 -> craftRobot\n" +
+                "2 -> settlerDrill\n" +
+                "3 -> settlerMine\n" +
+                "4 -> craftGates\n" +
+                "5 -> putTpGateDown\n" +
+                "6 -> settlerMoves\n" +
+                "7 -> settlerUsesTpGate\n" +
+                "8 -> sunStorm\n" +
+                "9 -> iceGetsCloseToSun\n" +
+                "10 -> settlerPutsMaterialBack\n" +
+                "11 -> _2ndToLastSettlerDies\n" +
+                "12 -> aiControllsRobot\n" +
+                "13 -> uranExplodes\n" +
+                "14 -> buildBase\n" +
+                "15 -> exit\n" +
+                "-----------------------------------\n" +
+                "Válasszon egy tesztesetet!");
         while(true){
             Scanner input = new Scanner(System.in);
             int testcase = input.nextInt();
-            if(testcase == 0)
-                break;
-            if(testcase ==1){
-                craftRobot();
+            switch (testcase) {
+                case 1 -> craftRobot();
+                case 2 -> settlerDrill();
+                case 3 -> settlerMine();
+                case 4 -> craftGates();
+                case 5 -> putTpGateDown();
+                case 6 -> settlerMoves();
+                case 7 -> settlerUsesTpGate();
+                case 8 -> sunStorm();
+                case 9 -> iceGetsCloseToSun();
+                case 10 -> settlerPutsMaterialBack();
+                case 11 -> _2ndToLastSettlerDies();
+                case 12 -> aiControllsRobot();
+                case 13 -> uranExplodes();
+                case 14 -> buildBase();
+                case 15 -> System.exit(0);
             }
-            if(testcase ==2){
-                settlerDrill();
-            }
-            if(testcase ==3){
-                settlerMine();
-            }
-            if(testcase ==4){
-                craftGates();
-            }
-            if(testcase ==5){
-                putTpGateDown();
-            }
-            if(testcase ==6){
-                //settlerMoves();
-            }
-            if(testcase ==7){
-                settlerUsesTpGate();
-            }
-            if(testcase ==8){
-                sunStorm();
-            }
-            if(testcase ==9){
-                iceGetsCloseToSun();
-            }
-            if(testcase ==10){
-                settlerPutsMaterialBack();
-            }
+            System.out.println("------------test ended----------------");
+
         }
     }
 
@@ -132,7 +135,7 @@ public class Main {
         s.putTpGateDown();
     }
 
-    public void settlerMoves() throws MoveFailedException {
+    public static void settlerMoves() {
         Settler s = new Settler();
         Asteroid a1 = new Asteroid();
         Asteroid a2 = new Asteroid();
@@ -141,7 +144,11 @@ public class Main {
         a1.addNeighbour(a2);
         a2.addNeighbour(a1);
         System.out.println("------------test starts now----------------");
-        s.move(a2);
+        try {
+            s.move(a2);
+        } catch (MoveFailedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void settlerUsesTpGate() {
@@ -219,7 +226,7 @@ public class Main {
         s1.radExplode();
     }
 
-    public static void AiControllsRobot(){
+    public static void aiControllsRobot(){
         Robot r = new Robot();
         Asteroid a1 = new Asteroid(0, 3, 3, null);
         Asteroid a2 = new Asteroid();
