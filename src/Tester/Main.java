@@ -4,13 +4,52 @@ import modell.*;
 import modell.Character;
 import modell.exceptions.MoveFailedException;
 
+import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-        _2ndToLastSettlerDies();
+        System.out.println("Írjon be egy teszteset számot !");
+        while(true){
+            Scanner input = new Scanner(System.in);
+            int testcase = input.nextInt();
+            if(testcase == 0)
+                break;
+            if(testcase ==1){
+                craftRobot();
+            }
+            if(testcase ==2){
+                settlerDrill();
+            }
+            if(testcase ==3){
+                settlerMine();
+            }
+            if(testcase ==4){
+                craftGates();
+            }
+            if(testcase ==5){
+                putTpGateDown();
+            }
+            if(testcase ==6){
+                //settlerMoves();
+            }
+            if(testcase ==7){
+                settlerUsesTpGate();
+            }
+            if(testcase ==8){
+                sunStorm();
+            }
+            if(testcase ==9){
+                iceGetsCloseToSun();
+            }
+            if(testcase ==10){
+                settlerPutsMaterialBack();
+            }
+        }
     }
+
+
 
     public static void craftRobot(){
         Settler s = new Settler();
@@ -77,7 +116,7 @@ public class Main {
         s.putTpGateDown();
     }
 
-    public void settlerMoves() throws MoveFailedException {
+    public static void settlerMoves() throws MoveFailedException {
         Settler s = new Settler();
         Asteroid a1 = new Asteroid();
         Asteroid a2 = new Asteroid();
@@ -143,26 +182,4 @@ public class Main {
         System.out.println("------------test starts now----------------");
         s.putMaterialBack(i);
     }
-
-    public static void _2ndToLastSettlerDies(){
-        Settler s1 = new Settler();
-        Settler s2 = new Settler();
-
-        List<Character> chars = new ArrayList<>();
-        chars.add(s1);
-        chars.add(s2);
-
-        Space space = new Space(2, 3, 3, new ArrayList<Asteroid>(), chars);
-
-        Asteroid ast = new Asteroid();
-        s1.setSpace(space);
-        s1.setCurrentAsteroid(ast);
-        s2.setSpace(space);
-        s2.setCurrentAsteroid(ast);
-
-        System.out.println("------------test starts now----------------");
-        s1.radExplode();
-    }
-
-
 }
