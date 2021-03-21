@@ -44,7 +44,7 @@ public class Asteroid implements IAsteroid {
 
     /**
      * Ha már át lett fúrva a kéreg, akkor kiveszi a materialt és a meghívó megkapja azt.
-     * @return
+     * @return Magjában lévő material
      * @throws CantBeMinedException
      */
     public Material getMined()throws CantBeMinedException {
@@ -92,7 +92,7 @@ public class Asteroid implements IAsteroid {
     /**
      * Ha az aszteroida magja üres, akkor a kapott nyersanyagot beteszi a magjába, egyébként kivételt dob.
      * @param material Ezt teszi be a magba
-     * @throws CoreFullException Már van material a magba
+     * @throws CoreFullException Már van material a magban
      */
     public void addCore(Material material)throws CoreFullException {
         System.out.println("Belépett az addCore-ba");
@@ -118,6 +118,7 @@ public class Asteroid implements IAsteroid {
 
     /**
      * Ha a kapott karakter szerepel az aszteroidán lévők listájában, akkor kiveszi onnan.
+     * @param character kivevendő karakter
      */
     public void removeCharacter(Character character){
         System.out.println("Belépett a removeCharacter-be");
@@ -144,6 +145,7 @@ public class Asteroid implements IAsteroid {
 
     /**
      * Ha a kapott karakter még nem szerepel az aszteroidán lévők listájában, akkor hozzáadja.
+     * @param character felvevendő karakter
      */
     @Override
     public void addCharacter(Character character) {
@@ -155,7 +157,8 @@ public class Asteroid implements IAsteroid {
     }
 
     /**
-     * A paraméterként kapott objektum eltávolítása a szomszédokból.
+     * Kapott asteroidát kivesszük a szomszédok közül
+     * @param asteroid kivevendő aszteroida
      */
     @Override
     public void removeNeighbour(Asteroid asteroid) {
@@ -188,7 +191,12 @@ public class Asteroid implements IAsteroid {
         System.out.println("Kilépett a getCoreMaterial-ból");
         this.coreMaterial = coreMaterial;
     }
-    //TODO
+
+    /**
+     * Visszaad egy olyan IAsteroidát amire ha lépünk akkor fúrható aszteroidára kerülünk
+     * @return Fúrható aszteroida
+     * @throws NoDrillableNeighbourException nincs fúrható aszteroida
+     */
     public IAsteroid getDrillableNeighbour()throws NoDrillableNeighbourException {
         System.out.println("Belépett a getDrillableNeighbour-be");
         for(IAsteroid ast: neighbours){
