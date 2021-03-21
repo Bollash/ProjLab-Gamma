@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
+        _2ndToLastSettlerDies();
     }
 
     public static void craftRobot(){
@@ -142,4 +143,26 @@ public class Main {
         System.out.println("------------test starts now----------------");
         s.putMaterialBack(i);
     }
+
+    public static void _2ndToLastSettlerDies(){
+        Settler s1 = new Settler();
+        Settler s2 = new Settler();
+
+        List<Character> chars = new ArrayList<>();
+        chars.add(s1);
+        chars.add(s2);
+
+        Space space = new Space(2, 3, 3, new ArrayList<Asteroid>(), chars);
+
+        Asteroid ast = new Asteroid();
+        s1.setSpace(space);
+        s1.setCurrentAsteroid(ast);
+        s2.setSpace(space);
+        s2.setCurrentAsteroid(ast);
+
+        System.out.println("------------test starts now----------------");
+        s1.radExplode();
+    }
+
+
 }
