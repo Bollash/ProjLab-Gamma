@@ -89,23 +89,19 @@ public class Space {
      * @param character Ez a karakter halt meg
      */
     public void removeCharacter(Character character){
-        System.out.println("Belépett a removeCharacter-be");
         characters.remove(character);
-        System.out.println("Kilépett a removeCharacter-ből");
     }
 
     /**
      * Csökkenti a napviharszámlálót. Ha az elérte a nullát, akkor napvihar söpör végig a pályán, és a számláló a sunStormFreq értékre áll vissza.
      */
     public void handleCountDown(){
-        System.out.println("Belépett a handleCountDown-ba");
         turnsTillSunStorm--;
 
         if(turnsTillSunStorm == 0){
             characters.removeIf(Character::getSunStormed);
             turnsTillSunStorm = sunStormFreq;
         }
-        System.out.println("Kilépett a handleCountDown-ba");
     }
 
     /**
@@ -113,11 +109,9 @@ public class Space {
      * @param character Ez a karakter kerül a characters-be
      */
     public void addCharacter(Character character){
-        System.out.println("Belépett az addCharacter-be");
         if(!characters.contains(character)){
             characters.add(character);
         }
-        System.out.println("Kilépett az addCharacter-ből");
     }
 
     /**
@@ -125,8 +119,6 @@ public class Space {
      * @return _
      */
     public boolean isGameOver() {
-        System.out.println("Belépett az isGameOver-be");
-        System.out.println("Kilépett az isGameOver-ből");
         return gameOver;
     }
 
@@ -135,9 +127,7 @@ public class Space {
      * @param gameOver _
      */
     public void setGameOver(boolean gameOver) {
-        System.out.println("Belépett a setGameOver-be");
         this.gameOver = gameOver;
-        System.out.println("Kilépett a setGameOver-ből");
     }
 
     /**
@@ -145,8 +135,6 @@ public class Space {
      * @return .
      */
     public int getAliveSettlerCnt() {
-        System.out.println("Belépett a getAliveSettlerCnt-be");
-        System.out.println("Kilépett a getAliveSettlerCnt-ből");
         return aliveSettlerCnt;
     }
 
@@ -155,8 +143,6 @@ public class Space {
      * @param aliveSettlerCnt _
      */
     public void setAliveSettlerCnt(int aliveSettlerCnt) {
-        System.out.println("Belépett a setAliveSettlerCnt-be");
         this.aliveSettlerCnt = aliveSettlerCnt;
-        System.out.println("Kilépett a setAliveSettlerCnt-ből");
     }
 }

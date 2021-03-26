@@ -7,8 +7,6 @@ public class Coal extends Material{
      */
     @Override
     public MaterialType getType() {
-        System.out.println("Belépett a getType-ba");
-        System.out.println("Kilépett a getType-ból");
         return MaterialType.Coal;
     }
 }

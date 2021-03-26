@@ -20,8 +20,6 @@ public class TpGate implements IAsteroid {
      * @return      Az az aszteroida, amelyiken az adott modell.TpGate van
      */
     public Asteroid getOnAsteroid() {
-        System.out.println("Belépett a getOnAsteroid-ba");
-        System.out.println("Kilépett a getOnAsteroid-ból");
         return onAsteroid;
     }
 
@@ -30,8 +28,6 @@ public class TpGate implements IAsteroid {
      * @return      Az adott modell.TpGate párja
      */
     public TpGate getLinkedTpGate() {
-        System.out.println("Belépett a getLinkedTpGate-ba");
-        System.out.println("Kilépett a getLinkedTpGate-ből");
         return linkedTpGate;
     }
 
@@ -40,8 +36,6 @@ public class TpGate implements IAsteroid {
      * @param Asteroid       az aszteroida, amire tesszük a modell.TpGate-et
      */
     public void setOnAsteroid(Asteroid Asteroid) {
-        System.out.println("Belépett a setOnAsteroid-ba");
-        System.out.println("Kilépett a setOnAsteroid-ból");
         onAsteroid = Asteroid;
     }
 
@@ -50,8 +44,6 @@ public class TpGate implements IAsteroid {
      * @param TpGate       a modell.TpGate-ünk párja
      */
     public void setLinkedTpGate(TpGate TpGate) {
-        System.out.println("Belépett a setLinkedTpGate-ba");
-        System.out.println("Kilépett a setLinkedTpGate-ből");
         linkedTpGate = TpGate;
     }
 
@@ -62,14 +54,12 @@ public class TpGate implements IAsteroid {
      */
     @Override
     public void addCharacter(Character character) throws MoveFailedException {
-        System.out.println("Belépett az addCharacter-ba");
         if(linkedTpGate.getOnAsteroid() == null){
             throw new MoveFailedException("TpGate not on asteroid");
         }
         Asteroid ast = linkedTpGate.getOnAsteroid();
         ast.addCharacter(character);
         ast.removeCharacter(character);
-        System.out.println("Kilépett az addCharacter-ból");
     }
 
     /**
@@ -79,16 +69,12 @@ public class TpGate implements IAsteroid {
      */
     @Override
     public void removeNeighbour(Asteroid asteroid) {
-        System.out.println("Belépett a removeNeighbor-be");
         if(getLinkedTpGate().getOnAsteroid() == asteroid)
             getLinkedTpGate().getOnAsteroid().removeNeighbour(asteroid);
-        System.out.println("Kilépett a removeNeihbor-ből");
     }
 
     @Override
     public int getLayer() {
-        System.out.println("Belépett a getLayer-be");
-        System.out.println("Kilépett a getLayer-ből");
         return linkedTpGate.getOnAsteroid().getLayer();
     }
 }

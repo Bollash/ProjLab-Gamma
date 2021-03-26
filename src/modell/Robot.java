@@ -13,7 +13,6 @@ public class Robot extends Character{
      */
     @Override
     public boolean radExplode() {
-        System.out.println("Belépett a radExplode-be");
         List<IAsteroid> destination = currentAsteroid.getNeighbours();
 
         Random rnd = new Random(System.currentTimeMillis());
@@ -23,7 +22,6 @@ public class Robot extends Character{
         while(true){
             try{
                 destination.get(rnd.nextInt(destination.size())).addCharacter(this);
-                System.out.println("Kilépett a radExplode-ból");
                 return false;
             }catch(MoveFailedException ignored){
             }
@@ -35,10 +33,8 @@ public class Robot extends Character{
      */
     @Override
     public void act(){
-        System.out.println("Belépett az act-ba");
         if(currentAsteroid.getLayer() > 0){
             currentAsteroid.getDrilled();
-            System.out.println("Kilépett az act-ból");
             return;
         }
         try {
