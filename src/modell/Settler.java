@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Settler extends Character{
+public class Settler extends Actor implements iDrill, iMine{
     /**
      * Telepes nyersanyagai
      */
@@ -43,7 +43,7 @@ public class Settler extends Character{
      */
     @Override
     public boolean radExplode() {
-        space.removeCharacter(this);
+        space.removeActor(this);
         int value = space.getAliveSettlerCnt() - 1;
         space.setAliveSettlerCnt(value);
         if(value <= 1) space.setGameOver(true);
@@ -53,7 +53,7 @@ public class Settler extends Character{
     @Override
     public boolean getSunStormed(){
         if(currentAsteroid.getLayer() != 0 || currentAsteroid.getCoreMaterial() != null){
-            currentAsteroid.removeCharacter(this);
+            space.removeActor(this);
             int value = space.getAliveSettlerCnt() - 1;
             space.setAliveSettlerCnt(value);
             if(value <= 1) space.setGameOver(true);
@@ -79,12 +79,14 @@ public class Settler extends Character{
      * gyárt egy kapupárt ha van nyersanyag, és nála nincs 1 darab kapu se
      */
     public void craftGates(){
-        if(tpGates.size() == 0){
+        if(tpGates.size() <= 1){
             TpGate[] gates;
             try {
                 gates = materials.buildGates();
                 gates[0].setLinkedTpGate(gates[1]);
+                gates[0].setInSettler(this);
                 gates[1].setLinkedTpGate(gates[0]);
+                gates[1].setInSettler(this);
                 tpGates.addAll(Arrays.asList(gates));
             } catch (NotEnoughMaterialException e) {
                 System.out.println("Not enough material to craft");
@@ -99,8 +101,8 @@ public class Settler extends Character{
     public void craftRobot(){
         try{
             Robot r = materials.buildRobot();
-            space.addCharacter(r);
-            currentAsteroid.addCharacter(r);
+            space.addActor(r);
+            currentAsteroid.addActor(r);
         }catch(NotEnoughMaterialException e){
             System.out.println("Not enough material to craft");
         }
@@ -126,7 +128,7 @@ public class Settler extends Character{
      */
     public void putTpGateDown(){
         if(tpGates.size() > 0){
-            tpGates.get(0).setOnAsteroid(currentAsteroid);
+            currentAsteroid.addActor(tpGates.get(0));
             currentAsteroid.addNeighbour(tpGates.get(0));
             tpGates.remove(0);
         }
@@ -142,5 +144,10 @@ public class Settler extends Character{
 
     public void addTpGate(TpGate tpg1) {
         tpGates.add(tpg1);
+    }
+
+    @Override
+    public void drill() {
+        currentAsteroid.getDrilled();
     }
 }

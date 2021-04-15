@@ -3,9 +3,9 @@ package modell;
 import modell.exceptions.MoveFailedException;
 
 public interface IAsteroid {
-    void addCharacter(Character character)throws MoveFailedException;
+    void addActor(Actor actor)throws MoveFailedException;
 
-    void removeNeighbour(Asteroid asteroid);
+    void removeNeighbour(IAsteroid asteroid);
 
     int getLayer();
 }

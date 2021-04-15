@@ -1,6 +1,12 @@
 package modell;
 
 public class Uran extends Material{
+
+    private int counter;
+
+    public Uran(){
+        counter = 0;
+    }
     /**
      * Ez a függvény visszaadja, hogy az adott material Uran
      * @return az adott material Uran típusú
@@ -16,6 +22,9 @@ public class Uran extends Material{
      */
     @Override
     public void closeToSunAction(Asteroid ast) {
-        ast.explode();
+        counter++;
+        if(counter == 3){
+            ast.explode();
+        }
     }
 }

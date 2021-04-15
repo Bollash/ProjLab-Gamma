@@ -1,26 +1,22 @@
 package modell;
 
 import modell.exceptions.MoveFailedException;
+import modell.exceptions.NoDrillableNeighbourException;
 
 /**
  * Ez az osztály írja le, hogy a modell.TpGate-et hogyan tudjuk használni
  */
-public class TpGate implements IAsteroid {
+public class TpGate extends Actor implements IAsteroid {
 
     private TpGate linkedTpGate;
-    private Asteroid onAsteroid;
+    private Settler inSettler;
+    private boolean activated;
 
     /**
      * modell.TpGate konstruktora
      */
-    public void TpGate(){ }
-
-    /**
-     * Annak az aszteroidának a lekérdezése, amelyiken az adott modell.TpGate van
-     * @return      Az az aszteroida, amelyiken az adott modell.TpGate van
-     */
-    public Asteroid getOnAsteroid() {
-        return onAsteroid;
+    public TpGate(){
+        activated = false;
     }
 
     /**
@@ -29,14 +25,6 @@ public class TpGate implements IAsteroid {
      */
     public TpGate getLinkedTpGate() {
         return linkedTpGate;
-    }
-
-    /**
-     * Beállítja, hogy a modell.TpGate melyik aszteroidára lett lehelyezve
-     * @param Asteroid       az aszteroida, amire tesszük a modell.TpGate-et
-     */
-    public void setOnAsteroid(Asteroid Asteroid) {
-        onAsteroid = Asteroid;
     }
 
     /**
@@ -50,31 +38,78 @@ public class TpGate implements IAsteroid {
     /**
      * Ha egy karakter átlép egy olyan aszteroidára, amelyiken a modell.TpGate párja van,
      * akkor levesszük az előző aszteroidáról, és áttesszük az újra
-     * @param character       a karakter, aki használja a modell.TpGate-et
+     * @param actor       a karakter, aki használja a modell.TpGate-et
      */
     @Override
-    public void addCharacter(Character character) throws MoveFailedException {
-        if(linkedTpGate.getOnAsteroid() == null){
+    public void addActor(Actor actor) throws MoveFailedException {
+        if(linkedTpGate.currentAsteroid == null){
             throw new MoveFailedException("TpGate not on asteroid");
         }
-        Asteroid ast = linkedTpGate.getOnAsteroid();
-        ast.addCharacter(character);
-        ast.removeCharacter(character);
+        Asteroid ast = linkedTpGate.currentAsteroid;
+        ast.addActor(actor);
+        currentAsteroid.removeActor(actor);
     }
 
-    /**
-     * Ha egy egy olyan aszteroida felrobban, amelyiken a modell.TpGate párja van,
-     * akkor levesszük kivesszük az adott aszteroida szomszédai közül
-     * @param asteroid       a karakter, aki használja a modell.TpGate-et
-     */
     @Override
-    public void removeNeighbour(Asteroid asteroid) {
-        if(getLinkedTpGate().getOnAsteroid() == asteroid)
-            getLinkedTpGate().getOnAsteroid().removeNeighbour(asteroid);
+    public void removeNeighbour(IAsteroid asteroid) {
     }
 
     @Override
     public int getLayer() {
-        return linkedTpGate.getOnAsteroid().getLayer();
+        // Ha le van téve a tp gate akkor visszatér a párja layerével
+        if(linkedTpGate.currentAsteroid != null){
+            return linkedTpGate.currentAsteroid.getLayer();
+        }
+        // Ha nincs akkor -1 es visszatéréssel jelezzük, hogy ez nem valid uticél
+        return -1;
+    }
+
+    @Override
+    public boolean radExplode() {
+        linkedTpGate.explode();
+        return true;
+    }
+
+    public void explode(){
+        currentAsteroid.removeNeighbour(this);
+        currentAsteroid.removeActor(this);
+        space.removeActor(this);
+    }
+
+    @Override
+    public boolean getSunStormed() {
+        // Aktiváljuk
+        if(!activated) activated = true;
+        // A tpgate nem hal meg sose napviharban
+        return false;
+    }
+
+    @Override
+    public void act() throws NoDrillableNeighbourException {
+        if(activated){
+            try {
+                //Ha van legalább egy szomszéd akkor mozog
+                if(currentAsteroid.getNeighbours().size() != 0){
+                    for(int i = 0; i < currentAsteroid.getNeighbours().size(); i++){
+                        // ellenőrizzük, hogy magára ne lépjen
+                        if(currentAsteroid.getNeighbours().get(i) != this){
+                            move(currentAsteroid.getNeighbours().get(i));
+                            break;
+                        }
+                    }
+                }
+
+            } catch (MoveFailedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Settler getInSettler() {
+        return inSettler;
+    }
+
+    public void setInSettler(Settler inSettler) {
+        this.inSettler = inSettler;
     }
 }

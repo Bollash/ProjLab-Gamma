@@ -11,7 +11,7 @@ public class Asteroid implements IAsteroid {
 
     private List<IAsteroid> neighbours;
 
-    private List<Character> charactersOnSurface;
+    private List<Actor> actorsOnSurface;
 
     private int closeToSunFreq;
 
@@ -26,7 +26,7 @@ public class Asteroid implements IAsteroid {
      */
     public Asteroid(){
         neighbours = new ArrayList<>();
-        charactersOnSurface = new ArrayList<>();
+        actorsOnSurface = new ArrayList<>();
 
         layer = 3;
         closeToSunFreq = 3;
@@ -36,7 +36,7 @@ public class Asteroid implements IAsteroid {
 
     public Asteroid(int layer, int closeToSunFreq, int turnsTillCloseToSun, Material core){
         neighbours = new ArrayList<>();
-        charactersOnSurface = new ArrayList<>();
+        actorsOnSurface = new ArrayList<>();
 
         this.layer = layer;
         this.closeToSunFreq = closeToSunFreq;
@@ -86,8 +86,8 @@ public class Asteroid implements IAsteroid {
      */
     public MaterialArray countMaterialsOnSurface(){
         MaterialArray materialArray = new MaterialArray();
-        for (Character character : charactersOnSurface) {
-            materialArray = materialArray.plus(character.getMaterials());
+        for (Actor actor : actorsOnSurface) {
+            materialArray = materialArray.plus(actor.getMaterials());
         }
         return materialArray;
     }
@@ -111,15 +111,15 @@ public class Asteroid implements IAsteroid {
      * Radioaktív robbanás következtében meghívja minden rajta tartózkodó radExplode() metódusát.
      */
     public void explode(){
-        charactersOnSurface.removeIf(Character::radExplode);
+        actorsOnSurface.removeIf(Actor::radExplode);
     }
 
     /**
      * Ha a kapott karakter szerepel az aszteroidán lévők listájában, akkor kiveszi onnan.
-     * @param character kivevendő karakter
+     * @param actor kivevendő karakter
      */
-    public void removeCharacter(Character character){
-        charactersOnSurface.remove(character);
+    public void removeActor(Actor actor){
+        actorsOnSurface.remove(actor);
     }
 
     /**
@@ -139,12 +139,13 @@ public class Asteroid implements IAsteroid {
 
     /**
      * Ha a kapott karakter még nem szerepel az aszteroidán lévők listájában, akkor hozzáadja.
-     * @param character felvevendő karakter
+     * @param actor felvevendő karakter
      */
     @Override
-    public void addCharacter(Character character) {
-        if(!charactersOnSurface.contains(character)){
-            charactersOnSurface.add(character);
+    public void addActor(Actor actor) {
+        if(!actorsOnSurface.contains(actor)){
+            actor.currentAsteroid = this;
+            actorsOnSurface.add(actor);
         }
     }
 
@@ -153,7 +154,7 @@ public class Asteroid implements IAsteroid {
      * @param asteroid kivevendő aszteroida
      */
     @Override
-    public void removeNeighbour(Asteroid asteroid) {
+    public void removeNeighbour(IAsteroid asteroid) {
         neighbours.remove(asteroid);
     }
 
@@ -190,5 +191,13 @@ public class Asteroid implements IAsteroid {
 
     public List<IAsteroid> getNeighbours() {
         return neighbours;
+    }
+
+    /**
+     * napvihar söpör végig az aszteroidán. Minden actorra meghívódik a getSunStormed().
+     */
+    public void sunStorm(){
+        // Minden actorra meghívjuk a getSunStormed-et. Ha ez true-val tér vissza akkor levesszük az aszteroidáról, mert meghalt. Eléggé érdekesen néz ki ez a megoldás, de csak így lehetett megcsinálni.
+        actorsOnSurface.removeIf(Actor::getSunStormed);
     }
 }

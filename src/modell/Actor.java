@@ -3,25 +3,13 @@ package modell;
 import modell.exceptions.MoveFailedException;
 import modell.exceptions.NoDrillableNeighbourException;
 
-public abstract class Character {
+public abstract class Actor {
     protected Space space;
     protected Asteroid currentAsteroid;
 
     public abstract boolean radExplode();
 
-    /**
-     * Napvihar éri a karaktert és ha nem tud elbújni meghal
-     */
-    public boolean getSunStormed(){
-        return currentAsteroid.getLayer() != 0 || currentAsteroid.getCoreMaterial() != null;
-    }
-
-    /**
-     * megfúrja a currentAsteroid-ot
-     */
-    public void drill(){
-        currentAsteroid.getDrilled();
-    }
+    public abstract boolean getSunStormed();
 
     /**
      * A kapott IAsteroid-ra mozog
@@ -29,7 +17,7 @@ public abstract class Character {
      * @throws MoveFailedException Sikertelen volt a mozgás
      */
     public void move(IAsteroid ast) throws MoveFailedException {
-        ast.addCharacter(this);
+        ast.addActor(this);
     }
 
     public abstract void act() throws NoDrillableNeighbourException;

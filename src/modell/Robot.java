@@ -6,7 +6,7 @@ import modell.exceptions.NoDrillableNeighbourException;
 import java.util.List;
 import java.util.Random;
 
-public class Robot extends Character{
+public class Robot extends Actor implements iDrill{
 
     /**
      * Radioaktív robbanás miatt egy szomszédos aszteroidán landol a robot
@@ -21,11 +21,24 @@ public class Robot extends Character{
         //TODO: rendesen megoldani ezt
         while(true){
             try{
-                destination.get(rnd.nextInt(destination.size())).addCharacter(this);
+                destination.get(rnd.nextInt(destination.size())).addActor(this);
                 return false;
             }catch(MoveFailedException ignored){
             }
         }
+    }
+
+    @Override
+    public boolean getSunStormed() {
+        // Ha meghal leveszi magát a spaceről
+        if(currentAsteroid.getLayer() != 0 || currentAsteroid.getCoreMaterial() != null){
+            space.removeActor(this);
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
     /**
@@ -38,14 +51,19 @@ public class Robot extends Character{
             return;
         }
         try {
-            currentAsteroid.getDrillableNeighbour().addCharacter(this);
+            currentAsteroid.getDrillableNeighbour().addActor(this);
         }catch (NoDrillableNeighbourException ex){
             Random rnd = new Random(System.currentTimeMillis());
             try {
-                currentAsteroid.getNeighbours().get(rnd.nextInt(currentAsteroid.getNeighbours().size())).addCharacter(this);
+                currentAsteroid.getNeighbours().get(rnd.nextInt(currentAsteroid.getNeighbours().size())).addActor(this);
             } catch (MoveFailedException e) {
                 e.printStackTrace();
             }
         }catch (MoveFailedException ignored){}
+    }
+
+    @Override
+    public void drill() {
+        currentAsteroid.getDrilled();
     }
 }

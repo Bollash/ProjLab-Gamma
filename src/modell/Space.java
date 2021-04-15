@@ -1,7 +1,7 @@
 package modell;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -37,7 +37,7 @@ public class Space {
     /**
      * Aktív karakterek gyűjteménye
      */
-    private List<Character> characters;
+    private List<Actor> actors;
 
     /**
      * kapott paraméterek alapján legenerál egy játékteret
@@ -66,30 +66,30 @@ public class Space {
             asteroids.add(asts.get(idx));
             asts.remove(idx);
         }
-        characters = new ArrayList<>();
+        actors = new ArrayList<>();
         for(int i = 0; i < settlerCnt; i++){
-            characters.add(new Settler());
+            actors.add(new Settler());
         }
 
-        for (Character c: characters) {
-            asteroids.get(0).addCharacter(c);
+        for (Actor c: actors) {
+            asteroids.get(0).addActor(c);
         }
     }
 
-    public Space(int settlerCnt, int turnsTillSunStorm, int sunStormFreq, List<Asteroid> asteroids, List<Character> characters){
+    public Space(int settlerCnt, int turnsTillSunStorm, int sunStormFreq, List<Asteroid> asteroids, List<Actor> actors){
         this.aliveSettlerCnt = settlerCnt;
         this.turnsTillSunStorm = turnsTillSunStorm;
         this.sunStormFreq = sunStormFreq;
         this.asteroids = asteroids;
-        this.characters = characters;
+        this.actors = actors;
     }
 
     /**
      * Karakter kivevése az aktív karakterek közül
-     * @param character Ez a karakter halt meg
+     * @param actor Ez a karakter halt meg
      */
-    public void removeCharacter(Character character){
-        characters.remove(character);
+    public void removeActor(Actor actor){
+        actors.remove(actor);
     }
 
     /**
@@ -99,18 +99,24 @@ public class Space {
         turnsTillSunStorm--;
 
         if(turnsTillSunStorm == 0){
-            characters.removeIf(Character::getSunStormed);
+            // megkeverjük
+            Collections.shuffle(asteroids);
+            // Ha páratlan hosszó akkor 1 ha nem akkor 0. Ezzel lehet biztosítani hogy mindig a fele + 0.5 aszteroidán van vihar
+            int correction = asteroids.size() % 2 == 0?0:1;
+            for(int i = 0; i < asteroids.size() / 2 + correction; i++){
+                asteroids.get(i).sunStorm();
+            }
             turnsTillSunStorm = sunStormFreq;
         }
     }
 
     /**
      * Kapott karaktert hozzá adja az aktív játékosok közé
-     * @param character Ez a karakter kerül a characters-be
+     * @param actor Ez a karakter kerül a characters-be
      */
-    public void addCharacter(Character character){
-        if(!characters.contains(character)){
-            characters.add(character);
+    public void addActor(Actor actor){
+        if(!actors.contains(actor)){
+            actors.add(actor);
         }
     }
 
