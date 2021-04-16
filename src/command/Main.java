@@ -17,58 +17,26 @@ public class Main {
     private static Space space;
     private static int currentActor;
 
-    public  static void cmdProg(File source){
-        try {
-            Scanner input = new Scanner(source);
-            while(input.hasNextLine()){
-                String line = input.nextLine();
-                String[] tokenized = line.split(" ");
-                Execute ex = new Execute(tokenized);
-                Consumer<String[]> func;
-                switch (tokenized[0]) {
-                    case "Seed" -> func = Main::seed;
-                    case "Map" -> func = Main::map;
-                    case "Act" -> func = Main::act;
-                    case "Countdown" -> func = Main::countdown;
-                    default -> throw new IllegalStateException("Unexpected value: " + tokenized[0]);
-                }
-                ex.call(func);
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Parancs kezelő program
+     * @param source System.in vagy new FileInputStream(new File(filename))
+     */
     public static void cmdProg(InputStream source){
         Scanner input = new Scanner(source);
         while(input.hasNextLine()){
             String line = input.nextLine();
             String[] tokenized = line.split(" ");
-            Execute ex = new Execute(tokenized);
+
+            //A switchen belül egy functiont adok át aminek paraméterként egy String[]-et kell adni és voiddal tér vissza
             Consumer<String[]> func;
             switch (tokenized[0]) {
                 case "Seed" -> func = Main::seed;
                 case "Map" -> func = Main::map;
                 case "Act" -> func = Main::act;
                 case "Countdown" -> func = Main::countdown;
-                default -> throw new IllegalStateException("Unexpected value: " + tokenized[0]);
+                default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
             }
-            ex.call(func);
-        }
-    }
-
-    /**
-     * Segéd class arra, hogy meglehessen a kapott functionre hívni a tokeneket.
-     */
-    static class Execute{
-        private String[] tokens;
-
-        public Execute(String[] t){
-            tokens = Arrays.copyOfRange(t, 1, t.length);
-        }
-
-        public void call(Consumer<String[]> func){
-            func.accept(tokens);
+            func.accept(Arrays.copyOfRange(tokenized, 1, tokenized.length));
         }
     }
 
