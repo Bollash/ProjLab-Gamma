@@ -6,7 +6,7 @@ import modell.exceptions.NoDrillableNeighbourException;
 /**
  * Ez az osztály írja le, hogy a modell.TpGate-et hogyan tudjuk használni
  */
-public class TpGate extends Actor implements IAsteroid {
+public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
 
     private TpGate linkedTpGate;
     private Settler inSettler;
@@ -85,23 +85,28 @@ public class TpGate extends Actor implements IAsteroid {
     }
 
     @Override
-    public void act() throws NoDrillableNeighbourException {
+    public void act(){
         if(activated){
             try {
                 //Ha van legalább egy szomszéd akkor mozog
                 if(currentAsteroid.getNeighbours().size() != 0){
                     for(int i = 0; i < currentAsteroid.getNeighbours().size(); i++){
-                        // ellenőrizzük, hogy magára ne lépjen
+                        // ellenőrizzük, hogy magára ne lépjen hanem az első lehetőségre
                         if(currentAsteroid.getNeighbours().get(i) != this){
                             move(currentAsteroid.getNeighbours().get(i));
+                            System.out.println("Az actor egy szomszédos aszteroidára mozog.");
                             break;
                         }
                     }
+                }else{
+                    System.out.println("Az actor nem tud szomszédos aszteroidára mozogni.");
                 }
 
             } catch (MoveFailedException e) {
                 e.printStackTrace();
             }
+        }else{
+            System.out.println("A TpGate nem csinál semmit.");
         }
     }
 

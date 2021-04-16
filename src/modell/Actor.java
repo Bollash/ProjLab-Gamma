@@ -3,7 +3,7 @@ package modell;
 import modell.exceptions.MoveFailedException;
 import modell.exceptions.NoDrillableNeighbourException;
 
-public abstract class Actor {
+public abstract class Actor implements java.io.Serializable{
     protected Space space;
     protected Asteroid currentAsteroid;
 
@@ -20,7 +20,7 @@ public abstract class Actor {
         ast.addActor(this);
     }
 
-    public abstract void act() throws NoDrillableNeighbourException;
+    public abstract void act();
 
     public MaterialArray getMaterials(){
         return new MaterialArray();

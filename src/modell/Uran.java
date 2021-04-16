@@ -1,6 +1,6 @@
 package modell;
 
-public class Uran extends Material{
+public class Uran extends Material implements java.io.Serializable{
 
     private int counter;
 

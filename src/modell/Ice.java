@@ -2,7 +2,7 @@ package modell;
 
 import modell.exceptions.CantBeMinedException;
 
-public class Ice extends Material{
+public class Ice extends Material implements java.io.Serializable{
     /**
      * Ez a függvény visszaadja, hogy az adott material Ice
      * @return az adott material Ice típusú

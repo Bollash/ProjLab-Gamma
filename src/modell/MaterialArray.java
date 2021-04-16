@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MaterialArray {
+public class MaterialArray implements java.io.Serializable{
     private List<Material> materials;
 
     public MaterialArray(){

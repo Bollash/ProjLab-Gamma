@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Space {
+public class Space implements java.io.Serializable{
 
     /**
      * Aktív telepesek száma
@@ -107,7 +107,10 @@ public class Space {
                 asteroids.get(i).sunStorm();
             }
             turnsTillSunStorm = sunStormFreq;
+            System.out.println("A számláló elérte a nullát és napszél lett. A számláló visszaállt a kiindulási állapotba.");
+            return;
         }
+        System.out.println("A napszél számláló eggyel csökkent.");
     }
 
     /**
@@ -150,5 +153,13 @@ public class Space {
      */
     public void setAliveSettlerCnt(int aliveSettlerCnt) {
         this.aliveSettlerCnt = aliveSettlerCnt;
+    }
+
+    public List<Actor> getActors(){
+        return actors;
+    }
+
+    public List<Asteroid> getAsteroids(){
+        return asteroids;
     }
 }

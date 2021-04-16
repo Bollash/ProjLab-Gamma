@@ -1,6 +1,6 @@
 package modell;
 
-public class Iron extends Material{
+public class Iron extends Material implements java.io.Serializable{
     /**
      * Ez a függvény visszaadja, hogy az adott material Iron
      * @return az adott material Iron típusú

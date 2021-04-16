@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Settler extends Actor implements iDrill, iMine{
+public class Settler extends Actor implements iDrill, iMine, java.io.Serializable{
     /**
      * Telepes nyersanyagai
      */
@@ -26,15 +26,13 @@ public class Settler extends Actor implements iDrill, iMine{
 
     /**
      * Kibányássza az asteroida magját, és beteszi a nyersanyagok közé, ha ott még 10 nél kevesebb darab van.
+     * @throws CantBeMinedException Ha az aszteroidát nem lehet bányászni ilyen exceptiont dobunk.
      */
-    public void mine(){
+    public void mine() throws CantBeMinedException {
         Material material;
-        try {
-            material = currentAsteroid.getMined();
-            if(materials.getMaterials().size() < 10){
-                materials.addMaterial(material);
-            }
-        } catch (CantBeMinedException e) {
+        material = currentAsteroid.getMined();
+        if(materials.getMaterials().size() < 10){
+            materials.addMaterial(material);
         }
     }
 
@@ -64,6 +62,7 @@ public class Settler extends Actor implements iDrill, iMine{
     //Todo
     @Override
     public void act() {
+        System.out.println("Az actor telepes.");
     }
 
     /**

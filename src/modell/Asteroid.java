@@ -7,7 +7,7 @@ import modell.exceptions.NoDrillableNeighbourException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Asteroid implements IAsteroid {
+public class Asteroid implements IAsteroid, java.io.Serializable{
 
     private List<IAsteroid> neighbours;
 
@@ -128,12 +128,16 @@ public class Asteroid implements IAsteroid {
      */
     public void handleCountDown(){
         turnsTillCloseToSun = turnsTillCloseToSun -1;
-        if(turnsTillCloseToSun ==0){
-            if(layer ==0){
+        if(turnsTillCloseToSun == 0){
+            if(layer == 0){
                 coreMaterial.closeToSunAction(this);
-
+                System.out.println("Napközelbe került az aszteroida.");
+            }else{
+                System.out.println("Napközelbe került az aszteroida.");
             }
             turnsTillCloseToSun = closeToSunFreq;
+        }else{
+            System.out.println("A napközeli számláló eggyel csökkent.");
         }
     }
 

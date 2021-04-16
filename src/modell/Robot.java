@@ -6,7 +6,7 @@ import modell.exceptions.NoDrillableNeighbourException;
 import java.util.List;
 import java.util.Random;
 
-public class Robot extends Actor implements iDrill{
+public class Robot extends Actor implements iDrill, java.io.Serializable{
 
     /**
      * Radioaktív robbanás miatt egy szomszédos aszteroidán landol a robot
@@ -48,18 +48,30 @@ public class Robot extends Actor implements iDrill{
     public void act(){
         if(currentAsteroid.getLayer() > 0){
             currentAsteroid.getDrilled();
+            System.out.println("Az actor megfúrja az aszteroidát");
             return;
         }
         try {
+            //Szomszédos fúrható aszteroidára mozog
             currentAsteroid.getDrillableNeighbour().addActor(this);
+            System.out.println("Az actor egy szomszédos aszteroidára mozgott.");
+        //Nincs fúrható aszteroida szomszéd
         }catch (NoDrillableNeighbourException ex){
-            Random rnd = new Random(System.currentTimeMillis());
-            try {
-                currentAsteroid.getNeighbours().get(rnd.nextInt(currentAsteroid.getNeighbours().size())).addActor(this);
-            } catch (MoveFailedException e) {
-                e.printStackTrace();
+            if(currentAsteroid.getNeighbours().size() != 0){
+                Random rnd = new Random(System.currentTimeMillis());
+                try {
+                    //Random szomszédos aszteroidára mozgott
+                    currentAsteroid.getNeighbours().get(rnd.nextInt(currentAsteroid.getNeighbours().size())).addActor(this);
+                    System.out.println("Az actor egy szomszédos aszteroidára mozgott.");
+                } catch (MoveFailedException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                System.out.println("Az actor nem tud szomszédos aszteroidára mozogni.");
             }
-        }catch (MoveFailedException ignored){}
+        }catch (MoveFailedException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
