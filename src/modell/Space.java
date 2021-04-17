@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.io.Serializable;
 
 public class Space implements java.io.Serializable{
 
@@ -161,5 +162,21 @@ public class Space implements java.io.Serializable{
 
     public List<Asteroid> getAsteroids(){
         return asteroids;
+    }
+
+    public int getTurnsTillSunStorm() {
+        return turnsTillSunStorm;
+    }
+
+    public int getSunStormFreq() {
+        return sunStormFreq;
+    }
+
+    public int asteroidCount() {
+        return asteroids.size();
+    }
+
+    public int actorCount() {
+        return actors.size();
     }
 }

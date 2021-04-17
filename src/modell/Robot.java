@@ -78,4 +78,7 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
     public void drill() {
         currentAsteroid.getDrilled();
     }
+
+    @Override
+    public void putMaterialBack(Material mat){}
 }

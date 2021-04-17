@@ -18,6 +18,56 @@ public class MaterialArray implements java.io.Serializable{
         this.materials = materials;
     }
 
+
+
+    /**
+     * Visszaadja az első urán material indexét, ha nincs ilyen, akkor -1.
+     * @return az index.
+     */
+    public int getUran() {
+        for(int i = 0; i < materials.size(); i++) {
+            if(materials.get(i).getType().equals(MaterialType.Uran))
+                return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Visszaadja az első vas material indexét, ha nincs ilyen, akkor -1.
+     * @return az index.
+     */
+    public int getIron() {
+        for(int i = 0; i < materials.size(); i++) {
+            if(materials.get(i).getType().equals(MaterialType.Iron))
+                return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Visszaadja az első szén material indexét, ha nincs ilyen, akkor -1.
+     * @return az index.
+     */
+    public int getCoal() {
+        for(int i = 0; i < materials.size(); i++) {
+            if(materials.get(i).getType().equals(MaterialType.Coal))
+                return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Visszaadja az első jég material indexét, ha nincs ilyen, akkor -1.
+     * @return az index.
+     */
+    public int getIce() {
+        for(int i = 0; i < materials.size(); i++) {
+            if(materials.get(i).getType().equals(MaterialType.Ice))
+                return i;
+        }
+        return -1;
+    }
+
     /**
      * Épít 2 teleport kaput
      * @return A készített teleport kapuk

@@ -110,6 +110,9 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
         }
     }
 
+    @Override
+    public void putMaterialBack(Material mat){}
+
     public Settler getInSettler() {
         return inSettler;
     }

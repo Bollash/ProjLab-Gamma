@@ -7,6 +7,8 @@ import modell.exceptions.NoDrillableNeighbourException;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.Serializable;
+
 public class Asteroid implements IAsteroid, java.io.Serializable{
 
     private List<IAsteroid> neighbours;
@@ -203,5 +205,25 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
     public void sunStorm(){
         // Minden actorra meghívjuk a getSunStormed-et. Ha ez true-val tér vissza akkor levesszük az aszteroidáról, mert meghalt. Eléggé érdekesen néz ki ez a megoldás, de csak így lehetett megcsinálni.
         actorsOnSurface.removeIf(Actor::getSunStormed);
+    }
+
+    public int getTurnsTillCloseToSun() {
+        return turnsTillCloseToSun;
+    }
+
+    public int getCloseToSunFreq() {
+        return closeToSunFreq;
+    }
+
+    public int neighborCount() {
+        return neighbours.size();
+    }
+
+    public int actorsOnSurfaceCount() {
+        return actorsOnSurface.size();
+    }
+
+    public List<Actor> getActorsOnSurface() {
+        return actorsOnSurface;
     }
 }

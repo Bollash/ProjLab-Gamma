@@ -2,9 +2,13 @@ package modell;
 
 import modell.exceptions.MoveFailedException;
 import modell.exceptions.NoDrillableNeighbourException;
+import java.io.Serializable;
 
 public abstract class Actor implements java.io.Serializable{
+
+
     protected Space space;
+
     protected Asteroid currentAsteroid;
 
     public abstract boolean radExplode();
@@ -21,6 +25,10 @@ public abstract class Actor implements java.io.Serializable{
     }
 
     public abstract void act();
+
+    public abstract void putMaterialBack(Material mat);
+
+    public void putTpGateDown(){}
 
     public MaterialArray getMaterials(){
         return new MaterialArray();

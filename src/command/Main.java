@@ -1,7 +1,9 @@
 package command;
 
+import modell.*;
 import modell.Space;
 import modell.exceptions.NoDrillableNeighbourException;
+import modell.exceptions.NotEnoughMaterialException;
 
 import java.io.*;
 import java.util.Arrays;
@@ -169,5 +171,171 @@ public class Main {
             }
         }
         System.out.println("Nem létezik az indexnek megfelelő aszteroida");
+    }
+
+    /**
+     * Build metódus, építést hajtja vége.
+     * @param actor Paraméterként megkapott string, mely alapján dönti el a program az építendő objektumot.
+     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik az építés.
+     * @throws NotEnoughMaterialException Ezt dobjuk, ha nincs elég nyersanyag.
+     */
+    public static void build(String actor, String index) throws NotEnoughMaterialException {
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
+        }
+        else{
+            try{
+                currentActor = Integer.parseInt(index);
+            }catch(NumberFormatException e){
+                System.out.println("Nem létezik az indexnek megfelelő actor.");
+            }
+        }
+        if(actor.equals("Robot")) {
+                space.getActors().get(currentActor).getMaterials().buildRobot();
+        }
+        if(actor.equals("TpGate")) {
+            space.getActors().get(currentActor).getMaterials().buildRobot();
+        }
+        if(actor.equals("Base")) {
+            if (space.getActors().get(currentActor).getMaterials().canBuildBase()) {
+                //na itt mi van?
+            }
+        }
+        currentActor++;
+        return;
+    }
+
+
+    /**
+     * PutBack metódus, nyersanyag visszahelyezésre szolgál.
+     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a PutBack.
+     * @param materialName String, mely a visszahelyezni kívánt nyersanyag nevét tartalmazza.
+     */
+    public static void putBack(String index, String materialName){
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
+        }
+        else{
+            try{
+                currentActor = Integer.parseInt(index);
+            }catch(NumberFormatException e){
+                System.out.println("Nem létezik az indexnek megfelelő actor.");
+            }
+        }
+        if(materialName.equals("Uran")) {
+            int idx = space.getActors().get(currentActor).getMaterials().getUran();
+            if(idx != -1)
+                space.getActors().get(currentActor).putMaterialBack(space.getActors().get(currentActor).getMaterials().getMaterials().get(idx));
+        }
+        if(materialName.equals("Ice")) {
+            int idx = space.getActors().get(currentActor).getMaterials().getIce();
+            if(idx != -1)
+                space.getActors().get(currentActor).putMaterialBack(space.getActors().get(currentActor).getMaterials().getMaterials().get(idx));
+        }
+        if(materialName.equals("Coal")) {
+            int idx = space.getActors().get(currentActor).getMaterials().getCoal();
+            if(idx != -1)
+                space.getActors().get(currentActor).putMaterialBack(space.getActors().get(currentActor).getMaterials().getMaterials().get(idx));
+        }
+        if(materialName.equals("Iron")) {
+            int idx = space.getActors().get(currentActor).getMaterials().getIron();
+            if(idx != -1)
+                space.getActors().get(currentActor).putMaterialBack(space.getActors().get(currentActor).getMaterials().getMaterials().get(idx));
+        }
+        else {
+            System.out.println("Nincs ilyen nyersanyag a játékban.");
+        }
+        currentActor++;
+        return;
+    }
+
+
+    /**
+     * Metódus teleportkapu lerakására.
+     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik az építés.
+     */
+    public static void putTpGate(String index) {
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
+        }
+        else{
+            try{
+                currentActor = Integer.parseInt(index);
+            }catch(NumberFormatException e){
+                System.out.println("Nem létezik az indexnek megfelelő actor.");
+            }
+        }
+        space.getActors().get(currentActor).putTpGateDown();
+        currentActor++;
+        return;
+    }
+
+
+    /**
+     * Lementi a pálya aktuális állását.
+     * @param name Ezen a néven menti el a fájlt.
+     */
+    public static void save(String name) throws IOException {
+        FileOutputStream fos = new FileOutputStream(name + ".txt");
+        ObjectOutputStream out  = new ObjectOutputStream(fos);
+        out.writeObject(space);
+        out.close();
+        return;
+    }
+
+
+    /**
+     * Kiírja a kimenetre a space tulajdonságait.
+     */
+    public static void spaceStatus(){
+        System.out.println("Space");
+        System.out.println(space.getAliveSettlerCnt());
+        System.out.println(space.getTurnsTillSunStorm());
+        System.out.println(space.getSunStormFreq());
+        System.out.println(space.isGameOver());
+        System.out.println(space.asteroidCount());
+        System.out.println(space.actorCount());
+    }
+
+    /**
+     * Kiírja a kimenetre egy aszteroida tulajdonságait.
+     */
+    public static void asteroidStatus(int index){
+        System.out.println("Asteroid");
+        System.out.println(index);
+        System.out.println(space.getAsteroids().get(index).getTurnsTillCloseToSun());
+        System.out.println(space.getAsteroids().get(index).getCloseToSunFreq());
+        System.out.println(space.getAsteroids().get(index).getLayer());
+        System.out.println(space.getAsteroids().get(index).getCoreMaterial().getType());
+        System.out.println(space.getAsteroids().get(index).neighborCount());
+        for(int i = 0; i < space.getAsteroids().get(index).neighborCount(); i++) {
+          //  if(space.getAsteroids().get(index).getNeighbours().get(i).//itt tipuslekerdezes lenne)
+        }
+        System.out.println(space.getAsteroids().get(index).actorsOnSurfaceCount());
+        for(int i = 0; i < space.getAsteroids().get(index).actorsOnSurfaceCount(); i++) {
+            System.out.println(space.getAsteroids().get(index).getActorsOnSurface().get(i));
+        }
+    }
+
+
+    /**
+     * Kiírja a kimenetre a Settler tulajdonságait.
+     */
+    public static void settlerStatus(Settler s){
+        System.out.println("Settler");
+        //sok kerdes, tipuslekerdezessel kapcs + indexekkel, meg kene beszelni
+    }
+
+
+
+    /**
+     * Kiírja a kimenbetre a megadott objektum vagy objektumok állapotát.
+     * @param object Ezen paraméterrel meghatározható a kiíratni kívánt objektum.
+     */
+    public static void status(String object){
+        if(object.equals(null)) {
+            spaceStatus();
+        }
+        return;
     }
 }

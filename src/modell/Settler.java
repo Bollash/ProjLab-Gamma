@@ -125,6 +125,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
     /**
      * Leteszi a currentAsteroidára az egyik TpGate-t
      */
+    @Override
     public void putTpGateDown(){
         if(tpGates.size() > 0){
             currentAsteroid.addActor(tpGates.get(0));
@@ -149,4 +150,5 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
     public void drill() {
         currentAsteroid.getDrilled();
     }
+
 }

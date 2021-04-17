@@ -39,4 +39,7 @@ public class Ufo extends Actor implements iMine{
     public void mine() throws CantBeMinedException {
         currentAsteroid.getMined();
     }
+
+    @Override
+    public void putMaterialBack(Material mat){}
 }
