@@ -53,6 +53,16 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
     }
 
     @Override
+    public void addActor(Actor actor, boolean remove) throws MoveFailedException {
+        if(linkedTpGate.currentAsteroid == null){
+            throw new MoveFailedException("TpGate not on asteroid");
+        }
+        Asteroid ast = linkedTpGate.currentAsteroid;
+        ast.addActor(actor, remove);
+        currentAsteroid.removeActor(actor);
+    }
+
+    @Override
     public void removeNeighbour(IAsteroid asteroid) {
     }
 

@@ -14,17 +14,11 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
     @Override
     public boolean radExplode() {
         List<IAsteroid> destination = currentAsteroid.getNeighbours();
-
-        Random rnd = new Random(System.currentTimeMillis());
-
-        //Ha egyikre se lehet lépni akkor infinite loop
         try{
                 if(destination.size() != 0){
-                    destination.get(rnd.nextInt(destination.size())).addActor(this);
-                    return false;
-                }else{
-                    return true;
+                    destination.get(0).addActor(this, false);
                 }
+            return true;
 
         }catch(MoveFailedException ignored){
             return true;

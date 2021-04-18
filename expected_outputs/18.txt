@@ -1,9 +1,9 @@
 Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
-Sikeres volt a telepeshozzáadás
-Sikeres volt a telepeshozzáadás
 Az adott aszteroida kérge a kapott értékre lett állítva.
+Sikeres volt a telepeshozzáadás
+Sikeres volt a telepeshozzáadás
 A napközeli számláló eggyel csökkent.
 A napközeli számláló eggyel csökkent.
 Napközelbe került az aszteroida.
@@ -28,7 +28,8 @@ Asteroid
 3
 3
 3
-Iron
+Uran
+0
 0
 1
 0

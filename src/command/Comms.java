@@ -541,6 +541,7 @@ public class Comms {
                 robot.setSpace(space);
                 space.addActor(robot);
                 space.getAsteroids().get(astidx).addActor(robot);
+                robot.setCurrentAsteroid(space.getAsteroids().get(astidx));
                 System.out.println("Sikeres volt a robothozzáadás");
             }
 

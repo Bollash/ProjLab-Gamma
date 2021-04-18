@@ -1,9 +1,6 @@
 package modell;
 
-import modell.exceptions.CantBeMinedException;
-import modell.exceptions.CoreFullException;
-import modell.exceptions.LayerNot0Exception;
-import modell.exceptions.NoDrillableNeighbourException;
+import modell.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -171,6 +168,17 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
     public void addActor(Actor actor) {
         if(!actorsOnSurface.contains(actor)){
             if(actor.currentAsteroid != null){
+                actor.currentAsteroid.removeActor(actor);
+            }
+            actor.currentAsteroid = this;
+            actorsOnSurface.add(actor);
+        }
+    }
+
+    @Override
+    public void addActor(Actor actor, boolean remove) throws MoveFailedException {
+        if(!actorsOnSurface.contains(actor)){
+            if(actor.currentAsteroid != null && remove){
                 actor.currentAsteroid.removeActor(actor);
             }
             actor.currentAsteroid = this;
