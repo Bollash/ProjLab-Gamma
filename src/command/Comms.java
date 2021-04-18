@@ -4,17 +4,13 @@ import modell.*;
 import modell.Space;
 import modell.exceptions.CantBeMinedException;
 import modell.exceptions.MoveFailedException;
-import modell.exceptions.NoDrillableNeighbourException;
-import modell.exceptions.NotEnoughMaterialException;
 
 import java.io.*;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
-public class Main {
+public class Comms {
     public static void main(String[] args){
         cmdProg(System.in, System.out);
     }
@@ -37,23 +33,23 @@ public class Main {
             //A switchen belül egy functiont adok át aminek paraméterként egy String[]-et kell adni és voiddal tér vissza
             Consumer<String[]> func;
             switch (tokenized[0]) {
-                case "Seed" -> func = Main::seed;
-                case "Map" -> func = Main::map;
-                case "Act" -> func = Main::act;
-                case "Countdown" -> func = Main::countdown;
-                case "Mine" -> func = Main::mine;
-                case "NeighbourCnt" -> func = Main::neighbourCnt;
-                case "Move" -> func = Main::move;
-                case "Drill" -> func = Main::drill;
-                case "Build" -> func = Main::build;
-                case "Putback" -> func = Main::putBack;
-                case "PutTpGate" -> func = Main::putTpGate;
-                case "Save" -> func = Main::save;
-                case "Neighbour" -> func = Main::neighbour;
-                case "Mod" -> func = Main::mod;
-                case "Create" -> func = Main::createSpace;
-                case"Add" -> func = Main::add;
-                case "Status" -> func = Main::status;
+                case "Seed" -> func = Comms::seed;
+                case "Map" -> func = Comms::map;
+                case "Act" -> func = Comms::act;
+                case "Countdown" -> func = Comms::countdown;
+                case "Mine" -> func = Comms::mine;
+                case "NeighbourCnt" -> func = Comms::neighbourCnt;
+                case "Move" -> func = Comms::move;
+                case "Drill" -> func = Comms::drill;
+                case "Build" -> func = Comms::build;
+                case "Putback" -> func = Comms::putBack;
+                case "PutTpGate" -> func = Comms::putTpGate;
+                case "Save" -> func = Comms::save;
+                case "Neighbour" -> func = Comms::neighbour;
+                case "Mod" -> func = Comms::mod;
+                case "Create" -> func = Comms::createSpace;
+                case"Add" -> func = Comms::add;
+                case "Status" -> func = Comms::status;
                 default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
             }
             func.accept(Arrays.copyOfRange(tokenized, 1, tokenized.length));
