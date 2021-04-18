@@ -160,6 +160,9 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
     @Override
     public void addActor(Actor actor) {
         if(!actorsOnSurface.contains(actor)){
+            if(actor.currentAsteroid != null){
+                actor.currentAsteroid.removeActor(actor);
+            }
             actor.currentAsteroid = this;
             actorsOnSurface.add(actor);
         }

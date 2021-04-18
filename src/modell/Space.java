@@ -50,6 +50,7 @@ public class Space implements java.io.Serializable{
         gameOver = false;
         this.aliveSettlerCnt = settlerCnt;
         sunStormFreq = freq;
+        turnsTillSunStorm = sunStormFreq;
         List<Asteroid> asts = new ArrayList<>();
         Random rnd = new Random(System.currentTimeMillis());
         for(int i = 0; i < sameCnt; i++){
