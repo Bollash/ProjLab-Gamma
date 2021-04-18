@@ -42,7 +42,7 @@ public class Comms {
                 case "Move" -> func = Comms::move;
                 case "Drill" -> func = Comms::drill;
                 case "Build" -> func = Comms::build;
-                case "Putback" -> func = Comms::putBack;
+                case "PutBack" -> func = Comms::putBack;
                 case "PutTpGate" -> func = Comms::putTpGate;
                 case "Save" -> func = Comms::save;
                 case "Neighbour" -> func = Comms::neighbour;
