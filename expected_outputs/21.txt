@@ -1,7 +1,7 @@
 Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
-Sikeres volt a ufóhozzáadás
 Az adott aszteroida kérge a kapott értékre lett állítva.
+Sikeres volt az ufóhozzáadás
 A napközeli számláló eggyel csökkent.
 A napközeli számláló eggyel csökkent.
 Napközelbe került az aszteroida.

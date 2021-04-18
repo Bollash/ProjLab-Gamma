@@ -1,7 +1,7 @@
 Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 Sikeres volt a telepeshozzáadás
-Az adott aszteroida kérge a kapott értékre lett állítva
+Az adott aszteroida kérge a kapott értékre lett állítva.
 Az aszteroida magja a kapott nyersanyagra lett állítva
 Sikeresen betettük a nyersanyagot a telepesbe
 Nincs a telepesnél ilyen nyersanyag

@@ -1,3 +1,4 @@
+Create Space
 Add Asteroid Uran
 Add Robot 0
 Mod Layer 0 0

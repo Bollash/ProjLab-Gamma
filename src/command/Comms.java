@@ -378,7 +378,7 @@ public class Comms {
         if(cmd.length == 1 || cmd.length == 2){
             if(cmd.length == 2){
                 try{
-                    int curr = Integer.parseInt(cmd[1]);
+                    int curr = Integer.parseInt(cmd[0]);
                     if(curr >= 0 && curr < space.getActors().size()){
                         currentActor = curr;
                     } else {
@@ -390,28 +390,47 @@ public class Comms {
                     return;
                 }
 
+                try{
+                    Settler s = (Settler)space.getActors().get(currentActor);
+                    int idx = -1;
+                    switch (cmd[1]){
+                        case "Uran" -> idx = s.getMaterials().getUran();
+                        case "Ice" -> idx = s.getMaterials().getIce();
+                        case "Coal" -> idx = s.getMaterials().getCoal();
+                        case "Iron" -> idx = s.getMaterials().getIron();
+                    }
+                    if(idx != -1){
+                        s.putMaterialBack(s.getMaterials().getMaterials().get(idx));
+                    }else{
+                        System.out.println("Nincs a telepesnél ilyen nyersanyag");
+                    }
+                }catch(ClassCastException ex){
+                    System.out.println("Az actor nem tud nyersanyagot visszatenni, mert nem telepes.");
+                }
+
             } else{
                 if(currentActor == space.getActors().size()){
                     currentActor = 0;
+                    try{
+                        Settler s = (Settler)space.getActors().get(currentActor);
+                        int idx = -1;
+                        switch (cmd[0]){
+                            case "Uran" -> idx = s.getMaterials().getUran();
+                            case "Ice" -> idx = s.getMaterials().getIce();
+                            case "Coal" -> idx = s.getMaterials().getCoal();
+                            case "Iron" -> idx = s.getMaterials().getIron();
+                        }
+                        if(idx != -1){
+                            s.putMaterialBack(s.getMaterials().getMaterials().get(idx));
+                        }else{
+                            System.out.println("Nincs a telepesnél ilyen nyersanyag");
+                        }
+                    }catch(ClassCastException ex){
+                        System.out.println("Az actor nem tud nyersanyagot visszatenni, mert nem telepes.");
+                    }
                 }
             }
-            try{
-                Settler s = (Settler)space.getActors().get(currentActor);
-                int idx = -1;
-                switch (cmd[0]){
-                    case "Uran" -> idx = s.getMaterials().getUran();
-                    case "Ice" -> idx = s.getMaterials().getIce();
-                    case "Coal" -> idx = s.getMaterials().getCoal();
-                    case "Iron" -> idx = s.getMaterials().getIron();
-                }
-                if(idx != -1){
-                    s.putMaterialBack(s.getMaterials().getMaterials().get(idx));
-                }else{
-                    System.out.println("Nincs a telepesnél ilyen nyersanyag");
-                }
-            }catch(ClassCastException ex){
-                System.out.println("Az actor nem tud nyersanyagot visszatenni, mert nem telepes.");
-            }
+
             currentActor++;
         }
         else{
@@ -555,7 +574,7 @@ public class Comms {
                 ufo.setSpace(space);
                 space.addActor(ufo);
                 space.getAsteroids().get(astidx).addActor(ufo);
-                System.out.println("Sikeres volt a ufóhozzáadás");
+                System.out.println("Sikeres volt az ufóhozzáadás");
             }
 
             case "TpGate"->{
@@ -734,6 +753,7 @@ public class Comms {
                 if(cmd.length == 2){
                     int vl = Integer.parseInt(cmd[1]);
                     space.setTurnsTillSunStorm(vl);
+                    System.out.println("A napszél visszaszámláló az adott értékre állítódott.");
                     return;
                 }
                 if(cmd.length == 3){
@@ -741,6 +761,7 @@ public class Comms {
                         int idx = Integer.parseInt(cmd[1]);
                         int vl = Integer.parseInt(cmd[2]);
                         space.getAsteroids().get(idx).setTurnsTillCloseToSun(vl);
+                        System.out.println("A napközeli visszaszámláló a kapott értékre állítódott.");
                         return;
                     } catch(NumberFormatException e){
                         System.out.println("Hibás aszteroida indexet adtunk meg.");
@@ -786,6 +807,7 @@ public class Comms {
                         int idx = Integer.parseInt(cmd[1]);
                         boolean vl = Boolean.parseBoolean(cmd[2]);
                         ((TpGate)space.getActors().get(idx)).setActivated(vl);
+                        System.out.println("A teleportkapu activated flag-jét átállítottuk.");
                         return;
                     } catch (NumberFormatException e){
                         System.out.println("Hibás actor indexet adtunk meg.");

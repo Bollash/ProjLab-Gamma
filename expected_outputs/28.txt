@@ -1,7 +1,7 @@
 Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
-Sikeres volt a ufóhozzáadás
-Az actor nem tud szomszédos aszteroidára mozogni
+Sikeres volt az ufóhozzáadás
+Az actor nem tud szomszédos aszteroidára mozogni.
 Space
 0
 10

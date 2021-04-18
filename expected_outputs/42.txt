@@ -1,5 +1,6 @@
 Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Az adott aszteroida kérge a kapott értékre lett állítva.
 A napközeli számláló eggyel csökkent.
 A napközeli számláló eggyel csökkent.
 Napközelbe került az aszteroida.

@@ -1,6 +1,6 @@
 Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
-Sikeres volt a telepeshozzáadás.
+Sikeres volt a telepeshozzáadás
 Hozzáadtuk a teleportkapukat a célpontokhoz.
 Az adott aszteroida kérge a kapott értékre lett állítva.
 Az aszteroida magja a kapott nyersanyagra lett állítva
@@ -19,7 +19,7 @@ Asteroid
 3
 0
 1
-ast 1
+tp 1
 2
 0
 1

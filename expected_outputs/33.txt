@@ -1,7 +1,7 @@
 Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 Sikeres volt a telepeshozzáadás
-A napszél visszaszámláló a kapott értékre állítódott.
+A napszél visszaszámláló az adott értékre állítódott.
 A számláló elérte a nullát és napszél lett. A számláló visszaállt a kiindulási állapotba.
 Space
 0
@@ -9,4 +9,12 @@ Space
 10
 True
 1
+0
+Asteroid
+0
+3
+3
+3
+Iron
+0
 0

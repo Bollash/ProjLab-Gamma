@@ -1,5 +1,5 @@
 Space létrehozva
-A napszél visszaszámláló a kapott értékre állítódott.
+A napszél visszaszámláló az adott értékre állítódott.
 A napszél számláló eggyel csökkent.
 Space
 0

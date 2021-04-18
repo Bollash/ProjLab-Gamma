@@ -8,7 +8,8 @@ import modell.exceptions.NoDrillableNeighbourException;
 public class Ufo extends Actor implements iMine{
     @Override
     public boolean radExplode() {
-        return false;
+        space.removeActor(this);
+        return true;
     }
 
     @Override
@@ -26,7 +27,6 @@ public class Ufo extends Actor implements iMine{
             if(currentAsteroid.getNeighbours().size() != 0){
                 try {
                     move(currentAsteroid.getNeighbours().get(0));
-                    System.out.println("Az actor egy szomszédos aszteroidára mozog");
                 } catch (MoveFailedException moveFailedException) {
                     moveFailedException.printStackTrace();
                 }

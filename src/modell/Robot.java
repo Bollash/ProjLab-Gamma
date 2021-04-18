@@ -17,6 +17,8 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
         try{
                 if(destination.size() != 0){
                     destination.get(0).addActor(this, false);
+                }else{
+                    space.removeActor(this);
                 }
             return true;
 
@@ -45,7 +47,6 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
     public void act(){
         if(currentAsteroid.getLayer() > 0){
             drill();
-            System.out.println("Az actor megfúrja az aszteroidát");
             return;
         }
         try {
@@ -55,10 +56,9 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
         //Nincs fúrható aszteroida szomszéd
         }catch (NoDrillableNeighbourException ex){
             if(currentAsteroid.getNeighbours().size() != 0){
-                Random rnd = new Random(System.currentTimeMillis());
                 try {
                     //Random szomszédos aszteroidára mozgott
-                    currentAsteroid.getNeighbours().get(rnd.nextInt(currentAsteroid.getNeighbours().size())).addActor(this);
+                    currentAsteroid.getNeighbours().get(0).addActor(this);
                     System.out.println("Az actor egy szomszédos aszteroidára mozgott.");
                 } catch (MoveFailedException e) {
                     e.printStackTrace();

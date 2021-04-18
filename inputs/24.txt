@@ -2,8 +2,8 @@ Create Space
 Add Asteroid Iron
 Add Asteroid Iron
 Add Asteroid Iron
-Neighbor 0 1
-Neighbor 1 2
+Neighbour 0 1
+Neighbour 1 2
 Mod Layer 0 0
 Mod Layer 1 0
 Mod Layer 2 0

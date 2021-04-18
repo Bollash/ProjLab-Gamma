@@ -2,6 +2,7 @@ Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 Sikeres volt a telepeshozzáadás
 Hozzáadtuk a teleportkapukat a célpontokhoz.
+A teleportkapu activated flag-jét átállítottuk.
 Az actor nem tud szomszédos aszteroidára mozogni.
 Space
 1

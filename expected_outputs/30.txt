@@ -4,7 +4,7 @@ A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 A kapott aszteroidák szomszédossá váltak.
 Hozzáadtuk a teleportkapukat a célpontokhoz.
 A teleportkapu activated flag-jét átállítottuk.
-Az actor egy szomszédos aszteroidára mozog.
+Az aktor az aszteroidára mozgott.
 Space
 0
 10
@@ -21,7 +21,6 @@ Iron
 2
 ast 1
 tp 0
-1
 0
 Asteroid
 1
@@ -32,11 +31,12 @@ Iron
 2
 ast 0
 tp 1
-1
+2
+0
 1
 TpGate
 0
-ast 0
+ast 1
 1
 True
 TpGate

@@ -2,7 +2,7 @@ Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 Sikeres volt a robothozzáadás
-A kapott aszteroidák szomszédossá váltak
+A kapott aszteroidák szomszédossá váltak.
 Az adott aszteroida kérge a kapott értékre lett állítva.
 Az actor egy szomszédos aszteroidára mozgott.
 Space
@@ -28,7 +28,7 @@ Asteroid
 3
 Iron
 1
-0
+ast 0
 1
 0
 Robot

@@ -34,7 +34,7 @@ Asteroid
 Iron
 2
 ast 0
-2
+ast 2
 0
 Asteroid
 2

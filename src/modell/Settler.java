@@ -60,6 +60,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
             int value = space.getAliveSettlerCnt() - 1;
             space.setAliveSettlerCnt(value);
             if(value <= 1) space.setGameOver(true);
+            return true;
         }
         return false;
     }
@@ -133,9 +134,10 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         if(materials.getMaterials().contains(mat)){
             try {
                 currentAsteroid.addCore(mat);
+                System.out.println("Telepes visszatette a nyersanyagot.");
                 materials.getMaterials().remove(mat);
             } catch (CoreFullException e) {
-                System.out.println("The asteroid core is not empty");
+                System.out.println("Nem sikerült a visszatétel, mert a mag nem volt üres.");
             } catch (LayerNot0Exception e) {
                 System.out.println("Nem sikerült a visszatétel, mert a kéreg nem volt 0.");
             }

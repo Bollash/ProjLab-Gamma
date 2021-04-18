@@ -2,8 +2,8 @@ Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 A kapott aszteroidák szomszédossá váltak.
-Sikeres volt a ufóhozzáadás
-Az actor egy szomszédos aszteroidára mozog
+Sikeres volt az ufóhozzáadás
+Az aktor az aszteroidára mozgott.
 Space
 0
 10

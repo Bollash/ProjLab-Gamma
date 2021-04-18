@@ -2,7 +2,7 @@ Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 Sikeres volt a robothozzáadás
-A kapott aszteroidák szomszédossá váltak
+A kapott aszteroidák szomszédossá váltak.
 Az adott aszteroida kérge a kapott értékre lett állítva.
 A napközeli számláló eggyel csökkent.
 A napközeli számláló eggyel csökkent.

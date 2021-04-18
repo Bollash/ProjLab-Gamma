@@ -128,6 +128,9 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
      */
     public void explode(){
         actorsOnSurface.removeIf(Actor::radExplode);
+        for(IAsteroid ast : getNeighbours()){
+            ast.removeNeighbour(this);
+        }
         space.getAsteroids().remove(this);
     }
 
