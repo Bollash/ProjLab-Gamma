@@ -20,7 +20,7 @@ public class Main {
 
     private static int seed;
     private static Space space;
-    private static int currentActor, currentAsteroid;
+    private static int currentActor;
 
     /**
      * Parancs kezelő program
@@ -258,22 +258,29 @@ public class Main {
                 currentActor = 0;
             }
             try {
-                space.getActors().get(currentActor).move(space.getAsteroids().get(currentAsteroid));
+                int astidx = Integer.parseInt(cmd[0]);
+                space.getActors().get(currentActor).move(space.getAsteroids().get(astidx));
+                currentActor++;
+                return;
             } catch (MoveFailedException e) {
                 System.out.println("Nem sikerült a mozgás, mert nem létezik ilyen indexű aszteroida!");
+                return;
             }
-            currentActor++;
-            return;
         }
         else if(cmd.length == 2){
             try {
-                int idx = Integer.parseInt(cmd[1]);
-                space.getActors().get(idx).move(space.getAsteroids().get(currentAsteroid));
-            } catch (NumberFormatException e) {
-                System.out.println("Nem létezik az indexnek megfelelő asteroid.");
+                int astidx = Integer.parseInt(cmd[1]);
+                int idx = Integer.parseInt(cmd[0]);
+                space.getActors().get(idx).move(space.getAsteroids().get(astidx));
+                return;
+            } catch (MoveFailedException e) {
+                System.out.println("Nem sikerült a mozgás, mert nem létezik ilyen indexű aszteroida!");
+                return;
+            } catch (NumberFormatException e){
+                System.out.println("Nem létezik ilyen indexű actor!");
             }
         }
-
+        System.out.println("Nem létezik ilyen indexű actor/asteroid!");
     }
 
     /**
