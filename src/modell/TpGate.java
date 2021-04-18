@@ -120,4 +120,8 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
     public void setInSettler(Settler inSettler) {
         this.inSettler = inSettler;
     }
+
+    public void setActivated(boolean b){
+        activated = b;
+    }
 }

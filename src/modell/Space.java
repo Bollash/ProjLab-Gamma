@@ -182,6 +182,8 @@ public class Space implements java.io.Serializable{
         return sunStormFreq;
     }
 
+    public void setTurnsTillSunStorm(int c){ turnsTillSunStorm = c; }
+
     public int asteroidCount() {
         return asteroids.size();
     }

@@ -585,18 +585,78 @@ public class Main {
         System.out.println("Nem létező indexű aszteroidákat adtunk meg!");
     }
 
-    public static void mod(String [] strs){
-        switch (strs[0]){
+
+    /**
+     * Az egyik objektum egyik attribútumát átállítjuk a kívánt értékre.
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
+     */
+    public static void mod(String[] cmd){
+        switch (cmd[0]){
             case "Counter":
-
+                if(cmd.length == 2){
+                    int vl = Integer.parseInt(cmd[1]);
+                    space.setTurnsTillSunStorm(vl);
+                    return;
+                }
+                if(cmd.length == 3){
+                    try{
+                        int idx = Integer.parseInt(cmd[1]);
+                        int vl = Integer.parseInt(cmd[2]);
+                        space.getAsteroids().get(idx).setTurnsTillCloseToSun(vl);
+                        return;
+                    } catch(NumberFormatException e){
+                        System.out.println("Hibás aszteroida indexet adtunk meg.");
+                        return;
+                    }
+                }
             case "Layer":
-
+                if(cmd.length == 3){
+                    try {
+                        int idx = Integer.parseInt(cmd[1]);
+                        int vl = Integer.parseInt(cmd[2]);
+                        space.getAsteroids().get(idx).setLayer(vl);
+                        return;
+                    } catch (NumberFormatException e){
+                        System.out.println("Hibás aszteroida indexet adtunk meg.");
+                        return;
+                    }
+                }
             case "Core":
-
+                if(cmd.length == 3){
+                    try {
+                        int idx = Integer.parseInt(cmd[1]);
+                        if(cmd[2].equals("coal")) {
+                            space.getAsteroids().get(idx).setCoreMaterial(new Coal());
+                        }
+                        if(cmd[2].equals("ice")) {
+                            space.getAsteroids().get(idx).setCoreMaterial(new Ice());
+                        }
+                        if(cmd[2].equals("iron")) {
+                            space.getAsteroids().get(idx).setCoreMaterial(new Iron());
+                        }
+                        if(cmd[2].equals("uran")) {
+                            space.getAsteroids().get(idx).setCoreMaterial(new Uran());
+                        }
+                        return;
+                    } catch (NumberFormatException e){
+                        System.out.println("Hibás aszteroida indexet adtunk meg.");
+                        return;
+                    }
+                }
             case "Activated":
+                if(cmd.length == 3){
+                    try {
+                        int idx = Integer.parseInt(cmd[1]);
+                        boolean vl = Boolean.parseBoolean(cmd[2]);
+                        ((TpGate)space.getActors().get(idx)).setActivated(vl);
+                        return;
+                    } catch (NumberFormatException e){
+                        System.out.println("Hibás actor indexet adtunk meg.");
+                        return;
+                    }
+                }
+            default:
+                break;
         }
     }
-
-
-
 }

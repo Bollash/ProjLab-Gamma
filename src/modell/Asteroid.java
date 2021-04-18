@@ -224,6 +224,8 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         return turnsTillCloseToSun;
     }
 
+    public void setTurnsTillCloseToSun(int c) { turnsTillCloseToSun = c;}
+
     public int getCloseToSunFreq() {
         return closeToSunFreq;
     }
