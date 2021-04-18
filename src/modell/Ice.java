@@ -1,6 +1,7 @@
 package modell;
 
 import modell.exceptions.CantBeMinedException;
+import modell.exceptions.LayerNot0Exception;
 
 public class Ice extends Material implements java.io.Serializable{
     /**
@@ -28,7 +29,7 @@ public class Ice extends Material implements java.io.Serializable{
         try {
             ast.getMined();
             System.out.println("A magban lévő jég elpárolgott.");
-        } catch (CantBeMinedException ignored) {
+        } catch (CantBeMinedException | LayerNot0Exception ignored) {
         }
     }
 }

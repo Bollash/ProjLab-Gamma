@@ -13,6 +13,7 @@ Sikeresen betettük a nyersanyagot a telepesbe
 Sikeresen betettük a nyersanyagot a telepesbe
 Sikeresen betettük a nyersanyagot a telepesbe
 Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
 Felépült a bázis. Nyertek a telepesek
 Space
 2
@@ -21,7 +22,7 @@ Space
 True
 1
 2
-Asteroid 
+Asteroid
 0
 3
 3
@@ -35,9 +36,24 @@ Settler
 0
 0
 0
-0
+6
+Iron
+Iron
+Iron
+Coal
+Coal
+Coal
 Settler
 1
 0
 0
+6
+Ice
+Ice
+Ice
+Uran
+0
+Uran
+0
+Uran
 0

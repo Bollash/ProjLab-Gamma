@@ -13,7 +13,7 @@ Space
 10
 False
 1
-1
+3
 Asteroid
 0
 3
@@ -26,9 +26,20 @@ Iron
 Settler
 0
 0
-0
-0
+2
+4
 Iron
 Iron
 Ice
 Uran
+0
+TpGate
+1
+set 0
+2
+False
+TpGate
+2
+set 0
+1
+False

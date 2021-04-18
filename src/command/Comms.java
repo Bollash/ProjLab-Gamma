@@ -3,6 +3,7 @@ package command;
 import modell.*;
 import modell.Space;
 import modell.exceptions.CantBeMinedException;
+import modell.exceptions.LayerNot0Exception;
 import modell.exceptions.MoveFailedException;
 
 import java.io.*;
@@ -201,7 +202,14 @@ public class Comms {
                 currentActor++;
                 return;
             } catch (CantBeMinedException e) {
+                System.out.println("Az aszteroidában nincs nyersanyag.");
+                return;
+            }catch (ClassCastException ex) {
                 System.out.println("Az aktor nem képes bányászni.");
+                return;
+            }
+            catch (LayerNot0Exception ex){
+                System.out.println("Nem lehet az aszteroidát bányászni, mert nincs átfúrva a kéreg.");
                 return;
             }
         } else if(cmd.length == 1) {
@@ -212,14 +220,22 @@ public class Comms {
                     return;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Nem létezik ilyen indexű actor.");
+                System.out.println("A kapott indexxel nem létezik actor.");
                 return;
             } catch (CantBeMinedException e) {
+                System.out.println("Az aszteroidában nincs nyersanyag.");
+                return;
+            }
+            catch (ClassCastException ex) {
                 System.out.println("Az aktor nem képes bányászni.");
                 return;
             }
+            catch (LayerNot0Exception ex){
+                System.out.println("Nem lehet az aszteroidát bányászni, mert nincs átfúrva a kéreg.");
+                return;
+            }
         }
-        System.out.println("Nem létezik ilyen indexű actor.");
+        System.out.println("A kapott indexxel nem létezik actor.");
     }
 
     /**
@@ -335,22 +351,21 @@ public class Comms {
                     System.out.println("Nem létezik ilyen indexű actor.");
                     return;
                 }
-                if (currentActor == space.getActors().size()) {
-                    currentActor = 0;
-                } else {
-                    try {
-                        Settler s = (Settler) space.getActors().get(currentActor);
-                        switch (cmd[0]) {
-                            case "Robot" -> s.craftRobot();
-                            case "TpGate" -> s.craftGates();
-                            case "Base" -> s.buildBase();
-                        }
-                    } catch (ClassCastException ex) {
-                        System.out.println("Az actor nem tud építeni, mert nem telepes.");
-                    }
-                    currentActor++;
-                }
             }
+            if (currentActor == space.getActors().size()) {
+                currentActor = 0;
+            }
+            try {
+                Settler s = (Settler) space.getActors().get(currentActor);
+                switch (cmd[0]) {
+                    case "Robot" -> s.craftRobot();
+                    case "TpGate" -> s.craftGates();
+                    case "Base" -> s.buildBase();
+                }
+            } catch (ClassCastException ex) {
+                System.out.println("Az actor nem tud építeni, mert nem telepes.");
+            }
+            currentActor++;
         }
     }
 
@@ -748,18 +763,16 @@ public class Comms {
                 if(cmd.length == 3){
                     try {
                         int idx = Integer.parseInt(cmd[1]);
-                        if(cmd[2].equals("coal")) {
-                            space.getAsteroids().get(idx).setCoreMaterial(new Coal());
+                        switch (cmd[2]) {
+                            case "Coal" -> space.getAsteroids().get(idx).setCoreMaterial(new Coal());
+                            case "Ice" -> space.getAsteroids().get(idx).setCoreMaterial(new Ice());
+                            case "Iron" -> space.getAsteroids().get(idx).setCoreMaterial(new Iron());
+                            case "Uran" -> space.getAsteroids().get(idx).setCoreMaterial(new Uran());
+                            case "Nothing" -> space.getAsteroids().get(idx).setCoreMaterial(null);
+                            default -> {System.out.println("Nincs ilyen nyersanyag.");
+                            return;}
                         }
-                        if(cmd[2].equals("ice")) {
-                            space.getAsteroids().get(idx).setCoreMaterial(new Ice());
-                        }
-                        if(cmd[2].equals("iron")) {
-                            space.getAsteroids().get(idx).setCoreMaterial(new Iron());
-                        }
-                        if(cmd[2].equals("uran")) {
-                            space.getAsteroids().get(idx).setCoreMaterial(new Uran());
-                        }
+                        System.out.println("Az aszteroida magja a kapott nyersanyagra lett állítva");
                         return;
                     } catch (NumberFormatException e){
                         System.out.println("Hibás aszteroida indexet adtunk meg.");

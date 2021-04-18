@@ -29,11 +29,15 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
      * Kibányássza az asteroida magját, és beteszi a nyersanyagok közé, ha ott még 10 nél kevesebb darab van.
      * @throws CantBeMinedException Ha az aszteroidát nem lehet bányászni ilyen exceptiont dobunk.
      */
-    public void mine() throws CantBeMinedException {
+    public void mine() throws CantBeMinedException, LayerNot0Exception {
         Material material;
         material = currentAsteroid.getMined();
+        System.out.println("Telepes bányászott.");
         if(materials.getMaterials().size() < 10){
             materials.addMaterial(material);
+            System.out.println("A nyersanyag el lett tárolva");
+        }else{
+            System.out.println("A nyersanyagnak nincs hely ezért elpusztult.");
         }
     }
 
@@ -91,6 +95,10 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
                 gates[1].setLinkedTpGate(gates[0]);
                 gates[1].setInSettler(this);
                 tpGates.addAll(Arrays.asList(gates));
+                space.addActor(gates[0]);
+                space.addActor(gates[1]);
+                gates[0].setSpace(space);
+                gates[1].setSpace(space);
                 System.out.println("A telepes teleportkapukat épített.");
             } catch (NotEnoughMaterialException e) {
                 System.out.println("Nem sikerült a teleportkapu építés, mert nincs elég nyersanyag.");

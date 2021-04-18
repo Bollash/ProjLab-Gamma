@@ -12,7 +12,7 @@ Space
 False
 1
 2
-Asteroid 
+Asteroid
 0
 3
 3

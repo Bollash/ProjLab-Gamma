@@ -8,16 +8,11 @@ import command.Comms;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner in = new Scanner(System.in);
-
-        //deleteFiles("outputs");
-        //for(int i = 1; i < 46; i++){
-        //    runtest(i);
-        //}
-        System.setOut(System.out);
-        try {
-            testeval();
-        } catch (IOException e) {
-            e.printStackTrace();
+        int n = in.nextInt();
+        if(n == 0){
+            gen();
+        }else{
+            eval();
         }
     }
 
@@ -60,6 +55,20 @@ public class Main {
             else if(c2 == -1 || c1 != c2){
                 return false;
             }
+        }
+    }
+    public static void gen(){
+        deleteFiles("outputs");
+        for(int i = 1; i < 46; i++){
+            runtest(i);
+        }
+    }
+    public static void eval(){
+        System.setOut(System.out);
+        try {
+            testeval();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

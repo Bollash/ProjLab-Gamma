@@ -65,15 +65,17 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
      * @return Magjában lévő material
      * @throws CantBeMinedException
      */
-    public Material getMined()throws CantBeMinedException {
+    public Material getMined() throws CantBeMinedException, LayerNot0Exception {
         if (layer == 0) {
             if(coreMaterial == null){
                 throw new CantBeMinedException("No core material");
             }
-                return coreMaterial;
+            Material core = coreMaterial;
+            coreMaterial = null;
+            return core;
             }
             else{
-                throw new CantBeMinedException("Layer is not 0");
+                throw new LayerNot0Exception("Layer is not 0");
             }
 
     }
@@ -251,7 +253,10 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         System.out.println(turnsTillCloseToSun);
         System.out.println(closeToSunFreq);
         System.out.println(layer);
-        coreMaterial.status();
+        if(coreMaterial != null){
+            coreMaterial.status();
+        }
+
         System.out.println(neighborCount());
         for(IAsteroid iast : neighbours){
             if(iast instanceof TpGate) {
