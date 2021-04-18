@@ -40,6 +40,8 @@ public class Main {
                 case "Act" -> func = Main::act;
                 case "Countdown" -> func = Main::countdown;
                 case "Mine" -> func = Main::mine;
+                case "NeighbourCnt" -> func = Main::neighbourCnt;
+                case "Move" -> func = Main::move;
                 case "Drill" -> func = Main::drill;
                 default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
             }
@@ -215,36 +217,32 @@ public class Main {
 
     /**
      * A paraméteként kapott aszteroidának/actor aszteroidájának szomszédos aszteroidáinak száma.
-     * @param object Paraméterként megkapott string, mely Asteroid, vagy Actor lehet.
-     * @param index Paraméterként kapott string, annak az asteroidnak/actornak az indexe van benne, mely szomszédjai számát akarjuk lekérdezni.
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
-    public static void neighbourCnt(String object, String index){
-        if(object.equals("Asteroid")) {
-            if(currentAsteroid == space.getAsteroids().size()){
-                currentAsteroid = 0;
-            }
-            else {
+    public static void neighbourCnt(String[] cmd){
+        if(cmd.length == 2) {
+            if (cmd[0].equals("Asteroid")) {
                 try {
-                    currentAsteroid = Integer.parseInt(index);
+                    int idx = Integer.parseInt(cmd[1]);
+                    System.out.println(space.getAsteroids().get(idx).getNeighbours().size());
+                    return;
                 } catch (NumberFormatException e) {
                     System.out.println("Nem létezik az indexnek megfelelő asteroid.");
+                    return;
                 }
             }
-            space.getAsteroids().get(currentAsteroid).getNeighbours();
-        }
-        if(object.equals("Actor")) {
-            if(currentActor == space.getActors().size()){
-                currentActor = 0;
-            }
-            else {
+            if (cmd[0].equals("Actor")) {
                 try {
-                    currentActor = Integer.parseInt(index);
+                    int idx = Integer.parseInt(cmd[1]);
+                    System.out.println(space.getActors().get(idx).getCurrentAsteroid().getNeighbours().size());
+                    return;
                 } catch (NumberFormatException e) {
                     System.out.println("Nem létezik az indexnek megfelelő actor.");
+                    return;
                 }
             }
-            space.getActors().get(currentActor).getCurrentAsteroid().getNeighbours();
         }
+        System.out.println("Nem létezik az indexnek megfelelő actor.");
     }
 
     /**
