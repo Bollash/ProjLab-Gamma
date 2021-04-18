@@ -208,14 +208,14 @@ public class Main {
                     return;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Nem létezik az indexnek megfelelő actor.");
+                System.out.println("Nem létezik ilyen indexű actor.");
                 return;
             } catch (CantBeMinedException e) {
                 System.out.println("Az aktor nem képes bányászni.");
                 return;
             }
         }
-        System.out.println("Nem létezik az indexnek megfelelő actor.");
+        System.out.println("Nem létezik ilyen indexű actor.");
     }
 
     /**
@@ -230,7 +230,7 @@ public class Main {
                     System.out.println(space.getAsteroids().get(idx).getNeighbours().size());
                     return;
                 } catch (NumberFormatException e) {
-                    System.out.println("Nem létezik az indexnek megfelelő asteroid.");
+                    System.out.println("Nem létezik ilyen indexű asteroid.");
                     return;
                 }
             }
@@ -240,12 +240,12 @@ public class Main {
                     System.out.println(space.getActors().get(idx).getCurrentAsteroid().getNeighbours().size());
                     return;
                 } catch (NumberFormatException e) {
-                    System.out.println("Nem létezik az indexnek megfelelő actor.");
+                    System.out.println("Nem létezik ilyen indexű actor.");
                     return;
                 }
             }
         }
-        System.out.println("Nem létezik az indexnek megfelelő actor.");
+        System.out.println("Nem létezik ilyen indexű actor.");
     }
 
     /**
@@ -303,11 +303,11 @@ public class Main {
                     return;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Nem létezik az indexnek megfelelő actor.");
+                System.out.println("Nem létezik ilyen indexű actor.");
                 return;
             }
         }
-        System.out.println("Nem létezik az indexnek megfelelő actor.");
+        System.out.println("Nem létezik ilyen indexű actor.");
     }
 
     /**
