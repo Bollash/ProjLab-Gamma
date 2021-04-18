@@ -13,6 +13,7 @@ public class Main {
         //for(int i = 1; i < 46; i++){
         //    runtest(i);
         //}
+        System.setOut(System.out);
         try {
             testeval();
         } catch (IOException e) {

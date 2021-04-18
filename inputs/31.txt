@@ -2,6 +2,6 @@ Create Space
 Add Asteroid Iron
 Add Settler 0
 Add TpGate Asteroid 0 Settler 0
-Mod Activated 0 True
+Mod Activated 1 True
 Act 0
 Status All

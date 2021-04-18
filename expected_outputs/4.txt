@@ -1,7 +1,7 @@
 Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 Sikeres volt a robothozzáadás
-Az actor megfúrta az aszteroidát
+Az actor megfúrta az aszteroidát.
 Space
 0
 10

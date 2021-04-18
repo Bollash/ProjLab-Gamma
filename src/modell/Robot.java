@@ -18,13 +18,16 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
         Random rnd = new Random(System.currentTimeMillis());
 
         //Ha egyikre se lehet lépni akkor infinite loop
-        //TODO: rendesen megoldani ezt
-        while(true){
-            try{
-                destination.get(rnd.nextInt(destination.size())).addActor(this);
-                return false;
-            }catch(MoveFailedException ignored){
-            }
+        try{
+                if(destination.size() != 0){
+                    destination.get(rnd.nextInt(destination.size())).addActor(this);
+                    return false;
+                }else{
+                    return true;
+                }
+
+        }catch(MoveFailedException ignored){
+            return true;
         }
     }
 

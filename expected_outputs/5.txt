@@ -1,6 +1,7 @@
 Space létrehozva
 A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
 Sikeres volt a telepeshozzáadás
+Az adott aszteroida kérge a kapott értékre lett állítva.
 Nem sikerült fúrni, mert az aszteroida kérge már 0.
 Space
 1
