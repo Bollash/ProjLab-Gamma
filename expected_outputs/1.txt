@@ -27,7 +27,7 @@ Asteroid
 3
 Iron
 1
-ast 0
+Ast 0
 1
 0
 Settler
