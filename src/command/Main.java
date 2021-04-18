@@ -39,6 +39,8 @@ public class Main {
                 case "Map" -> func = Main::map;
                 case "Act" -> func = Main::act;
                 case "Countdown" -> func = Main::countdown;
+                case "Mine" -> func = Main::mine;
+                case "Drill" -> func = Main::drill;
                 default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
             }
             func.accept(Arrays.copyOfRange(tokenized, 1, tokenized.length));
@@ -178,21 +180,37 @@ public class Main {
 
     /**
      * A paraméterként kapott számú aktort bányászásra bírjuk, ha tud olyat.
-     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a bányászás.
-     * @throws CantBeMinedException Ezt dubjuk, ha valami oknál fogva nem tudunk bányászni
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
-    public static void mine(String actor, String index) throws CantBeMinedException {
-        if(currentActor == space.getActors().size()){
-            currentActor = 0;
-        }
-        else {
+    public static void mine(String[] cmd) {
+        if(cmd.length == 0) {
+            if (currentActor == space.getActors().size()) {
+                currentActor = 0;
+            }
             try {
-                currentActor = Integer.parseInt(index);
+                ((iMine) space.getActors().get(currentActor)).mine();
+                currentActor++;
+                return;
+            } catch (CantBeMinedException e) {
+                System.out.println("Az aktor nem képes bányászni.");
+                return;
+            }
+        } else if(cmd.length == 1) {
+            try {
+                int idx = Integer.parseInt(cmd[0]);
+                if(idx < space.getActors().size() && idx >= 0) {
+                    ((iMine) space.getActors().get(idx)).mine();
+                    return;
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Nem létezik az indexnek megfelelő actor.");
+                return;
+            } catch (CantBeMinedException e) {
+                System.out.println("Az aktor nem képes bányászni.");
+                return;
             }
         }
-        space.getActors().get(currentActor).getCurrentAsteroid().getMined();
+        System.out.println("Nem létezik az indexnek megfelelő actor.");
     }
 
     /**
@@ -261,20 +279,29 @@ public class Main {
 
     /**
      * A paraméterként kapott actor fúr, ha képes rá.
-     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a fúrás.
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
-    public static void drill(String actor, String index){
-        if(currentActor == space.getActors().size()){
-            currentActor = 0;
-        }
-        else {
+    public static void drill(String[] cmd){
+        if(cmd.length == 0) {
+            if (currentActor == space.getActors().size()) {
+                currentActor = 0;
+            }
+            ((iDrill) space.getActors().get(currentActor)).drill();
+            currentActor++;
+            return;
+        } else if(cmd.length == 1) {
             try {
-                currentActor = Integer.parseInt(index);
+                int idx = Integer.parseInt(cmd[0]);
+                if(idx < space.getActors().size() && idx >= 0) {
+                    ((iDrill) space.getActors().get(idx)).drill();
+                    return;
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Nem létezik az indexnek megfelelő actor.");
+                return;
             }
         }
-        space.getActors().get(currentActor).getCurrentAsteroid().getDrilled();
+        System.out.println("Nem létezik az indexnek megfelelő actor.");
     }
 
     /**
