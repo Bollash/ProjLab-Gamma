@@ -9,6 +9,7 @@ import modell.exceptions.NotEnoughMaterialException;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
@@ -441,4 +442,65 @@ public class Main {
         }
         return;
     }
+
+
+    /**
+     *
+     */
+    public static void createSpace(){
+
+    }
+
+
+    public static void addAsteroid(String materialName){
+        if(materialName.equals("Uran")) {
+            Asteroid ast = new Asteroid(3,3,3,new Uran());
+            space.addAsteroid(ast);
+        }
+        if(materialName.equals("Ice")) {
+            Asteroid ast = new Asteroid(3,3,3,new Ice());
+            space.addAsteroid(ast);
+        }
+        if(materialName.equals("Coal")) {
+            Asteroid ast = new Asteroid(3,3,3,new Coal());
+            space.addAsteroid(ast);
+        }
+        if(materialName.equals("Iron")) {
+            Asteroid ast = new Asteroid(3,3,3,new Iron());
+            space.addAsteroid(ast);
+        }
+
+    }
+
+    public static void addActor(String actor,String index){
+        if(actor.equals("Settler")){
+            ;
+
+        }
+        if(actor.equals("Robot")){
+            ;
+
+        }
+        if(actor.equals("Ufo")){
+            ;
+
+        }
+    }
+
+    public static void addTpGate(String index1, String index2){
+
+
+    }
+
+    public static void addMaterial(String settlerID, String type){
+
+    }
+
+    public static void neighbour(String index1, String index2){
+
+
+    }
+
+
+
 }

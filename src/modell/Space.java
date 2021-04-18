@@ -125,6 +125,16 @@ public class Space implements java.io.Serializable{
     }
 
     /**
+     * Kapott aszteroidát adja az aszteroidák közé
+     * @param asteroid Ez az aszteroida kerül az asteroids-ba
+     */
+    public void addAsteroid(Asteroid asteroid){
+        if(!asteroids.contains(asteroid)){
+            asteroids.add(asteroid);
+        }
+    }
+
+    /**
      * gameOver flag getter-e
      * @return _
      */
