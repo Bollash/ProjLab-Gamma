@@ -2,6 +2,7 @@ package modell;
 
 import modell.exceptions.CantBeMinedException;
 import modell.exceptions.CoreFullException;
+import modell.exceptions.LayerNot0Exception;
 import modell.exceptions.NotEnoughMaterialException;
 
 import java.util.ArrayList;
@@ -125,6 +126,8 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
                 materials.getMaterials().remove(mat);
             } catch (CoreFullException e) {
                 System.out.println("The asteroid core is not empty");
+            } catch (LayerNot0Exception e) {
+                System.out.println("Nem sikerült a visszatétel, mert a kéreg nem volt 0.");
             }
         }
     }
