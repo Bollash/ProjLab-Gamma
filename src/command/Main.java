@@ -560,10 +560,25 @@ public class Main {
 
     }
 
-    public static void neighbour(String [] indexes){
-        space.getAsteroids()
 
-
+    /**
+     * 2 IAsteroid-ot szomszédossá tesz.
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
+     */
+    public static void neighbour(String[] cmd){
+        if(cmd.length == 2){
+            try {
+                int idx1 = Integer.parseInt(cmd[0]);
+                int idx2 = Integer.parseInt(cmd[1]);
+                space.getAsteroids().get(idx1).addNeighbour(space.getAsteroids().get(idx2));
+                space.getAsteroids().get(idx2).addNeighbour(space.getAsteroids().get(idx1));
+                return;
+            } catch (NumberFormatException e) {
+                System.out.println("Nem létezik ilyen indexű actor.");
+                return;
+            }
+        }
+        System.out.println("Nem létezik ilyen indexű actor.");
     }
 
     public static void mod(String [] strs){
