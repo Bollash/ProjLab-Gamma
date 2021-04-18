@@ -1,0 +1,23 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Az adott aszteroida kérge a kapott értékre lett állítva.
+Sikeres volt az ufóhozzáadás
+Az actor bányászik
+Space
+0
+10
+10
+False
+1
+1
+Asteroid
+0
+3
+3
+0
+0
+1
+0
+Ufo
+0
+0

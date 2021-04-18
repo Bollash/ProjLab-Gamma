@@ -1,0 +1,21 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Az adott aszteroida kérge a kapott értékre lett állítva.
+A napközeli számláló eggyel csökkent.
+A napközeli számláló eggyel csökkent.
+Napközelbe került az aszteroida.
+A magban lévő jég elpárolgott.
+Space
+0
+10
+10
+False
+1
+0
+Asteroid
+0
+3
+3
+3
+0
+0

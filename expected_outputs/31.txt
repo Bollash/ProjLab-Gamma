@@ -1,0 +1,38 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Sikeres volt a telepeshozzáadás
+Hozzáadtuk a teleportkapukat a célpontokhoz.
+Az actor nem tud szomszédos aszteroidára mozogni.
+Space
+1
+10
+10
+False
+1
+3
+Asteroid
+0
+3
+3
+3
+Iron
+1
+tp 1
+2
+0
+1
+Settler
+0
+0
+1
+0
+TpGate
+1
+ast 0
+2
+True
+TpGate
+2
+set 0
+1
+False

@@ -1,0 +1,18 @@
+Create Space
+Add Asteroid Iron
+Add Settler 0
+Add Settler 0
+Add Material 0 Iron
+Add Material 0 Iron
+Add Material 0 Iron
+Add Material 0 Coal
+Add Material 0 Coal
+Add Material 0 Coal
+Add Material 1 Ice
+Add Material 1 Ice
+Add Material 1 Ice
+Add Material 1 Uran
+Add Material 1 Uran
+Add Material 1 Uran
+Build Base
+Status All

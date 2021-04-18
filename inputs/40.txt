@@ -1,0 +1,5 @@
+Create Space
+Add Asteroid Iron
+Add Asteroid Iron
+Neighbour 0 1
+Status All

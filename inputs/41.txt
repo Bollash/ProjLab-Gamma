@@ -1,0 +1,5 @@
+Create Space
+Add Asteroid Uran
+Mod Counter 0 1
+CountDown 0
+Status All

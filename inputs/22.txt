@@ -1,0 +1,5 @@
+Create Space
+Add Asteroid Iron
+Add Robot 0
+Act 0
+Status All

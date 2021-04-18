@@ -1,0 +1,8 @@
+Create Space
+Add Asteroid Iron
+Add Settler 0
+Mod Layer 0 0
+Mod Core 0 Nothing
+Add Material 0 Coal
+PutBack 0 Iron
+Status All

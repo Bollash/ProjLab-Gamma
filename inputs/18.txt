@@ -1,0 +1,16 @@
+Create Space
+Add Asteroid Uran
+Add Asteroid Uran
+Mod Layer 0 0
+Add Settler 0
+Add Settler 1
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Status All

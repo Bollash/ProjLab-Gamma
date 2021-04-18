@@ -1,0 +1,7 @@
+Create Space
+Add Asteroid Iron
+Add Asteroid Iron
+Neighbour 0 1
+Add Settler 0
+Move 0 0
+Status All

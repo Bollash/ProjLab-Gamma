@@ -1,0 +1,6 @@
+Create Space
+Add Asteroid Iron
+Add Asteroid Iron
+Add TpGate Asteroid 0 Asteroid 1
+Act 0
+Status All

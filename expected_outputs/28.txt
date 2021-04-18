@@ -1,0 +1,23 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Sikeres volt a ufóhozzáadás
+Az actor nem tud szomszédos aszteroidára mozogni
+Space
+0
+10
+10
+False
+1
+1
+Asteroid
+0
+3
+3
+3
+Iron
+0
+1
+0
+Ufo
+0
+0

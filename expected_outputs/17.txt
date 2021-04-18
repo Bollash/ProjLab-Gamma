@@ -1,0 +1,46 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Sikeres volt a telepeshozzáadás
+Sikeres volt a telepeshozzáadás
+Sikeres volt a telepeshozzáadás
+Az adott aszteroida kérge a kapott értékre lett állítva.
+A napközeli számláló eggyel csökkent.
+A napközeli számláló eggyel csökkent.
+Napközelbe került az aszteroida.
+Az urán számlálója eggyel nőtt.
+A napközeli számláló eggyel csökkent.
+A napközeli számláló eggyel csökkent.
+Napközelbe került az aszteroida.
+Az urán számlálója eggyel nőtt.
+A napközeli számláló eggyel csökkent.
+A napközeli számláló eggyel csökkent.
+Napközelbe került az aszteroida.
+Az aszteroida felrobbant.
+Space
+2
+10
+10
+False
+1
+2
+Asteroid
+0
+3
+3
+3
+Iron
+0
+2
+0
+1
+Settler
+0
+0
+0
+0
+Settler
+1
+0
+0
+0

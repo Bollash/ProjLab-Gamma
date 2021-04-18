@@ -1,0 +1,7 @@
+Create Space
+Add Asteroid Iron
+Add Asteroid Iron 
+Add Settler 0
+Add TpGate Asteroid 0 Asteroid 1
+Move 0 0
+Status All

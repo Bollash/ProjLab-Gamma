@@ -1,0 +1,27 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Sikeres volt a telepeshozzáadás
+Sikeresen betettük a nyersanyagot a telepesbe
+Nem sikerült a visszatétel, mert a kéreg nem volt 0.
+Space
+1
+10
+10
+False
+1
+1
+Asteroid
+0
+3
+3
+3
+Iron
+0
+1
+0
+Settler
+0
+0
+0
+1
+Iron

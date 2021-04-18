@@ -1,0 +1,12 @@
+Create Space
+Add Asteroid Iron
+Add Asteroid Iron
+Add Asteroid Iron
+Neighbor 0 1
+Neighbor 1 2
+Mod Layer 0 0
+Mod Layer 1 0
+Mod Layer 2 0
+Add Robot 1
+Act 0
+Status All
