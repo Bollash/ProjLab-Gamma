@@ -34,7 +34,7 @@ public abstract class Actor implements java.io.Serializable{
         return new MaterialArray();
     }
 
-    public Asteroid getCurrentAsteroid(){ return currentAsteroid; }
+    public Asteroid getCurrentAsteroid() { return currentAsteroid; }
 
     public void setCurrentAsteroid(Asteroid ast){
         currentAsteroid = ast;

@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 public class Main {
     public static void main(String[] args){
-        cmdProg(System.in, System.out);
+        cmdProg(System.in);
     }
 
     private static int seed;
@@ -26,8 +26,7 @@ public class Main {
      * Parancs kezelő program
      * @param source System.in vagy new FileInputStream(new File(filename))
      */
-    public static void cmdProg(InputStream source, PrintStream out){
-        System.setOut(out);
+    public static void cmdProg(InputStream source){
         Scanner input = new Scanner(source);
         while(input.hasNextLine()){
             String line = input.nextLine();
@@ -40,7 +39,6 @@ public class Main {
                 case "Map" -> func = Main::map;
                 case "Act" -> func = Main::act;
                 case "Countdown" -> func = Main::countdown;
-                case "Build" -> func = Main::build;
                 default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
             }
             func.accept(Arrays.copyOfRange(tokenized, 1, tokenized.length));
@@ -265,7 +263,7 @@ public class Main {
      * A paraméterként kapott actor fúr, ha képes rá.
      * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a fúrás.
      */
-    public static void drill(String index){
+    public static void drill(String actor, String index){
         if(currentActor == space.getActors().size()){
             currentActor = 0;
         }
@@ -276,42 +274,39 @@ public class Main {
                 System.out.println("Nem létezik az indexnek megfelelő actor.");
             }
         }
-        ((iDrill)space.getActors().get(currentActor)).drill();
         space.getActors().get(currentActor).getCurrentAsteroid().getDrilled();
     }
 
     /**
      * Build metódus, építést hajtja vége.
-     * @param cmd Parancsok
+     * @param actor Paraméterként megkapott string, mely alapján dönti el a program az építendő objektumot.
+     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik az építés.
+     * @throws NotEnoughMaterialException Ezt dobjuk, ha nincs elég nyersanyag.
      */
-    public static void build(String[] cmd){
-        if(cmd.length == 1 || cmd.length == 2){
-            if(cmd.length == 2){
-                try{
-                    int curr = Integer.parseInt(cmd[1]);
-                    if(curr >= 0 && curr < space.getActors().size()){
-                        currentActor = curr;
-                    }else{
-                        System.out.println("Nem létezik az indexnek megfelelő actor.");
-                        return;
-                    }
-                }catch(NumberFormatException e){
-                    System.out.println("Nem létezik az indexnek megfelelő actor.");
-                    return;
-                }
-
-            }
-            if(currentActor == space.getActors().size()) {
-                currentActor = 0;
-            }
-            Settler s = (Settler)space.getActors().get(currentActor);
-            switch(cmd[0]){
-                case "Robot"->s.craftRobot();
-                case "TpGate"-> s.craftGates();
-                case "Base"-> s.buildBase();
-            }
-            currentActor++;
+    public static void build(String actor, String index) throws NotEnoughMaterialException {
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
         }
+        else{
+            try{
+                currentActor = Integer.parseInt(index);
+            }catch(NumberFormatException e){
+                System.out.println("Nem létezik az indexnek megfelelő actor.");
+            }
+        }
+        if(actor.equals("Robot")) {
+                space.getActors().get(currentActor).getMaterials().buildRobot();
+        }
+        if(actor.equals("TpGate")) {
+            space.getActors().get(currentActor).getMaterials().buildRobot();
+        }
+        if(actor.equals("Base")) {
+            if (space.getActors().get(currentActor).getMaterials().canBuildBase()) {
+                //na itt mi van?
+            }
+        }
+        currentActor++;
+        return;
     }
 
 
