@@ -485,7 +485,6 @@ public class Main {
     }
 
     public static void add(String [] cmd){
-        Supplier<Actor> actorSupplier = null;
         switch (cmd[0]){
             case "Asteroid"->{
                 Material mat;
@@ -504,11 +503,46 @@ public class Main {
                 return;
             }
 
-            case "Settler"-> actorSupplier = Settler::new;
+            case "Settler"-> {
+                int astidx = Integer.parseInt(cmd[1]);
+                if(astidx< 0 || astidx>= space.getAsteroids().size()){
+                    System.out.println("Nem létező indexű aszteroidát adtunk meg.");
+                    return;
+                }
+                Settler settler = new Settler();
+                settler.setSpace(space);
+                space.addActor(settler);
+                space.setAliveSettlerCnt(space.getAliveSettlerCnt() + 1);
+                space.getAsteroids().get(astidx).addActor(settler);
+                System.out.println("Sikeres volt a telepeshozzáadás");
+                }
 
-            case "Robot"-> actorSupplier = Robot::new;
 
-            case "Ufo"-> actorSupplier = Ufo::new;
+            case "Robot"-> {
+                int astidx = Integer.parseInt(cmd[1]);
+                if(astidx< 0 || astidx>= space.getAsteroids().size()){
+                    System.out.println("Nem létező indexű aszteroidát adtunk meg.");
+                    return;
+                }
+                Robot robot = new Robot();
+                robot.setSpace(space);
+                space.addActor(robot);
+                space.getAsteroids().get(astidx).addActor(robot);
+                System.out.println("Sikeres volt a robothozzáadás");
+            }
+
+            case "Ufo"-> {
+                int astidx = Integer.parseInt(cmd[1]);
+                if(astidx< 0 || astidx>= space.getAsteroids().size()){
+                    System.out.println("Nem létező indexű aszteroidát adtunk meg.");
+                    return;
+                }
+                Ufo ufo = new Ufo();
+                ufo.setSpace(space);
+                space.addActor(ufo);
+                space.getAsteroids().get(astidx).addActor(ufo);
+                System.out.println("Sikeres volt a ufóhozzáadás");
+            }
 
             case "TpGate"->{
                 if(cmd.length == 5){
@@ -626,7 +660,9 @@ public class Main {
                         return;
                     }
                     space.addActor(tp1);
+                    tp1.setSpace(space);
                     space.addActor(tp2);
+                    tp2.setSpace(space);
                     System.out.println("Hozzáadtuk a teleportkapukat a célpontokhoz.");
                 }
             }
@@ -646,17 +682,6 @@ public class Main {
                 }
             }
         }
-        if(actorSupplier != null){
-            int astidx = Integer.parseInt(cmd[1]);
-            if(astidx< 0 || astidx>= space.getAsteroids().size()){
-                System.out.println("Nem létező indexű aszteroidát adtunk meg.");
-                return;
-            }
-            Actor actor = actorSupplier.get();
-            space.addActor(actor);
-            space.getAsteroids().get(astidx).addActor(actor);
-        }
-
     }
 
 
@@ -675,6 +700,7 @@ public class Main {
                 int idx2 = Integer.parseInt(cmd[1]);
                 space.getAsteroids().get(idx1).addNeighbour(space.getAsteroids().get(idx2));
                 space.getAsteroids().get(idx2).addNeighbour(space.getAsteroids().get(idx1));
+                System.out.println("A kapott aszteroidák szomszédossá váltak.");
                 return;
             } catch (NumberFormatException e) {
                 System.out.println("Nem létező indexű aszteroidákat adtunk meg!");
