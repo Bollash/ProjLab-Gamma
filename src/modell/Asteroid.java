@@ -251,11 +251,11 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         coreMaterial.status();
         System.out.println(neighborCount());
         for(IAsteroid iast : neighbours){
-            if(iast.getClass().toString().equals("TpGate")) {
-                System.out.println("tp " + space.getActors().indexOf(iast));
+            if(iast instanceof TpGate) {
+                System.out.println("Tp " + space.getActors().indexOf(iast));
             }
-            if(iast.getClass().toString().equals("Asteroid")) {
-                System.out.println("ast " + space.getAsteroids().indexOf(iast));
+            if(iast instanceof Asteroid) {
+                System.out.println("Ast " + space.getAsteroids().indexOf(iast));
             }
         }
         System.out.println(actorsOnSurface.size());

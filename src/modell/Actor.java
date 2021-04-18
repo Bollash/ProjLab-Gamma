@@ -22,6 +22,7 @@ public abstract class Actor implements java.io.Serializable{
      */
     public void move(IAsteroid ast) throws MoveFailedException {
         ast.addActor(this);
+        System.out.println("Az aktor az aszteroidára mozgott.");
     }
 
     public abstract void act();

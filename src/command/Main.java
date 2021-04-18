@@ -267,11 +267,13 @@ public class Main {
             }
             try {
                 int astidx = Integer.parseInt(cmd[0]);
-                space.getActors().get(currentActor).move(space.getAsteroids().get(astidx));
+                Actor act = space.getActors().get(currentActor);
+                act.move(act.getCurrentAsteroid().getNeighbours().get(0));
                 currentActor++;
+                System.out.println();
                 return;
             } catch (MoveFailedException e) {
-                System.out.println("Nem sikerült a mozgás, mert nem létezik ilyen indexű aszteroida!");
+                System.out.println("Sikertelen mozgás TpGate-el.");
                 return;
             }
         }
@@ -282,13 +284,13 @@ public class Main {
                 space.getActors().get(idx).move(space.getAsteroids().get(astidx));
                 return;
             } catch (MoveFailedException e) {
-                System.out.println("Nem sikerült a mozgás, mert nem létezik ilyen indexű aszteroida!");
+                System.out.println("Sikertelen mozgás TpGate-el.");
                 return;
             } catch (NumberFormatException e){
-                System.out.println("Nem létezik ilyen indexű actor!");
+                System.out.println("Nem létezik ilyen indexű aktor.");
             }
         }
-        System.out.println("Nem létezik ilyen indexű actor/asteroid!");
+        System.out.println("Nem sikerült a mozgás, mert nem létezik ilyen indexű aszteroida!");
     }
 
     /**
