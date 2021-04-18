@@ -521,7 +521,7 @@ public class Main {
                     case "Coal" -> mat = new Coal();
                     case "Iron" -> mat = new Iron();
                     default -> {
-                        System.out.println("Nem sikerült az aszteroida hozzáadás, mert nem létező nyersanyagot adtunk meg.";
+                        System.out.println("Nem sikerült az aszteroida hozzáadás, mert nem létező nyersanyagot adtunk meg.");
                         return;
                     }
                 }
@@ -539,19 +539,41 @@ public class Main {
             case "TpGate"->{
                 if(cmd.length == 5){
                     TpGate tp1 = new TpGate();
-                    //space.addActor(tp1);
                     TpGate tp2 = new TpGate();
-                    //space.addActor(tp2);
                     tp2.setLinkedTpGate(tp1);
                     tp1.setLinkedTpGate(tp2);
                     if(cmd[1].equals("Asteroid")){
+                        int idx1 = Integer.parseInt(cmd[2]);
+                        Asteroid a1;
+                        if(idx1 >= 0 && idx1 < space.getAsteroids().size()){
+                            a1 = space.getAsteroids().get(idx1);
+                        } else {
+                            System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
+                            return;
+                        }
                         if(cmd[3].equals("Asteroid")){
-                        }else if(cmd[3].equals("Settler")){
+                            int idx2 = Integer.parseInt(cmd[4]);
+                            Asteroid a2;
+                            if(idx2 >= 0 && idx2 < space.getAsteroids().size()){
+                                a2 = space.getAsteroids().get(idx2);
+                                a1.addActor(tp1);
+                                a1.addNeighbour(tp1);
+                                a2.addActor(tp2);
+                                a2.addNeighbour(tp2);
+                            } else {
+                                System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
+                                return;
+                            }
+                        }
+                        else if(cmd[3].equals("Settler")){
                             try{
-                                int idx1 = Integer.parseInt(cmd[2]);
-                                if(idx1 >= 0 && idx1 < space.getAsteroids().size()){
-                                    space.getAsteroids().get(idx1).addActor(tp1);
-                                    space.getAsteroids().get(idx1).addNeighbour(tp1);
+                                int idx2 = Integer.parseInt(cmd[4]);
+                                if(idx2 >= 0 && idx2 < space.getActors().size()){
+                                    Settler s2 = (Settler)space.getActors().get(idx2);
+                                    a1.addActor(tp1);
+                                    a1.addNeighbour(tp1);
+                                    s2.addTpGate(tp2);
+                                    tp2.setInSettler(s2);
                                 } else {
                                     System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
                                     return;
@@ -567,34 +589,88 @@ public class Main {
                     else if(cmd[1].equals("Settler")){
                         try{
                             int idx1 = Integer.parseInt(cmd[2]);
+                            Settler s1;
                             if(idx1 >= 0 && idx1 < space.getActors().size()){
-                                Settler s1 = (Settler)space.getActors().get(idx1);
+                                s1 = (Settler)space.getActors().get(idx1);
                             } else {
                                 System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
                                 return;
+                            }
+                            if(cmd[3].equals("Asteroid")){
+                                try{
+                                    int idx2 = Integer.parseInt(cmd[4]);
+                                    if(idx2 >= 0 && idx2< space.getAsteroids().size()){
+                                        Asteroid a2 = space.getAsteroids().get(idx2);
+                                        if(s1.getTpGates().size() < 3){
+                                            s1.addTpGate(tp1);
+                                            tp1.setInSettler(s1);
+                                            a2.addNeighbour(tp2);
+                                            a2.addActor(tp2);
+                                        }
+                                        else{
+                                            System.out.println("Nincs hely a telepesnél a teleportkapunak.");
+                                            return;
+                                        }
+                                    } else {
+                                        System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
+                                        return;
+                                    }
+                                }catch(NumberFormatException ex){
+                                    System.out.println("Nem létezik ilyen indexű actor.");
+                                    return;
+                                }
+                            }else if(cmd[3].equals("Settler")){
+                                try{
+                                    int idx2 = Integer.parseInt(cmd[4]);
+                                    if(idx2 >= 0 && idx2< space.getActors().size()){
+                                        Settler s2 = (Settler)space.getActors().get(idx2);
+                                        if(s1.getTpGates().size() < 3 && s2.getTpGates().size() < 3){
+                                            s1.addTpGate(tp1);
+                                            tp1.setInSettler(s1);
+                                            s2.addTpGate(tp2);
+                                            tp2.setInSettler(s2);
+                                        }
+                                        else{
+                                            System.out.println("Nincs hely a telepesnél a teleportkapunak.");
+                                            return;
+                                        }
+                                    } else {
+                                        System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
+                                        return;
+                                    }
+                                }catch(NumberFormatException ex){
+                                    System.out.println("Nem létezik ilyen indexű actor.");
+                                    return;
+                                }
                             }
                         }catch(NumberFormatException ex){
                             System.out.println("Nem létezik ilyen indexű actor.");
                             return;
                         }
-                        if(cmd[3].equals("Asteroid")){
-                            //hozzáadás
-                        }else if(cmd[3].equals("Settler")){
-                            if()
-                        }
+
                         System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
                         return;
                     }
+                    space.addActor(tp1);
+                    space.addActor(tp2);
+                    System.out.println("Hozzáadtuk a teleportkapukat a célpontokhoz.");
                 }
             }
 
-            case "Material":
-
-
-            default: //ha az elso egyik se
-
-
-
+            case "Material"->{
+                if(cmd.length == 3){
+                    switch(cmd[2]){
+                        case "Iron"-> space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Iron());
+                        case "Coal"-> space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Coal());
+                        case "Uran"-> space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Uran());
+                        case "Ice"-> space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Ice());
+                    }
+                    System.out.println("Sikeresen betettük a nyersanyagot a telepesbe");
+                }
+                else{
+                    System.out.println("Nem létező indexű telepest adtunk meg.");
+                }
+            }
         }
         if(actorSupplier != null){
             int astidx = Integer.parseInt(cmd[1]);
