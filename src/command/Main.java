@@ -490,57 +490,92 @@ public class Main {
      *
      */
     public static void createSpace(){
+        space = new Space(0,0,10);
 
     }
 
+    public static void add(String [] strings){
+        switch (strings[0]){
+            case "Asteroid":
+                switch (strings[1]) {
+                    case "Uran":
+                        Asteroid astUran = new Asteroid(3,3,3,new Uran());
+                        space.addAsteroid(astUran);
+                    case "Ice":
+                        Asteroid astIce = new Asteroid(3,3,3,new Ice());
+                        space.addAsteroid(astIce);
+                    case "Coal":
+                        Asteroid astCoal = new Asteroid(3,3,3,new Coal());
+                        space.addAsteroid(astCoal);
+                    case "Iron":
+                        Asteroid astIron = new Asteroid(3,3,3,new Iron());
+                        space.addAsteroid(astIron);
+                    default:
+                        System.out.println("Nem sikerült az aszteroida hozzáadás, mert nem létező nyersanyagot adtunk meg.");
 
-    public static void addAsteroid(String materialName){
-        if(materialName.equals("Uran")) {
-            Asteroid ast = new Asteroid(3,3,3,new Uran());
-            space.addAsteroid(ast);
-        }
-        if(materialName.equals("Ice")) {
-            Asteroid ast = new Asteroid(3,3,3,new Ice());
-            space.addAsteroid(ast);
-        }
-        if(materialName.equals("Coal")) {
-            Asteroid ast = new Asteroid(3,3,3,new Coal());
-            space.addAsteroid(ast);
-        }
-        if(materialName.equals("Iron")) {
-            Asteroid ast = new Asteroid(3,3,3,new Iron());
-            space.addAsteroid(ast);
+
+            }
+            case "Actor":
+                switch (strings[1]) {
+                    case "Settler":
+                        Settler settler = new Settler();
+                        space.addActor(settler);
+                        space.getAsteroids();
+
+                    case "Robot":
+                        Robot robot = new Robot();
+                        space.addActor(robot);
+                        space.getAsteroids();
+
+                    case "Ufo":
+                        Ufo ufo = new Ufo();
+                        space.addActor(ufo);
+                        space.getAsteroids();
+
+                    default:System.out.println("Nem létező indexű aszteroidát adtunk meg.");
+
+                }
+            case "TpGate":
+                switch (strings[1]){
+                    case "Asteroid":
+                        TpGate tpGate1 = new TpGate();
+                        TpGate tpGate2 = new TpGate();
+                        space.getAsteroids();
+
+
+                    case "Settler":
+                        TpGate tpgate1 = new TpGate();
+                        TpGate tpgate2 = new TpGate();
+
+                    default: System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
+                }
+            case "Material":
+
+
+            default: //ha az elso egyik se
+
+
+
         }
 
     }
 
-    public static void addActor(String actor,String index){
-        if(actor.equals("Settler")){
-            ;
-
-        }
-        if(actor.equals("Robot")){
-            ;
-
-        }
-        if(actor.equals("Ufo")){
-            ;
-
-        }
-    }
-
-    public static void addTpGate(String index1, String index2){
+    public static void neighbour(String [] indexes){
+        space.getAsteroids()
 
 
     }
 
-    public static void addMaterial(String settlerID, String type){
+    public static void mod(String [] strs){
+        switch (strs[0]){
+            case "Counter":
 
-    }
+            case "Layer":
 
-    public static void neighbour(String index1, String index2){
+            case "Core":
 
-
+            case "Activated":
+        }
     }
 
 
