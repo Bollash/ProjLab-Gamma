@@ -16,6 +16,8 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
      * modell.TpGate konstruktora
      */
     public TpGate(){
+        linkedTpGate = null;
+        inSettler = null;
         activated = false;
     }
 

@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class Main {
     public static void main(String[] args){
@@ -46,6 +47,7 @@ public class Main {
                 case "Drill" -> func = Main::drill;
                 case "Build" -> func = Main::build;
                 case "Putback" -> func = Main::putBack;
+                case "Save" -> func = Main::save;
                 default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
             }
             func.accept(Arrays.copyOfRange(tokenized, 1, tokenized.length));
@@ -322,11 +324,11 @@ public class Main {
                     if (curr >= 0 && curr < space.getActors().size()) {
                         currentActor = curr;
                     } else {
-                        System.out.println("Nem létezik az indexnek megfelelő actor.");
+                        System.out.println("Nem létezik ilyen indexű actor.");
                         return;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Nem létezik az indexnek megfelelő actor.");
+                    System.out.println("Nem létezik ilyen indexű actor.");
                     return;
                 }
                 if (currentActor == space.getActors().size()) {
@@ -360,6 +362,9 @@ public class Main {
                     int curr = Integer.parseInt(cmd[1]);
                     if(curr >= 0 && curr < space.getActors().size()){
                         currentActor = curr;
+                    } else {
+                        System.out.println("Nem létezik ilyen indexű actor.");
+                        return;
                     }
                 }catch(NumberFormatException ex){
                     System.out.println("Nem létezik ilyen indexű actor.");
@@ -400,9 +405,40 @@ public class Main {
      * Metódus teleportkapu lerakására.
      * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik az építés.
      */
-    public static void putTpGate(String index) {
+    public static void putTpGate(String[] cmd, String index) {
+        if(cmd.length == 1){
+            try{
+                int curr = Integer.parseInt(cmd[1]);
+                if(curr >= 0 && curr < space.getActors().size()){
+                    currentActor = curr;
+                } else {
+                    System.out.println("Nem létezik ilyen indexű actor.");
+                    return;
+                }
+            }catch(NumberFormatException ex){
+                System.out.println("Nem létezik ilyen indexű actor.");
+                return;
+            }
+        }
         if(currentActor == space.getActors().size()){
             currentActor = 0;
+        }
+        try{
+            Settler s = (Settler)space.getActors().get(currentActor);
+            int idx = -1;
+            switch (cmd[0]){
+                case "Uran" -> idx = s.getMaterials().getUran();
+                case "Ice" -> idx = s.getMaterials().getIce();
+                case "Coal" -> idx = s.getMaterials().getCoal();
+                case "Iron" -> idx = s.getMaterials().getIron();
+            }
+            if(idx != -1){
+                s.putMaterialBack(s.getMaterials().getMaterials().get(idx));
+            }else{
+                System.out.println("Nincs a telepesnél ilyen nyersanyag");
+            }
+        }catch(ClassCastException ex){
+            System.out.println("Az actor nem tud nyersanyagot visszatenni, mert nem telepes.");
         }
         else{
             try{
@@ -413,20 +449,14 @@ public class Main {
         }
         space.getActors().get(currentActor).putTpGateDown();
         currentActor++;
-        return;
     }
 
 
     /**
      * Lementi a pálya aktuális állását.
-     * @param name Ezen a néven menti el a fájlt.
      */
-    public static void save(String name) throws IOException {
-        FileOutputStream fos = new FileOutputStream(name + ".txt");
-        ObjectOutputStream out  = new ObjectOutputStream(fos);
-        out.writeObject(space);
-        out.close();
-        return;
+    public static void save(String[] cmd){
+        serialize(cmd[0]);
     }
 
 
@@ -489,66 +519,90 @@ public class Main {
     /**
      *
      */
-    public static void createSpace(){
+    public static void createSpace(String[] cmd){
         space = new Space(0,0,10);
+        System.out.println("Space létrehozva");
 
     }
 
-    public static void add(String [] strings){
-        switch (strings[0]){
-            case "Asteroid":
-                switch (strings[1]) {
-                    case "Uran":
-                        Asteroid astUran = new Asteroid(3,3,3,new Uran());
-                        space.addAsteroid(astUran);
-                    case "Ice":
-                        Asteroid astIce = new Asteroid(3,3,3,new Ice());
-                        space.addAsteroid(astIce);
-                    case "Coal":
-                        Asteroid astCoal = new Asteroid(3,3,3,new Coal());
-                        space.addAsteroid(astCoal);
-                    case "Iron":
-                        Asteroid astIron = new Asteroid(3,3,3,new Iron());
-                        space.addAsteroid(astIron);
-                    default:
-                        System.out.println("Nem sikerült az aszteroida hozzáadás, mert nem létező nyersanyagot adtunk meg.");
-
-
+    public static void add(String [] cmd){
+        Supplier<Actor> actorSupplier = null;
+        switch (cmd[0]){
+            case "Asteroid"->{
+                Material mat;
+                switch (cmd[1]) {
+                    case "Uran" -> mat = new Uran();
+                    case "Ice" -> mat = new Ice();
+                    case "Coal" -> mat = new Coal();
+                    case "Iron" -> mat = new Iron();
+                    default -> {
+                        System.out.println("Nem sikerült az aszteroida hozzáadás, mert nem létező nyersanyagot adtunk meg.";
+                        return;
+                    }
+                }
+                space.addAsteroid(new Asteroid(3, 3, 3, mat));
+                System.out.println("A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.");
+                return;
             }
-            case "Actor":
-                switch (strings[1]) {
-                    case "Settler":
-                        Settler settler = new Settler();
-                        space.addActor(settler);
-                        space.getAsteroids();
 
-                    case "Robot":
-                        Robot robot = new Robot();
-                        space.addActor(robot);
-                        space.getAsteroids();
+            case "Settler"-> actorSupplier = Settler::new;
 
-                    case "Ufo":
-                        Ufo ufo = new Ufo();
-                        space.addActor(ufo);
-                        space.getAsteroids();
+            case "Robot"-> actorSupplier = Robot::new;
 
-                    default:System.out.println("Nem létező indexű aszteroidát adtunk meg.");
+            case "Ufo"-> actorSupplier = Ufo::new;
 
+            case "TpGate"->{
+                if(cmd.length == 5){
+                    TpGate tp1 = new TpGate();
+                    //space.addActor(tp1);
+                    TpGate tp2 = new TpGate();
+                    //space.addActor(tp2);
+                    tp2.setLinkedTpGate(tp1);
+                    tp1.setLinkedTpGate(tp2);
+                    if(cmd[1].equals("Asteroid")){
+                        if(cmd[3].equals("Asteroid")){
+                        }else if(cmd[3].equals("Settler")){
+                            try{
+                                int idx1 = Integer.parseInt(cmd[2]);
+                                if(idx1 >= 0 && idx1 < space.getAsteroids().size()){
+                                    space.getAsteroids().get(idx1).addActor(tp1);
+                                    space.getAsteroids().get(idx1).addNeighbour(tp1);
+                                } else {
+                                    System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
+                                    return;
+                                }
+                            }catch(NumberFormatException ex){
+                                System.out.println("Nem létezik ilyen indexű actor.");
+                                return;
+                            }
+                        }
+                        System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
+                        return;
+                    }
+                    else if(cmd[1].equals("Settler")){
+                        try{
+                            int idx1 = Integer.parseInt(cmd[2]);
+                            if(idx1 >= 0 && idx1 < space.getActors().size()){
+                                Settler s1 = (Settler)space.getActors().get(idx1);
+                            } else {
+                                System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
+                                return;
+                            }
+                        }catch(NumberFormatException ex){
+                            System.out.println("Nem létezik ilyen indexű actor.");
+                            return;
+                        }
+                        if(cmd[3].equals("Asteroid")){
+                            //hozzáadás
+                        }else if(cmd[3].equals("Settler")){
+                            if()
+                        }
+                        System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
+                        return;
+                    }
                 }
-            case "TpGate":
-                switch (strings[1]){
-                    case "Asteroid":
-                        TpGate tpGate1 = new TpGate();
-                        TpGate tpGate2 = new TpGate();
-                        space.getAsteroids();
+            }
 
-
-                    case "Settler":
-                        TpGate tpgate1 = new TpGate();
-                        TpGate tpgate2 = new TpGate();
-
-                    default: System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
-                }
             case "Material":
 
 
@@ -556,6 +610,16 @@ public class Main {
 
 
 
+        }
+        if(actorSupplier != null){
+            int astidx = Integer.parseInt(cmd[1]);
+            if(astidx< 0 || astidx>= space.getAsteroids().size()){
+                System.out.println("Nem létező indexű aszteroidát adtunk meg.");
+                return;
+            }
+            Actor actor = actorSupplier.get();
+            space.addActor(actor);
+            space.getAsteroids().get(astidx).addActor(actor);
         }
 
     }
