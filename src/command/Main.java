@@ -465,7 +465,12 @@ public class Main {
         System.out.println(space.getAsteroids().get(index).getCoreMaterial().getType());
         System.out.println(space.getAsteroids().get(index).neighborCount());
         for(int i = 0; i < space.getAsteroids().get(index).neighborCount(); i++) {
-          //  if(space.getAsteroids().get(index).getNeighbours().get(i).//itt tipuslekerdezes lenne)
+            if(space.getAsteroids().get(index).getNeighbours().get(i).getClass().toString().equals("TpGate")) {
+                System.out.println("tp " + space.getActors().indexOf(space.getAsteroids().get(index).getNeighbours().get(i)));
+            }
+            if(space.getAsteroids().get(index).getNeighbours().get(i).getClass().toString().equals("Asteroid")) {
+                System.out.println("ast " + space.getAsteroids().indexOf(space.getAsteroids().get(index).getNeighbours().get(i)));
+            }
         }
         System.out.println(space.getAsteroids().get(index).actorsOnSurfaceCount());
         for(int i = 0; i < space.getAsteroids().get(index).actorsOnSurfaceCount(); i++) {
