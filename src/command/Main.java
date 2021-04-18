@@ -3,6 +3,7 @@ package command;
 import modell.*;
 import modell.Space;
 import modell.exceptions.CantBeMinedException;
+import modell.exceptions.MoveFailedException;
 import modell.exceptions.NoDrillableNeighbourException;
 import modell.exceptions.NotEnoughMaterialException;
 
@@ -174,6 +175,11 @@ public class Main {
         System.out.println("Nem létezik az indexnek megfelelő aszteroida");
     }
 
+    /**
+     * A paraméterként kapott számú aktort bányászásra bírjuk, ha tud olyat.
+     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a bányászás.
+     * @throws CantBeMinedException Ezt dubjuk, ha valami oknál fogva nem tudunk bányászni
+     */
     public static void mine(String actor, String index) throws CantBeMinedException {
         if(currentActor == space.getActors().size()){
             currentActor = 0;
@@ -185,31 +191,89 @@ public class Main {
                 System.out.println("Nem létezik az indexnek megfelelő actor.");
             }
         }
-        if(actor.equals("Settler")) {
-            //pls help me, mert nem teljesen értem, hogy aktorral hogy hívom meg a bányászást
-        }
-        if(actor.equals("Ufo")) {
-            //pls help me, mert nem teljesen értem, hogy aktorral hogy hívom meg a bányászást
-        }
+        space.getActors().get(currentActor).getCurrentAsteroid().getMined();
     }
 
-    public static void neighbourCnt(String object, String index) throws NumberFormatException{
+    /**
+     * A paraméteként kapott aszteroidának/actor aszteroidájának szomszédos aszteroidáinak száma.
+     * @param object Paraméterként megkapott string, mely Asteroid, vagy Actor lehet.
+     * @param index Paraméterként kapott string, annak az asteroidnak/actornak az indexe van benne, mely szomszédjai számát akarjuk lekérdezni.
+     */
+    public static void neighbourCnt(String object, String index){
         if(object.equals("Asteroid")) {
-            currentAsteroid = Integer.parseInt(index);
+            if(currentAsteroid == space.getAsteroids().size()){
+                currentAsteroid = 0;
+            }
+            else {
+                try {
+                    currentAsteroid = Integer.parseInt(index);
+                } catch (NumberFormatException e) {
+                    System.out.println("Nem létezik az indexnek megfelelő asteroid.");
+                }
+            }
             space.getAsteroids().get(currentAsteroid).getNeighbours();
         }
         if(object.equals("Actor")) {
-            currentActor = Integer.parseInt(index);
-            space.getActors().get(currentActor).currentAsteroid.getNeighbours();
+            if(currentActor == space.getActors().size()){
+                currentActor = 0;
+            }
+            else {
+                try {
+                    currentActor = Integer.parseInt(index);
+                } catch (NumberFormatException e) {
+                    System.out.println("Nem létezik az indexnek megfelelő actor.");
+                }
+            }
+            space.getActors().get(currentActor).getCurrentAsteroid().getNeighbours();
         }
     }
 
-    public static void move(){
-
+    /**
+     * A kapott aszteroidára mozog az actor.
+     * @param index1 Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a mozgás.
+     * @param index2 Paraméterként kapott string, annak az asteroidnak az indexe van benne, melyre mozgunk az actorral.
+     * @throws MoveFailedException
+     */
+    public static void move(String index1, String index2) throws MoveFailedException {
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
+        }
+        else {
+            try {
+                currentActor = Integer.parseInt(index1);
+            } catch (NumberFormatException e) {
+                System.out.println("Nem létezik az indexnek megfelelő actor.");
+            }
+        }
+        if(currentAsteroid == space.getAsteroids().size()){
+            currentAsteroid = 0;
+        }
+        else {
+            try {
+                currentAsteroid = Integer.parseInt(index2);
+            } catch (NumberFormatException e) {
+                System.out.println("Nem létezik az indexnek megfelelő asteroid.");
+            }
+        }
+        space.getActors().get(currentActor).move(space.getAsteroids().get(currentAsteroid));
     }
 
-    public static void drill(){
-
+    /**
+     * A paraméterként kapott actor fúr, ha képes rá.
+     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a fúrás.
+     */
+    public static void drill(String actor, String index){
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
+        }
+        else {
+            try {
+                currentActor = Integer.parseInt(index);
+            } catch (NumberFormatException e) {
+                System.out.println("Nem létezik az indexnek megfelelő actor.");
+            }
+        }
+        space.getActors().get(currentActor).getCurrentAsteroid().getDrilled();
     }
 
     /**
