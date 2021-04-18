@@ -2,6 +2,7 @@ package command;
 
 import modell.*;
 import modell.Space;
+import modell.exceptions.CantBeMinedException;
 import modell.exceptions.NoDrillableNeighbourException;
 import modell.exceptions.NotEnoughMaterialException;
 
@@ -17,7 +18,7 @@ public class Main {
 
     private static int seed;
     private static Space space;
-    private static int currentActor;
+    private static int currentActor, currentAsteroid;
 
     /**
      * Parancs kezelő program
@@ -171,6 +172,44 @@ public class Main {
             }
         }
         System.out.println("Nem létezik az indexnek megfelelő aszteroida");
+    }
+
+    public static void mine(String actor, String index) throws CantBeMinedException {
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
+        }
+        else {
+            try {
+                currentActor = Integer.parseInt(index);
+            } catch (NumberFormatException e) {
+                System.out.println("Nem létezik az indexnek megfelelő actor.");
+            }
+        }
+        if(actor.equals("Settler")) {
+            //pls help me, mert nem teljesen értem, hogy aktorral hogy hívom meg a bányászást
+        }
+        if(actor.equals("Ufo")) {
+            //pls help me, mert nem teljesen értem, hogy aktorral hogy hívom meg a bányászást
+        }
+    }
+
+    public static void neighbourCnt(String object, String index) throws NumberFormatException{
+        if(object.equals("Asteroid")) {
+            currentAsteroid = Integer.parseInt(index);
+            space.getAsteroids().get(currentAsteroid).getNeighbours();
+        }
+        if(object.equals("Actor")) {
+            currentActor = Integer.parseInt(index);
+            space.getActors().get(currentActor).currentAsteroid.getNeighbours();
+        }
+    }
+
+    public static void move(){
+
+    }
+
+    public static void drill(){
+
     }
 
     /**
