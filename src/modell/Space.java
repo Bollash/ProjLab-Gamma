@@ -54,10 +54,10 @@ public class Space implements java.io.Serializable{
         List<Asteroid> asts = new ArrayList<>();
         Random rnd = new Random(System.currentTimeMillis());
         for(int i = 0; i < sameCnt; i++){
-            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Iron()));
-            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Ice()));
-            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Coal()));
-            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Uran()));
+            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Iron(), this));
+            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Ice(), this));
+            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Coal(), this));
+            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Uran(), this));
         }
         asteroids = new ArrayList<>();
         while(asts.size() != 0){

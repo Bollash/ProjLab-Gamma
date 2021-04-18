@@ -511,7 +511,7 @@ public class Comms {
                         return;
                     }
                 }
-                space.addAsteroid(new Asteroid(3, 3, 3, mat));
+                space.addAsteroid(new Asteroid(3, 3, 3, mat, space));
                 System.out.println("A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.");
                 return;
             }

@@ -25,10 +25,12 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
 
     private Material coreMaterial;
 
+    private Space space;
+
     /**
      * constructor with default parameter
      */
-    public Asteroid(){
+    public Asteroid(Space space){
         neighbours = new ArrayList<>();
         actorsOnSurface = new ArrayList<>();
 
@@ -36,15 +38,17 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         closeToSunFreq = 3;
         turnsTillCloseToSun = 3;
         coreMaterial = new Iron();
+        this.space = space;
     }
 
-    public Asteroid(int layer, int closeToSunFreq, int turnsTillCloseToSun, Material core){
+    public Asteroid(int layer, int closeToSunFreq, int turnsTillCloseToSun, Material core, Space space){
         neighbours = new ArrayList<>();
         actorsOnSurface = new ArrayList<>();
 
         this.layer = layer;
         this.closeToSunFreq = closeToSunFreq;
         this.turnsTillCloseToSun = turnsTillCloseToSun;
+        this.space = space;
         coreMaterial = core;
     }
 
@@ -127,6 +131,7 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
      */
     public void explode(){
         actorsOnSurface.removeIf(Actor::radExplode);
+        space.getAsteroids().remove(this);
     }
 
     /**

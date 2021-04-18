@@ -29,7 +29,10 @@ public class Uran extends Material implements java.io.Serializable{
     @Override
     public void closeToSunAction(Asteroid ast) {
         counter++;
-        if(counter == 3){
+        if(counter != 3) {
+            System.out.println("Az urán számlálója eggyel nőtt.");
+        }else{
+            System.out.println("Az aszteroida felrobbant.");
             ast.explode();
         }
     }
