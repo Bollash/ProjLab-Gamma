@@ -47,7 +47,10 @@ public class Main {
                 case "Drill" -> func = Main::drill;
                 case "Build" -> func = Main::build;
                 case "Putback" -> func = Main::putBack;
+                case "PutTpGate" -> func = Main::putTpGate;
                 case "Save" -> func = Main::save;
+                case "Neighbour" -> func = Main::neighbour;
+                case "Mod" -> func = Main::mod;
                 default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
             }
             func.accept(Arrays.copyOfRange(tokenized, 1, tokenized.length));
@@ -314,7 +317,7 @@ public class Main {
 
     /**
      * Build metódus, építést hajtja vége.
-
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
     public static void build(String[] cmd) {
         if (cmd.length == 1 || cmd.length == 2) {
@@ -353,7 +356,7 @@ public class Main {
 
     /**
      * PutBack metódus, nyersanyag visszahelyezésre szolgál.
-
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
     public static void putBack(String[] cmd){
         if(cmd.length == 1 || cmd.length == 2){
@@ -403,52 +406,29 @@ public class Main {
 
     /**
      * Metódus teleportkapu lerakására.
-     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik az építés.
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
-    public static void putTpGate(String[] cmd, String index) {
-        if(cmd.length == 1){
-            try{
-                int curr = Integer.parseInt(cmd[1]);
-                if(curr >= 0 && curr < space.getActors().size()){
-                    currentActor = curr;
-                } else {
-                    System.out.println("Nem létezik ilyen indexű actor.");
-                    return;
-                }
-            }catch(NumberFormatException ex){
-                System.out.println("Nem létezik ilyen indexű actor.");
+    public static void putTpGate(String[] cmd) {
+        if(cmd.length == 0){
+            if(currentActor == space.getActors().size()){
+                currentActor = 0;
+            }
+            space.getActors().get(currentActor).putTpGateDown();
+            currentActor++;
+            return;
+        }
+        if(cmd.length == 1) {
+            try {
+                int idx = Integer.parseInt(cmd[0]);
+                Settler s = (Settler)space.getActors().get(idx);
+                s.putTpGateDown();
                 return;
+            } catch (ClassCastException ex) {
+                System.out.println("Az actor nem tud teleportkaput letenni, mert nem telepes.");
+            } catch (NumberFormatException e){
+                System.out.println( "Nem létezik ilyen indexű actor.");
             }
         }
-        if(currentActor == space.getActors().size()){
-            currentActor = 0;
-        }
-        try{
-            Settler s = (Settler)space.getActors().get(currentActor);
-            int idx = -1;
-            switch (cmd[0]){
-                case "Uran" -> idx = s.getMaterials().getUran();
-                case "Ice" -> idx = s.getMaterials().getIce();
-                case "Coal" -> idx = s.getMaterials().getCoal();
-                case "Iron" -> idx = s.getMaterials().getIron();
-            }
-            if(idx != -1){
-                s.putMaterialBack(s.getMaterials().getMaterials().get(idx));
-            }else{
-                System.out.println("Nincs a telepesnél ilyen nyersanyag");
-            }
-        }catch(ClassCastException ex){
-            System.out.println("Az actor nem tud nyersanyagot visszatenni, mert nem telepes.");
-        }
-        else{
-            try{
-                currentActor = Integer.parseInt(index);
-            }catch(NumberFormatException e){
-                System.out.println("Nem létezik az indexnek megfelelő actor.");
-            }
-        }
-        space.getActors().get(currentActor).putTpGateDown();
-        currentActor++;
     }
 
 
