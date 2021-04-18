@@ -1,0 +1,6 @@
+Create Space
+Add Asteroid Iron
+Add Settler 0
+Add Material 0 Iron
+PutBack 0 Iron
+Status All

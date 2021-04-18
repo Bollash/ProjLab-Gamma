@@ -1,0 +1,6 @@
+Create Space
+Add Asteroid Iron
+Mod Layer 0 0
+Add Robot 0
+Act 0
+Status All

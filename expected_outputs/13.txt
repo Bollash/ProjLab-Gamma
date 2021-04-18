@@ -1,0 +1,32 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Sikeres volt a telepeshozzáadás
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+A telepes robotot épített.
+Space
+1
+10
+10
+False
+1
+2
+Asteroid
+0
+3
+3
+3
+Iron
+0
+2
+0
+1
+Settler
+0
+0
+0
+0
+Robot
+1
+0

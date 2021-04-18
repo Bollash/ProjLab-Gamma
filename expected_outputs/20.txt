@@ -1,0 +1,23 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Sikeres volt a robothozzáadás
+Az adott aszteroida kérge a kapott értékre lett állítva.
+A napközeli számláló eggyel csökkent.
+A napközeli számláló eggyel csökkent.
+Napközelbe került az aszteroida.
+Az urán számlálója eggyel nőtt.
+A napközeli számláló eggyel csökkent.
+A napközeli számláló eggyel csökkent.
+Napközelbe került az aszteroida.
+Az urán számlálója eggyel nőtt.
+A napközeli számláló eggyel csökkent.
+A napközeli számláló eggyel csökkent.
+Napközelbe került az aszteroida.
+Az aszteroida felrobbant.
+Space
+0
+10
+10
+False
+0
+0

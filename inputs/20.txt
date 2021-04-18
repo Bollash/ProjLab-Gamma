@@ -1,0 +1,13 @@
+Add Asteroid Uran
+Add Robot 0
+Mod Layer 0 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Status All

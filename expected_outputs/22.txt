@@ -1,0 +1,23 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Sikeres volt a robothozzáadás
+Az actor megfúrja az aszteroidát
+Space
+0
+10
+10
+False
+1
+1
+Asteroid
+0
+3
+3
+2
+Iron
+0
+1
+0
+Robot
+0
+0

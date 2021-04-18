@@ -1,0 +1,10 @@
+Space létrehozva
+A napszél visszaszámláló a kapott értékre állítódott.
+A napszél számláló eggyel csökkent.
+Space
+0
+1
+10
+False
+0
+0

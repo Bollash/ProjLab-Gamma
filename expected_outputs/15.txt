@@ -1,0 +1,43 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Sikeres volt a telepeshozzáadás
+Sikeres volt a telepeshozzáadás
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Sikeresen betettük a nyersanyagot a telepesbe
+Felépült a bázis. Nyertek a telepesek
+Space
+2
+10
+10
+True
+1
+2
+Asteroid 
+0
+3
+3
+3
+Iron
+0
+2
+0
+1
+Settler
+0
+0
+0
+0
+Settler
+1
+0
+0
+0

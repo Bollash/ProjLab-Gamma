@@ -1,0 +1,7 @@
+Create Space
+Add Asteroid Iron
+Add Settler 0
+Add Material 0 Iron
+Add Material 0 Iron
+Build Robot 0
+Status All

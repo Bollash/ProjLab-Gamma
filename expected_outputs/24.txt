@@ -1,0 +1,50 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+A kapott aszteroidák szomszédossá váltak.
+A kapott aszteroidák szomszédossá váltak.
+Az adott aszteroida kérge a kapott értékre lett állítva.
+Az adott aszteroida kérge a kapott értékre lett állítva.
+Az adott aszteroida kérge a kapott értékre lett állítva.
+Sikeres volt a robothozzáadás
+Az actor egy szomszédos aszteroidára mozgott.
+Space
+0
+10
+10
+False
+3
+1
+Asteroid
+0
+3
+3
+0
+Iron
+1
+ast 1
+1
+0
+Asteroid
+1
+3
+3
+0
+Iron
+2
+ast 0
+2
+0
+Asteroid
+2
+3
+3
+0
+Iron
+1
+ast 1
+0
+Robot
+0
+0

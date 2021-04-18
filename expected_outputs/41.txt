@@ -1,0 +1,20 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+A napközeli visszaszámláló a kapott értékre állítódott.
+Napközelbe került az aszteroida.
+Space
+0
+10
+10
+False
+1
+0
+Asteroid
+0
+3
+3
+3
+Uran
+2
+0
+0

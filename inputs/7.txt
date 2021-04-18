@@ -1,0 +1,5 @@
+Create Space
+Add Asteroid Iron
+Add Settler 0
+Mine 0
+Status All

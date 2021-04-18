@@ -1,0 +1,40 @@
+Space létrehozva
+A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.
+Sikeres volt a telepeshozzáadás.
+Hozzáadtuk a teleportkapukat a célpontokhoz.
+Az adott aszteroida kérge a kapott értékre lett állítva.
+Az aszteroida magja a kapott nyersanyagra lett állítva
+A napszél visszaszámláló az adott értékre állítódott.
+A számláló elérte a nullát és napszél lett. A számláló visszaállt a kiindulási állapotba.
+Space
+1
+10
+10
+False
+1
+3
+Asteroid
+0
+3
+3
+0
+1
+ast 1
+2
+0
+1
+Settler
+0
+0
+1
+0
+TpGate
+1
+ast 0
+2
+True
+TpGate
+2
+set 0
+1
+False

@@ -1,0 +1,7 @@
+Create Space
+Add Asteroid Iron
+Add Asteroid Iron
+Neighbor 0 1
+Add Ufo 0
+Act 0
+Status All
