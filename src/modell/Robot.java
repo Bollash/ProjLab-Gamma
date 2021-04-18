@@ -47,7 +47,7 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
     @Override
     public void act(){
         if(currentAsteroid.getLayer() > 0){
-            currentAsteroid.getDrilled();
+            drill();
             System.out.println("Az actor megfúrja az aszteroidát");
             return;
         }

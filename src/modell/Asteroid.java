@@ -52,6 +52,7 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
     public void getDrilled(){
         if(layer != 0) {
             layer = layer-1;
+
         }
     }
 

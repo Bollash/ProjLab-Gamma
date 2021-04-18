@@ -71,6 +71,9 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
     public void buildBase(){
         if(currentAsteroid.countMaterialsOnSurface().canBuildBase()){
             space.setGameOver(true);
+            System.out.println("Felépült a bázis. Nyertek a telepesek");
+        }else{
+            System.out.println("Nem sikerült a bázis építés, mert nincs elég nyersanyag az aszteroidán.");
         }
     }
 
@@ -87,10 +90,13 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
                 gates[1].setLinkedTpGate(gates[0]);
                 gates[1].setInSettler(this);
                 tpGates.addAll(Arrays.asList(gates));
+                System.out.println("A telepes teleportkapukat épített.");
             } catch (NotEnoughMaterialException e) {
-                System.out.println("Not enough material to craft");
+                System.out.println("Nem sikerült a teleportkapu építés, mert nincs elég nyersanyag.");
             }
 
+        }else{
+            System.out.println("Nem sikerült a teleportkapu építés, mert nincs hely.");
         }
     }
 
@@ -102,8 +108,9 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
             Robot r = materials.buildRobot();
             space.addActor(r);
             currentAsteroid.addActor(r);
+            System.out.println("A telepes robotot épített.");
         }catch(NotEnoughMaterialException e){
-            System.out.println("Not enough material to craft");
+            System.out.println("Nem sikerült a robot építés, mert nincs elég nyersanyag.");
         }
     }
 
@@ -130,6 +137,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         if(tpGates.size() > 0){
             currentAsteroid.addActor(tpGates.get(0));
             currentAsteroid.addNeighbour(tpGates.get(0));
+            tpGates.get(0).setInSettler(null);
             tpGates.remove(0);
         }
     }
