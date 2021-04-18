@@ -247,32 +247,30 @@ public class Main {
 
     /**
      * A kapott aszteroidára mozog az actor.
-     * @param index1 Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a mozgás.
-     * @param index2 Paraméterként kapott string, annak az asteroidnak az indexe van benne, melyre mozgunk az actorral.
-     * @throws MoveFailedException
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
-    public static void move(String index1, String index2) throws MoveFailedException {
-        if(currentActor == space.getActors().size()){
-            currentActor = 0;
-        }
-        else {
-            try {
-                currentActor = Integer.parseInt(index1);
-            } catch (NumberFormatException e) {
-                System.out.println("Nem létezik az indexnek megfelelő actor.");
+    public static void move(String[] cmd) {
+        if (cmd.length == 1) {
+            if (currentActor == space.getActors().size()) {
+                currentActor = 0;
             }
-        }
-        if(currentAsteroid == space.getAsteroids().size()){
-            currentAsteroid = 0;
-        }
-        else {
             try {
-                currentAsteroid = Integer.parseInt(index2);
+                space.getActors().get(currentActor).move(space.getAsteroids().get(currentAsteroid));
+            } catch (MoveFailedException e) {
+                System.out.println("Nem sikerült a mozgás, mert nem létezik ilyen indexű aszteroida!");
+            }
+            currentActor++;
+            return;
+        }
+        else if(cmd.length == 2){
+            try {
+                int idx = Integer.parseInt(cmd[1]);
+                space.getActors().get(idx).move(space.getAsteroids().get(currentAsteroid));
             } catch (NumberFormatException e) {
                 System.out.println("Nem létezik az indexnek megfelelő asteroid.");
             }
         }
-        space.getActors().get(currentActor).move(space.getAsteroids().get(currentAsteroid));
+
     }
 
     /**
