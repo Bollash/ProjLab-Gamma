@@ -6,6 +6,7 @@ import modell.exceptions.LayerNot0Exception;
 import modell.exceptions.NoDrillableNeighbourException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import java.io.Serializable;
@@ -254,15 +255,20 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         System.out.println(neighborCount());
         for(IAsteroid iast : neighbours){
             if(iast instanceof TpGate) {
-                System.out.println("Tp " + space.getActors().indexOf(iast));
+                System.out.println("tp " + space.getActors().indexOf(iast));
             }
             if(iast instanceof Asteroid) {
-                System.out.println("Ast " + space.getAsteroids().indexOf(iast));
+                System.out.println("ast " + space.getAsteroids().indexOf(iast));
             }
         }
         System.out.println(actorsOnSurface.size());
+        List<Integer> lList = new ArrayList<>();
         for(Actor actor : actorsOnSurface){
-            System.out.println(space.getActors().indexOf(actor));
+            lList.add(space.getActors().indexOf(actor));
+        }
+        Collections.sort(lList);
+        for(Integer n : lList){
+            System.out.println(n);
         }
     }
 }

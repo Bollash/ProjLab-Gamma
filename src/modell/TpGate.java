@@ -124,6 +124,7 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
         }else if(inSettler != null){
             System.out.println("set " + space.getActors().indexOf(inSettler));
         }
+        System.out.println(space.getActors().indexOf(linkedTpGate));
         if(activated){
             System.out.println("True");
         }else{

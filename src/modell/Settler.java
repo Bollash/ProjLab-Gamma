@@ -109,6 +109,8 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
             Robot r = materials.buildRobot();
             space.addActor(r);
             currentAsteroid.addActor(r);
+            r.setCurrentAsteroid(currentAsteroid);
+            r.setSpace(space);
             System.out.println("A telepes robotot épített.");
         }catch(NotEnoughMaterialException e){
             System.out.println("Nem sikerült a robot építés, mert nincs elég nyersanyag.");

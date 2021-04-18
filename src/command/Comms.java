@@ -589,8 +589,6 @@ public class Comms {
                                 return;
                             }
                         }
-                        System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
-                        return;
                     }
                     else if(cmd[1].equals("Settler")){
                         try{
@@ -654,6 +652,7 @@ public class Comms {
                             return;
                         }
 
+                    }else{
                         System.out.println("Hibás index miatt nem sikerült a teleportkapu hozzáadás.");
                         return;
                     }

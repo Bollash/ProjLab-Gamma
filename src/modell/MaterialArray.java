@@ -106,10 +106,12 @@ public class MaterialArray implements java.io.Serializable{
      */
     private Map<MaterialType, Integer> countMaterials(){
         Map<MaterialType, Integer> mats = new HashMap<>();
-
+        mats.put(MaterialType.Uran, 0);
+        mats.put(MaterialType.Iron, 0);
+        mats.put(MaterialType.Coal, 0);
+        mats.put(MaterialType.Ice, 0);
         for(Material m : materials){
             MaterialType type = m.getType();
-            if(!mats.containsKey(type)) mats.put(type, 0);
             mats.put(type, mats.get(type) + 1);
         }
         return mats;
