@@ -185,16 +185,28 @@ public class Main {
 
     /**
      * A paraméterként kapott számú aktort bányászásra bírjuk, ha tud olyat.
-     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a bányászás.
-     * @throws CantBeMinedException Ezt dubjuk, ha valami oknál fogva nem tudunk bányászni
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
-    public static void mine(String actor, String index) throws CantBeMinedException {
-        if(currentActor == space.getActors().size()){
-            currentActor = 0;
-        }
-        else {
+    public static void mine(String[] cmd) {
+        if(cmd.length == 0) {
+            if (currentActor == space.getActors().size()) {
+                currentActor = 0;
+            }
             try {
-                currentActor = Integer.parseInt(index);
+                ((iMine) space.getActors().get(currentActor)).mine();
+                currentActor++;
+                return;
+            } catch (CantBeMinedException e) {
+                System.out.println("Az aktor nem képes bányászni.");
+                return;
+            }
+        } else if(cmd.length == 1) {
+            try {
+                int idx = Integer.parseInt(cmd[0]);
+                if(idx < space.getActors().size() && idx >= 0) {
+                    ((iMine) space.getActors().get(idx)).mine();
+                    return;
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Nem létezik az indexnek megfelelő actor.");
                 return;
@@ -203,42 +215,35 @@ public class Main {
                 return;
             }
         }
-        space.getActors().get(currentActor).getCurrentAsteroid().getMined();
+        System.out.println("Nem létezik az indexnek megfelelő actor.");
     }
 
     /**
      * A paraméteként kapott aszteroidának/actor aszteroidájának szomszédos aszteroidáinak száma.
-     * @param object Paraméterként megkapott string, mely Asteroid, vagy Actor lehet.
-     * @param index Paraméterként kapott string, annak az asteroidnak/actornak az indexe van benne, mely szomszédjai számát akarjuk lekérdezni.
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
-    public static void neighbourCnt(String object, String index){
-        if(object.equals("Asteroid")) {
-            if(currentAsteroid == space.getAsteroids().size()){
-                currentAsteroid = 0;
-            }
-            else {
+    public static void neighbourCnt(String[] cmd){
+        if(cmd.length == 2) {
+            if (cmd[0].equals("Asteroid")) {
                 try {
-                    currentAsteroid = Integer.parseInt(index);
+                    int idx = Integer.parseInt(cmd[1]);
+                    System.out.println(space.getAsteroids().get(idx).getNeighbours().size());
+                    return;
                 } catch (NumberFormatException e) {
                     System.out.println("Nem létezik az indexnek megfelelő asteroid.");
                     return;
                 }
             }
-            space.getAsteroids().get(currentAsteroid).getNeighbours();
-        }
-        if(object.equals("Actor")) {
-            if(currentActor == space.getActors().size()){
-                currentActor = 0;
-            }
-            else {
+            if (cmd[0].equals("Actor")) {
                 try {
-                    currentActor = Integer.parseInt(index);
+                    int idx = Integer.parseInt(cmd[1]);
+                    System.out.println(space.getActors().get(idx).getCurrentAsteroid().getNeighbours().size());
+                    return;
                 } catch (NumberFormatException e) {
                     System.out.println("Nem létezik az indexnek megfelelő actor.");
                     return;
                 }
             }
-            space.getActors().get(currentActor).getCurrentAsteroid().getNeighbours();
         }
         System.out.println("Nem létezik az indexnek megfelelő actor.");
     }
@@ -273,47 +278,42 @@ public class Main {
 
     /**
      * A paraméterként kapott actor fúr, ha képes rá.
-     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a fúrás.
+     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
-    public static void drill(String index){
-        if(currentActor == space.getActors().size()){
-            currentActor = 0;
-        }
-        else {
+    public static void drill(String[] cmd){
+        if(cmd.length == 0) {
+            if (currentActor == space.getActors().size()) {
+                currentActor = 0;
+            }
+            ((iDrill) space.getActors().get(currentActor)).drill();
+            currentActor++;
+            return;
+        } else if(cmd.length == 1) {
             try {
-                currentActor = Integer.parseInt(index);
+                int idx = Integer.parseInt(cmd[0]);
+                if(idx < space.getActors().size() && idx >= 0) {
+                    ((iDrill) space.getActors().get(idx)).drill();
+                    return;
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Nem létezik az indexnek megfelelő actor.");
+                return;
             }
         }
-        ((iDrill)space.getActors().get(currentActor)).drill();
-        space.getActors().get(currentActor).getCurrentAsteroid().getDrilled();
+        System.out.println("Nem létezik az indexnek megfelelő actor.");
     }
 
     /**
      * Build metódus, építést hajtja vége.
-     * @param cmd Parancsok
+     * @param actor Paraméterként megkapott string, mely alapján dönti el a program az építendő objektumot.
+     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik az építés.
+     * @throws NotEnoughMaterialException Ezt dobjuk, ha nincs elég nyersanyag.
      */
-    public static void build(String[] cmd){
-        if(cmd.length == 1 || cmd.length == 2){
-            if(cmd.length == 2){
-                try{
-                    int curr = Integer.parseInt(cmd[1]);
-                    if(curr >= 0 && curr < space.getActors().size()){
-                        currentActor = curr;
-                    }else{
-                        System.out.println("Nem létezik az indexnek megfelelő actor.");
-                        return;
-                    }
-                }catch(NumberFormatException e){
-                    System.out.println("Nem létezik az indexnek megfelelő actor.");
-                    return;
-                }
-
-            }
-            if(currentActor == space.getActors().size()) {
-                currentActor = 0;
-            }
+    public static void build(String actor, String index) throws NotEnoughMaterialException {
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
+        }
+        else{
             try{
                 Settler s = (Settler)space.getActors().get(currentActor);
                 switch(cmd[0]){
