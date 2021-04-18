@@ -567,6 +567,10 @@ public class Main {
      */
     public static void neighbour(String[] cmd){
         if(cmd.length == 2){
+            if(cmd[0].equals(cmd[1])){
+                System.out.println("Nem sikerült a szomszéddátétel, mert a két aszteroida megegyezik.");
+                return;
+            }
             try {
                 int idx1 = Integer.parseInt(cmd[0]);
                 int idx2 = Integer.parseInt(cmd[1]);
@@ -574,11 +578,11 @@ public class Main {
                 space.getAsteroids().get(idx2).addNeighbour(space.getAsteroids().get(idx1));
                 return;
             } catch (NumberFormatException e) {
-                System.out.println("Nem létezik ilyen indexű actor.");
+                System.out.println("Nem létező indexű aszteroidákat adtunk meg!");
                 return;
             }
         }
-        System.out.println("Nem létezik ilyen indexű actor.");
+        System.out.println("Nem létező indexű aszteroidákat adtunk meg!");
     }
 
     public static void mod(String [] strs){
