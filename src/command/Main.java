@@ -305,28 +305,39 @@ public class Main {
 
     /**
      * Build metódus, építést hajtja vége.
-     * @param actor Paraméterként megkapott string, mely alapján dönti el a program az építendő objektumot.
-     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik az építés.
-     * @throws NotEnoughMaterialException Ezt dobjuk, ha nincs elég nyersanyag.
+
      */
-    public static void build(String actor, String index) throws NotEnoughMaterialException {
-        if(currentActor == space.getActors().size()){
-            currentActor = 0;
-        }
-        else{
-            try{
-                Settler s = (Settler)space.getActors().get(currentActor);
-                switch(cmd[0]){
-                    case "Robot"->s.craftRobot();
-                    case "TpGate"-> s.craftGates();
-                    case "Base"-> s.buildBase();
+    public static void build(String[] cmd) {
+        if (cmd.length == 1 || cmd.length == 2) {
+            if (cmd.length == 2) {
+                try {
+                    int curr = Integer.parseInt(cmd[1]);
+                    if (curr >= 0 && curr < space.getActors().size()) {
+                        currentActor = curr;
+                    } else {
+                        System.out.println("Nem létezik az indexnek megfelelő actor.");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Nem létezik az indexnek megfelelő actor.");
+                    return;
                 }
-            }catch(ClassCastException ex){
-                System.out.println("Az actor nem tud építeni, mert nem telepes.");
+                if (currentActor == space.getActors().size()) {
+                    currentActor = 0;
+                } else {
+                    try {
+                        Settler s = (Settler) space.getActors().get(currentActor);
+                        switch (cmd[0]) {
+                            case "Robot" -> s.craftRobot();
+                            case "TpGate" -> s.craftGates();
+                            case "Base" -> s.buildBase();
+                        }
+                    } catch (ClassCastException ex) {
+                        System.out.println("Az actor nem tud építeni, mert nem telepes.");
+                    }
+                    currentActor++;
+                }
             }
-
-
-            currentActor++;
         }
     }
 
