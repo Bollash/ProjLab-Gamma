@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 public class Main {
     public static void main(String[] args){
-        cmdProg(System.in);
+        cmdProg(System.in, System.out);
     }
 
     private static int seed;
@@ -26,7 +26,8 @@ public class Main {
      * Parancs kezelő program
      * @param source System.in vagy new FileInputStream(new File(filename))
      */
-    public static void cmdProg(InputStream source){
+    public static void cmdProg(InputStream source, PrintStream out){
+        System.setOut(out);
         Scanner input = new Scanner(source);
         while(input.hasNextLine()){
             String line = input.nextLine();
@@ -43,6 +44,8 @@ public class Main {
                 case "NeighbourCnt" -> func = Main::neighbourCnt;
                 case "Move" -> func = Main::move;
                 case "Drill" -> func = Main::drill;
+                case "Build" -> func = Main::build;
+                case "Putback" -> func = Main::putBack;
                 default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
             }
             func.accept(Arrays.copyOfRange(tokenized, 1, tokenized.length));
@@ -182,28 +185,16 @@ public class Main {
 
     /**
      * A paraméterként kapott számú aktort bányászásra bírjuk, ha tud olyat.
-     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
+     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a bányászás.
+     * @throws CantBeMinedException Ezt dubjuk, ha valami oknál fogva nem tudunk bányászni
      */
-    public static void mine(String[] cmd) {
-        if(cmd.length == 0) {
-            if (currentActor == space.getActors().size()) {
-                currentActor = 0;
-            }
+    public static void mine(String actor, String index) throws CantBeMinedException {
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
+        }
+        else {
             try {
-                ((iMine) space.getActors().get(currentActor)).mine();
-                currentActor++;
-                return;
-            } catch (CantBeMinedException e) {
-                System.out.println("Az aktor nem képes bányászni.");
-                return;
-            }
-        } else if(cmd.length == 1) {
-            try {
-                int idx = Integer.parseInt(cmd[0]);
-                if(idx < space.getActors().size() && idx >= 0) {
-                    ((iMine) space.getActors().get(idx)).mine();
-                    return;
-                }
+                currentActor = Integer.parseInt(index);
             } catch (NumberFormatException e) {
                 System.out.println("Nem létezik az indexnek megfelelő actor.");
                 return;
@@ -212,35 +203,42 @@ public class Main {
                 return;
             }
         }
-        System.out.println("Nem létezik az indexnek megfelelő actor.");
+        space.getActors().get(currentActor).getCurrentAsteroid().getMined();
     }
 
     /**
      * A paraméteként kapott aszteroidának/actor aszteroidájának szomszédos aszteroidáinak száma.
-     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
+     * @param object Paraméterként megkapott string, mely Asteroid, vagy Actor lehet.
+     * @param index Paraméterként kapott string, annak az asteroidnak/actornak az indexe van benne, mely szomszédjai számát akarjuk lekérdezni.
      */
-    public static void neighbourCnt(String[] cmd){
-        if(cmd.length == 2) {
-            if (cmd[0].equals("Asteroid")) {
+    public static void neighbourCnt(String object, String index){
+        if(object.equals("Asteroid")) {
+            if(currentAsteroid == space.getAsteroids().size()){
+                currentAsteroid = 0;
+            }
+            else {
                 try {
-                    int idx = Integer.parseInt(cmd[1]);
-                    System.out.println(space.getAsteroids().get(idx).getNeighbours().size());
-                    return;
+                    currentAsteroid = Integer.parseInt(index);
                 } catch (NumberFormatException e) {
                     System.out.println("Nem létezik az indexnek megfelelő asteroid.");
                     return;
                 }
             }
-            if (cmd[0].equals("Actor")) {
+            space.getAsteroids().get(currentAsteroid).getNeighbours();
+        }
+        if(object.equals("Actor")) {
+            if(currentActor == space.getActors().size()){
+                currentActor = 0;
+            }
+            else {
                 try {
-                    int idx = Integer.parseInt(cmd[1]);
-                    System.out.println(space.getActors().get(idx).getCurrentAsteroid().getNeighbours().size());
-                    return;
+                    currentActor = Integer.parseInt(index);
                 } catch (NumberFormatException e) {
                     System.out.println("Nem létezik az indexnek megfelelő actor.");
                     return;
                 }
             }
+            space.getActors().get(currentActor).getCurrentAsteroid().getNeighbours();
         }
         System.out.println("Nem létezik az indexnek megfelelő actor.");
     }
@@ -277,105 +275,108 @@ public class Main {
 
     /**
      * A paraméterként kapott actor fúr, ha képes rá.
-     * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
+     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a fúrás.
      */
-    public static void drill(String[] cmd){
-        if(cmd.length == 0) {
-            if (currentActor == space.getActors().size()) {
-                currentActor = 0;
-            }
-            ((iDrill) space.getActors().get(currentActor)).drill();
-            currentActor++;
-            return;
-        } else if(cmd.length == 1) {
+    public static void drill(String index){
+        if(currentActor == space.getActors().size()){
+            currentActor = 0;
+        }
+        else {
             try {
-                int idx = Integer.parseInt(cmd[0]);
-                if(idx < space.getActors().size() && idx >= 0) {
-                    ((iDrill) space.getActors().get(idx)).drill();
-                    return;
-                }
+                currentActor = Integer.parseInt(index);
             } catch (NumberFormatException e) {
                 System.out.println("Nem létezik az indexnek megfelelő actor.");
-                return;
             }
         }
-        System.out.println("Nem létezik az indexnek megfelelő actor.");
+        ((iDrill)space.getActors().get(currentActor)).drill();
+        space.getActors().get(currentActor).getCurrentAsteroid().getDrilled();
     }
 
     /**
      * Build metódus, építést hajtja vége.
-     * @param actor Paraméterként megkapott string, mely alapján dönti el a program az építendő objektumot.
-     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik az építés.
-     * @throws NotEnoughMaterialException Ezt dobjuk, ha nincs elég nyersanyag.
+     * @param cmd Parancsok
      */
-    public static void build(String actor, String index) throws NotEnoughMaterialException {
-        if(currentActor == space.getActors().size()){
-            currentActor = 0;
-        }
-        else{
+    public static void build(String[] cmd){
+        if(cmd.length == 1 || cmd.length == 2){
+            if(cmd.length == 2){
+                try{
+                    int curr = Integer.parseInt(cmd[1]);
+                    if(curr >= 0 && curr < space.getActors().size()){
+                        currentActor = curr;
+                    }else{
+                        System.out.println("Nem létezik az indexnek megfelelő actor.");
+                        return;
+                    }
+                }catch(NumberFormatException e){
+                    System.out.println("Nem létezik az indexnek megfelelő actor.");
+                    return;
+                }
+
+            }
+            if(currentActor == space.getActors().size()) {
+                currentActor = 0;
+            }
             try{
-                currentActor = Integer.parseInt(index);
-            }catch(NumberFormatException e){
-                System.out.println("Nem létezik az indexnek megfelelő actor.");
+                Settler s = (Settler)space.getActors().get(currentActor);
+                switch(cmd[0]){
+                    case "Robot"->s.craftRobot();
+                    case "TpGate"-> s.craftGates();
+                    case "Base"-> s.buildBase();
+                }
+            }catch(ClassCastException ex){
+                System.out.println("Az actor nem tud építeni, mert nem telepes.");
             }
+
+
+            currentActor++;
         }
-        if(actor.equals("Robot")) {
-                space.getActors().get(currentActor).getMaterials().buildRobot();
-        }
-        if(actor.equals("TpGate")) {
-            space.getActors().get(currentActor).getMaterials().buildRobot();
-        }
-        if(actor.equals("Base")) {
-            if (space.getActors().get(currentActor).getMaterials().canBuildBase()) {
-                //na itt mi van?
-            }
-        }
-        currentActor++;
-        return;
     }
 
 
     /**
      * PutBack metódus, nyersanyag visszahelyezésre szolgál.
-     * @param index Paraméterként kapott string, annak az actornak az indexe van benne, melyre meghívódik a PutBack.
-     * @param materialName String, mely a visszahelyezni kívánt nyersanyag nevét tartalmazza.
+
      */
-    public static void putBack(String index, String materialName){
-        if(currentActor == space.getActors().size()){
-            currentActor = 0;
+    public static void putBack(String[] cmd){
+        if(cmd.length == 1 || cmd.length == 2){
+            if(cmd.length == 2){
+                try{
+                    int curr = Integer.parseInt(cmd[1]);
+                    if(curr >= 0 && curr < space.getActors().size()){
+                        currentActor = curr;
+                    }
+                }catch(NumberFormatException ex){
+                    System.out.println("Nem létezik ilyen indexű actor.");
+                    return;
+                }
+
+            } else{
+                if(currentActor == space.getActors().size()){
+                    currentActor = 0;
+                }
+            }
+            try{
+                Settler s = (Settler)space.getActors().get(currentActor);
+                int idx = -1;
+                switch (cmd[0]){
+                    case "Uran" -> idx = s.getMaterials().getUran();
+                    case "Ice" -> idx = s.getMaterials().getIce();
+                    case "Coal" -> idx = s.getMaterials().getCoal();
+                    case "Iron" -> idx = s.getMaterials().getIron();
+                }
+                if(idx != -1){
+                    s.putMaterialBack(s.getMaterials().getMaterials().get(idx));
+                }else{
+                    System.out.println("Nincs a telepesnél ilyen nyersanyag");
+                }
+            }catch(ClassCastException ex){
+                System.out.println("Az actor nem tud nyersanyagot visszatenni, mert nem telepes.");
+            }
+            currentActor++;
         }
         else{
-            try{
-                currentActor = Integer.parseInt(index);
-            }catch(NumberFormatException e){
-                System.out.println("Nem létezik az indexnek megfelelő actor.");
-            }
+            System.out.println("Nem létezik ilyen indexű actor.");
         }
-        if(materialName.equals("Uran")) {
-            int idx = space.getActors().get(currentActor).getMaterials().getUran();
-            if(idx != -1)
-                space.getActors().get(currentActor).putMaterialBack(space.getActors().get(currentActor).getMaterials().getMaterials().get(idx));
-        }
-        if(materialName.equals("Ice")) {
-            int idx = space.getActors().get(currentActor).getMaterials().getIce();
-            if(idx != -1)
-                space.getActors().get(currentActor).putMaterialBack(space.getActors().get(currentActor).getMaterials().getMaterials().get(idx));
-        }
-        if(materialName.equals("Coal")) {
-            int idx = space.getActors().get(currentActor).getMaterials().getCoal();
-            if(idx != -1)
-                space.getActors().get(currentActor).putMaterialBack(space.getActors().get(currentActor).getMaterials().getMaterials().get(idx));
-        }
-        if(materialName.equals("Iron")) {
-            int idx = space.getActors().get(currentActor).getMaterials().getIron();
-            if(idx != -1)
-                space.getActors().get(currentActor).putMaterialBack(space.getActors().get(currentActor).getMaterials().getMaterials().get(idx));
-        }
-        else {
-            System.out.println("Nincs ilyen nyersanyag a játékban.");
-        }
-        currentActor++;
-        return;
     }
 
 

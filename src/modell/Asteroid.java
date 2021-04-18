@@ -2,6 +2,7 @@ package modell;
 
 import modell.exceptions.CantBeMinedException;
 import modell.exceptions.CoreFullException;
+import modell.exceptions.LayerNot0Exception;
 import modell.exceptions.NoDrillableNeighbourException;
 
 import java.util.ArrayList;
@@ -106,13 +107,19 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
      * @param material Ezt teszi be a magba
      * @throws CoreFullException Már van material a magban
      */
-    public void addCore(Material material)throws CoreFullException {
-        if( coreMaterial == null){
-            coreMaterial = material;
+    public void addCore(Material material) throws CoreFullException, LayerNot0Exception {
+        if(layer == 0){
+            if( coreMaterial == null){
+                coreMaterial = material;
+            }
+            else{
+                throw new CoreFullException("Core is already full");
+            }
         }
         else{
-            throw new CoreFullException("Core is already full");
+            throw new LayerNot0Exception("Layer is not 0");
         }
+
     }
 
     /**
