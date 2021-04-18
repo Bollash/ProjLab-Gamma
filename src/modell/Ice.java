@@ -27,6 +27,7 @@ public class Ice extends Material implements java.io.Serializable{
 
         try {
             ast.getMined();
+            System.out.println("A magban lévő jég elpárolgott.");
         } catch (CantBeMinedException ignored) {
         }
     }

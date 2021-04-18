@@ -268,7 +268,7 @@ public class Main {
             try {
                 int astidx = Integer.parseInt(cmd[0]);
                 Actor act = space.getActors().get(currentActor);
-                act.move(act.getCurrentAsteroid().getNeighbours().get(0));
+                act.move(act.getCurrentAsteroid().getNeighbours().get(astidx));
                 currentActor++;
                 System.out.println();
                 return;
@@ -280,8 +280,8 @@ public class Main {
         else if(cmd.length == 2){
             try {
                 int astidx = Integer.parseInt(cmd[1]);
-                int idx = Integer.parseInt(cmd[0]);
-                space.getActors().get(idx).move(space.getAsteroids().get(astidx));
+                Actor act = space.getActors().get(currentActor);
+                act.move(act.getCurrentAsteroid().getNeighbours().get(astidx));
                 return;
             } catch (MoveFailedException e) {
                 System.out.println("Sikertelen mozgás TpGate-el.");

@@ -56,10 +56,7 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
             System.out.println("Az actor fúrt!");
             return;
         }
-        if(layer == 0){
-            System.out.println("Az actor nem tudott fúrni, mert a réteg 0!");
-            return;
-        }
+        System.out.println("Az actor nem tudott fúrni, mert a réteg 0!");
     }
 
     /**
