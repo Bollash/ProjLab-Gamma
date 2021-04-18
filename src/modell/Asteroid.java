@@ -140,12 +140,14 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
      */
     public void handleCountDown(){
         turnsTillCloseToSun = turnsTillCloseToSun -1;
-        if(turnsTillCloseToSun == 0){
+        if(turnsTillCloseToSun == 0)
+            {
+            System.out.println("Napközelbe került az aszteroida.");
             if(layer == 0){
                 coreMaterial.closeToSunAction(this);
-                System.out.println("Napközelbe került az aszteroida.");
+                //System.out.println("Napközelbe került az aszteroida.");
             }else{
-                System.out.println("Napközelbe került az aszteroida.");
+                //System.out.println("Napközelbe került az aszteroida.");
             }
             turnsTillCloseToSun = closeToSunFreq;
         }else{

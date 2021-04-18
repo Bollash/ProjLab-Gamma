@@ -742,6 +742,7 @@ public class Main {
                         int idx = Integer.parseInt(cmd[1]);
                         int vl = Integer.parseInt(cmd[2]);
                         space.getAsteroids().get(idx).setLayer(vl);
+                        System.out.println("Az adott aszteroida kérge a kapott értékre lett állítva.");
                         return;
                     } catch (NumberFormatException e){
                         System.out.println("Hibás aszteroida indexet adtunk meg.");
