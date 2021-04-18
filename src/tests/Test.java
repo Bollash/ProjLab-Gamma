@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import command.Comms;
 
-public class Main {
+public class Test {
     public static void main(String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
@@ -15,7 +15,7 @@ public class Main {
         }else if(n > 0 && n <= 45){
             deleteFiles("outputs");
             runtest(n);
-            System.setOut(System.out);
+            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
             if(compareTextFiles("outputs\\" + n + ".txt", "expected_outputs\\" + n + ".txt")) {
                 System.out.println(n + ". test passed");
             }

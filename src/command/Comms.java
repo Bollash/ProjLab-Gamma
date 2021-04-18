@@ -88,7 +88,7 @@ public class Comms {
             }
         }else if(cmd.length == 3){
             try {
-                //Átparseoljuk integerré a paramétereket
+                //parsing integers
                 int[] parameters = new int[3];
                 for(int i = 0; i < 3; i++){
                     parameters[i] = Integer.parseInt(cmd[i]);
