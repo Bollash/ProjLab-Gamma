@@ -42,4 +42,10 @@ public class Ufo extends Actor implements iMine{
 
     @Override
     public void putMaterialBack(Material mat){}
+
+    public void status() {
+        System.out.println("Ufo");
+        System.out.println(space.getActors().indexOf(this));
+        System.out.println(space.getAsteroids().indexOf(currentAsteroid));
+    }
 }

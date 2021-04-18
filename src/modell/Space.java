@@ -191,4 +191,18 @@ public class Space implements java.io.Serializable{
     public int actorCount() {
         return actors.size();
     }
+
+    public void status(){
+        System.out.println("Space");
+        System.out.println(aliveSettlerCnt);
+        System.out.println(turnsTillSunStorm);
+        System.out.println(sunStormFreq);
+        if(gameOver){
+            System.out.println("True");
+        }else{
+            System.out.println("False");
+        }
+        System.out.println(asteroids.size());
+        System.out.println(actors.size());
+    }
 }

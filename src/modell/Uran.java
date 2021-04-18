@@ -16,6 +16,12 @@ public class Uran extends Material implements java.io.Serializable{
         return MaterialType.Uran;
     }
 
+    @Override
+    public void status() {
+        System.out.println("Uran");
+        System.out.println(counter);
+    }
+
     /**
      * Radioaktív robbanás következik be és meghívja az aszteroida explode metódusát.
      * @param ast az adott aszteroida, amiben az Uran van.

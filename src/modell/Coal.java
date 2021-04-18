@@ -9,4 +9,9 @@ public class Coal extends Material implements java.io.Serializable{
     public MaterialType getType() {
         return MaterialType.Coal;
     }
+
+    @Override
+    public void status() {
+        System.out.println("Coal");
+    }
 }

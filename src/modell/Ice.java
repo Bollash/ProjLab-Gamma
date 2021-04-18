@@ -12,6 +12,11 @@ public class Ice extends Material implements java.io.Serializable{
         return MaterialType.Ice;
     }
 
+    @Override
+    public void status() {
+        System.out.println("Ice");
+    }
+
     /**
      * Ha napközelben van és az aszteroida kérge ki van fúrva, akkor kikerül a magban lévő nyersanyag
      * a getMined() függvény segítségével.

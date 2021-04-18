@@ -9,4 +9,9 @@ public class Iron extends Material implements java.io.Serializable{
     public MaterialType getType() {
         return MaterialType.Iron;
     }
+
+    @Override
+    public void status() {
+        System.out.println("Iron");
+    }
 }

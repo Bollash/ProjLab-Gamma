@@ -43,4 +43,6 @@ public abstract class Actor implements java.io.Serializable{
     public void setSpace(Space space) {
         this.space = space;
     }
+
+    public abstract void status();
 }

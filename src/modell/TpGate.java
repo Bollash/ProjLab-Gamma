@@ -115,6 +115,22 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
     @Override
     public void putMaterialBack(Material mat){}
 
+    @Override
+    public void status() {
+        System.out.println("TpGate");
+        System.out.println(space.getActors().indexOf(this));
+        if(currentAsteroid != null){
+            System.out.println("ast " + space.getAsteroids().indexOf(currentAsteroid));
+        }else if(inSettler != null){
+            System.out.println("set " + space.getActors().indexOf(inSettler));
+        }
+        if(activated){
+            System.out.println("True");
+        }else{
+            System.out.println("False");
+        }
+    }
+
     public Settler getInSettler() {
         return inSettler;
     }

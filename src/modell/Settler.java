@@ -166,4 +166,15 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         return tpGates;
     }
 
+    public void status() {
+        System.out.println("Settler");
+        System.out.println(space.getActors().indexOf(this));
+        System.out.println(space.getAsteroids().indexOf(currentAsteroid));
+        System.out.println(tpGates.size());
+        System.out.println(materials.getMaterials().size());
+        for(Material m : materials.getMaterials()){
+            m.status();
+        }
+    }
+
 }

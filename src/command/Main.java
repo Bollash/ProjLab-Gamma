@@ -51,6 +51,9 @@ public class Main {
                 case "Save" -> func = Main::save;
                 case "Neighbour" -> func = Main::neighbour;
                 case "Mod" -> func = Main::mod;
+                case "Create" -> func = Main::createSpace;
+                case"Add" -> func = Main::add;
+                case "Status" -> func = Main::status;
                 default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
             }
             func.accept(Arrays.copyOfRange(tokenized, 1, tokenized.length));
@@ -440,64 +443,35 @@ public class Main {
     }
 
 
-    /**
-     * Kiírja a kimenetre a space tulajdonságait.
-     */
-    public static void spaceStatus(){
-        System.out.println("Space");
-        System.out.println(space.getAliveSettlerCnt());
-        System.out.println(space.getTurnsTillSunStorm());
-        System.out.println(space.getSunStormFreq());
-        System.out.println(space.isGameOver());
-        System.out.println(space.asteroidCount());
-        System.out.println(space.actorCount());
-    }
-
-    /**
-     * Kiírja a kimenetre egy aszteroida tulajdonságait.
-     */
-    public static void asteroidStatus(int index){
-        System.out.println("Asteroid");
-        System.out.println(index);
-        System.out.println(space.getAsteroids().get(index).getTurnsTillCloseToSun());
-        System.out.println(space.getAsteroids().get(index).getCloseToSunFreq());
-        System.out.println(space.getAsteroids().get(index).getLayer());
-        System.out.println(space.getAsteroids().get(index).getCoreMaterial().getType());
-        System.out.println(space.getAsteroids().get(index).neighborCount());
-        for(int i = 0; i < space.getAsteroids().get(index).neighborCount(); i++) {
-            if(space.getAsteroids().get(index).getNeighbours().get(i).getClass().toString().equals("TpGate")) {
-                System.out.println("tp " + space.getActors().indexOf(space.getAsteroids().get(index).getNeighbours().get(i)));
-            }
-            if(space.getAsteroids().get(index).getNeighbours().get(i).getClass().toString().equals("Asteroid")) {
-                System.out.println("ast " + space.getAsteroids().indexOf(space.getAsteroids().get(index).getNeighbours().get(i)));
-            }
-        }
-        System.out.println(space.getAsteroids().get(index).actorsOnSurfaceCount());
-        for(int i = 0; i < space.getAsteroids().get(index).actorsOnSurfaceCount(); i++) {
-            System.out.println(space.getAsteroids().get(index).getActorsOnSurface().get(i));
-        }
-    }
-
-
-    /**
-     * Kiírja a kimenetre a Settler tulajdonságait.
-     */
-    public static void settlerStatus(Settler s){
-        System.out.println("Settler");
-        //sok kerdes, tipuslekerdezessel kapcs + indexekkel, meg kene beszelni
-    }
-
-
 
     /**
      * Kiírja a kimenbetre a megadott objektum vagy objektumok állapotát.
-     * @param object Ezen paraméterrel meghatározható a kiíratni kívánt objektum.
      */
-    public static void status(String object){
-        if(object.equals(null)) {
-            spaceStatus();
+    public static void status(String[] cmd){
+        if(cmd.length == 0){
+            space.status();
+            return;
         }
-        return;
+        int idx;
+        switch (cmd[0]) {
+            case "Asteroid" -> {
+                idx = Integer.parseInt(cmd[1]);
+                space.getAsteroids().get(idx).status(space);
+            }
+            case "Actor" -> {
+                idx = Integer.parseInt(cmd[1]);
+                space.getActors().get(idx).status();
+            }
+            case "All" -> {
+                space.status();
+                for (Asteroid ast : space.getAsteroids()) {
+                    ast.status(space);
+                }
+                for (Actor act : space.getActors()) {
+                    act.status();
+                }
+            }
+        }
     }
 
 
