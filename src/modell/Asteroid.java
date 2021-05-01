@@ -152,7 +152,9 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
             {
             System.out.println("Napközelbe került az aszteroida.");
             if(layer == 0){
-                coreMaterial.closeToSunAction(this);
+                if(coreMaterial != null){
+                    coreMaterial.closeToSunAction(this);
+                }
                 //System.out.println("Napközelbe került az aszteroida.");
             }else{
                 //System.out.println("Napközelbe került az aszteroida.");

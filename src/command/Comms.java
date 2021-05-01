@@ -32,28 +32,43 @@ public class Comms {
             String[] tokenized = line.split(" ");
 
             //A switchen belül egy functiont adok át aminek paraméterként egy String[]-et kell adni és voiddal tér vissza
-            Consumer<String[]> func;
             switch (tokenized[0]) {
-                case "Seed" -> func = Comms::seed;
-                case "Map" -> func = Comms::map;
-                case "Act" -> func = Comms::act;
-                case "Countdown" -> func = Comms::countdown;
-                case "Mine" -> func = Comms::mine;
-                case "NeighbourCnt" -> func = Comms::neighbourCnt;
-                case "Move" -> func = Comms::move;
-                case "Drill" -> func = Comms::drill;
-                case "Build" -> func = Comms::build;
-                case "PutBack" -> func = Comms::putBack;
-                case "PutTpGate" -> func = Comms::putTpGate;
-                case "Save" -> func = Comms::save;
-                case "Neighbour" -> func = Comms::neighbour;
-                case "Mod" -> func = Comms::mod;
-                case "Create" -> func = Comms::createSpace;
-                case"Add" -> func = Comms::add;
-                case "Status" -> func = Comms::status;
-                default -> func = str -> {System.out.println("Nem létező parancsot hívott meg"); };
+                case "Seed" : seed(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Map" : map(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Act" : act(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Countdown" : countdown(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Mine" : mine(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "NeighbourCnt" : neighbourCnt(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Move" : move(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Drill" : drill(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Build" : build(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "PutBack" : putBack(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "PutTpGate" : putTpGate(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Save" : save(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Neighbour" : neighbour(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Mod" : mod(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Create" : createSpace(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case"Add" : add(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                case "Status" : status(Arrays.copyOfRange(tokenized, 1, tokenized.length));
+                break;
+                default : System.out.println("Nem létező parancsot hívott meg");
             }
-            func.accept(Arrays.copyOfRange(tokenized, 1, tokenized.length));
         }
     }
 
@@ -358,9 +373,12 @@ public class Comms {
             try {
                 Settler s = (Settler) space.getActors().get(currentActor);
                 switch (cmd[0]) {
-                    case "Robot" -> s.craftRobot();
-                    case "TpGate" -> s.craftGates();
-                    case "Base" -> s.buildBase();
+                    case "Robot" : s.craftRobot();
+                    break;
+                    case "TpGate" : s.craftGates();
+                    break;
+                    case "Base" : s.buildBase();
+                    break;
                 }
             } catch (ClassCastException ex) {
                 System.out.println("Az actor nem tud építeni, mert nem telepes.");
@@ -394,10 +412,14 @@ public class Comms {
                     Settler s = (Settler)space.getActors().get(currentActor);
                     int idx = -1;
                     switch (cmd[1]){
-                        case "Uran" -> idx = s.getMaterials().getUran();
-                        case "Ice" -> idx = s.getMaterials().getIce();
-                        case "Coal" -> idx = s.getMaterials().getCoal();
-                        case "Iron" -> idx = s.getMaterials().getIron();
+                        case "Uran" : idx = s.getMaterials().getUran();
+                        break;
+                        case "Ice" : idx = s.getMaterials().getIce();
+                        break;
+                        case "Coal" : idx = s.getMaterials().getCoal();
+                        break;
+                        case "Iron" : idx = s.getMaterials().getIron();
+                        break;
                     }
                     if(idx != -1){
                         s.putMaterialBack(s.getMaterials().getMaterials().get(idx));
@@ -415,10 +437,14 @@ public class Comms {
                         Settler s = (Settler)space.getActors().get(currentActor);
                         int idx = -1;
                         switch (cmd[0]){
-                            case "Uran" -> idx = s.getMaterials().getUran();
-                            case "Ice" -> idx = s.getMaterials().getIce();
-                            case "Coal" -> idx = s.getMaterials().getCoal();
-                            case "Iron" -> idx = s.getMaterials().getIron();
+                            case "Uran" : idx = s.getMaterials().getUran();
+                            break;
+                            case "Ice" : idx = s.getMaterials().getIce();
+                            break;
+                            case "Coal" : idx = s.getMaterials().getCoal();
+                            break;
+                            case "Iron" : idx = s.getMaterials().getIron();
+                            break;
                         }
                         if(idx != -1){
                             s.putMaterialBack(s.getMaterials().getMaterials().get(idx));
@@ -486,15 +512,15 @@ public class Comms {
         }
         int idx;
         switch (cmd[0]) {
-            case "Asteroid" -> {
+            case "Asteroid" :
                 idx = Integer.parseInt(cmd[1]);
                 space.getAsteroids().get(idx).status(space);
-            }
-            case "Actor" -> {
+            break;
+            case "Actor" :
                 idx = Integer.parseInt(cmd[1]);
                 space.getActors().get(idx).status();
-            }
-            case "All" -> {
+                break;
+            case "All" :
                 space.status();
                 for (Asteroid ast : space.getAsteroids()) {
                     ast.status(space);
@@ -502,7 +528,8 @@ public class Comms {
                 for (Actor act : space.getActors()) {
                     act.status();
                 }
-            }
+                break;
+
         }
     }
 
@@ -518,24 +545,26 @@ public class Comms {
 
     public static void add(String [] cmd){
         switch (cmd[0]){
-            case "Asteroid"->{
+            case "Asteroid":
                 Material mat;
                 switch (cmd[1]) {
-                    case "Uran" -> mat = new Uran();
-                    case "Ice" -> mat = new Ice();
-                    case "Coal" -> mat = new Coal();
-                    case "Iron" -> mat = new Iron();
-                    default -> {
+                    case "Uran": mat = new Uran();
+                    break;
+                    case "Ice" : mat = new Ice();
+                    break;
+                    case "Coal" : mat = new Coal();
+                    break;
+                    case "Iron" : mat = new Iron();
+                    break;
+                    default :
                         System.out.println("Nem sikerült az aszteroida hozzáadás, mert nem létező nyersanyagot adtunk meg.");
                         return;
-                    }
                 }
                 space.addAsteroid(new Asteroid(3, 3, 3, mat, space));
                 System.out.println("A nyersanyaggal teli aszteroida hozzá lett adva a space-hez.");
                 return;
-            }
 
-            case "Settler"-> {
+            case "Settler":
                 int astidx = Integer.parseInt(cmd[1]);
                 if(astidx< 0 || astidx>= space.getAsteroids().size()){
                     System.out.println("Nem létező indexű aszteroidát adtunk meg.");
@@ -547,11 +576,11 @@ public class Comms {
                 space.setAliveSettlerCnt(space.getAliveSettlerCnt() + 1);
                 space.getAsteroids().get(astidx).addActor(settler);
                 System.out.println("Sikeres volt a telepeshozzáadás");
-                }
+                break;
 
 
-            case "Robot"-> {
-                int astidx = Integer.parseInt(cmd[1]);
+            case "Robot":
+                astidx = Integer.parseInt(cmd[1]);
                 if(astidx< 0 || astidx>= space.getAsteroids().size()){
                     System.out.println("Nem létező indexű aszteroidát adtunk meg.");
                     return;
@@ -562,10 +591,10 @@ public class Comms {
                 space.getAsteroids().get(astidx).addActor(robot);
                 robot.setCurrentAsteroid(space.getAsteroids().get(astidx));
                 System.out.println("Sikeres volt a robothozzáadás");
-            }
+                break;
 
-            case "Ufo"-> {
-                int astidx = Integer.parseInt(cmd[1]);
+            case "Ufo":
+                astidx = Integer.parseInt(cmd[1]);
                 if(astidx< 0 || astidx>= space.getAsteroids().size()){
                     System.out.println("Nem létező indexű aszteroidát adtunk meg.");
                     return;
@@ -575,9 +604,9 @@ public class Comms {
                 space.addActor(ufo);
                 space.getAsteroids().get(astidx).addActor(ufo);
                 System.out.println("Sikeres volt az ufóhozzáadás");
-            }
+            break;
 
-            case "TpGate"->{
+            case "TpGate":
                 if(cmd.length == 5){
                     TpGate tp1 = new TpGate();
                     TpGate tp2 = new TpGate();
@@ -697,22 +726,26 @@ public class Comms {
                     tp2.setSpace(space);
                     System.out.println("Hozzáadtuk a teleportkapukat a célpontokhoz.");
                 }
-            }
+            break;
 
-            case "Material"->{
+            case "Material":
                 if(cmd.length == 3){
                     switch(cmd[2]){
-                        case "Iron"-> space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Iron());
-                        case "Coal"-> space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Coal());
-                        case "Uran"-> space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Uran());
-                        case "Ice"-> space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Ice());
+                        case "Iron": space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Iron());
+                        break;
+                        case "Coal": space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Coal());
+                        break;
+                        case "Uran": space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Uran());
+                        break;
+                        case "Ice": space.getActors().get(Integer.parseInt(cmd[1])).getMaterials().addMaterial(new Ice());
+                        break;
                     }
                     System.out.println("Sikeresen betettük a nyersanyagot a telepesbe");
                 }
                 else{
                     System.out.println("Nem létező indexű telepest adtunk meg.");
                 }
-            }
+            break;
         }
     }
 
@@ -786,13 +819,18 @@ public class Comms {
                     try {
                         int idx = Integer.parseInt(cmd[1]);
                         switch (cmd[2]) {
-                            case "Coal" -> space.getAsteroids().get(idx).setCoreMaterial(new Coal());
-                            case "Ice" -> space.getAsteroids().get(idx).setCoreMaterial(new Ice());
-                            case "Iron" -> space.getAsteroids().get(idx).setCoreMaterial(new Iron());
-                            case "Uran" -> space.getAsteroids().get(idx).setCoreMaterial(new Uran());
-                            case "Nothing" -> space.getAsteroids().get(idx).setCoreMaterial(null);
-                            default -> {System.out.println("Nincs ilyen nyersanyag.");
-                            return;}
+                            case "Coal" : space.getAsteroids().get(idx).setCoreMaterial(new Coal());
+                            break;
+                            case "Ice" : space.getAsteroids().get(idx).setCoreMaterial(new Ice());
+                            break;
+                            case "Iron" : space.getAsteroids().get(idx).setCoreMaterial(new Iron());
+                            break;
+                            case "Uran" : space.getAsteroids().get(idx).setCoreMaterial(new Uran());
+                            break;
+                            case "Nothing" : space.getAsteroids().get(idx).setCoreMaterial(null);
+                            break;
+                            default : System.out.println("Nincs ilyen nyersanyag.");
+                            return;
                         }
                         System.out.println("Az aszteroida magja a kapott nyersanyagra lett állítva");
                         return;
