@@ -108,7 +108,7 @@ public class Comms {
                 for(int i = 0; i < 3; i++){
                     parameters[i] = Integer.parseInt(cmd[i]);
                 }
-                space = new Space(parameters[0], parameters[1], parameters[2]);
+                space = new Space(parameters[0], 0, parameters[1], parameters[2]);
                 System.out.println("Sikeres volt az új pálya generálás");
             }
             catch (NumberFormatException e)
@@ -538,7 +538,7 @@ public class Comms {
      *
      */
     public static void createSpace(String[] cmd){
-        space = new Space(0,0,10);
+        space = new Space(0, 0,0,10);
         System.out.println("Space létrehozva");
 
     }

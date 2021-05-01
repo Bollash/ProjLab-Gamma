@@ -46,7 +46,7 @@ public class Space implements java.io.Serializable{
      * @param sameCnt Egy bizonyos nyersanyag magú aszteroidák száma. Összesen 4x ennyi aszteroida lesz a játékban.
      * @param freq Napvihar frekvencia.
      */
-    public Space(int settlerCnt, int sameCnt, int freq){
+    public Space(int settlerCnt,int ufoCnt, int sameCnt, int freq){
         gameOver = false;
         this.aliveSettlerCnt = settlerCnt;
         sunStormFreq = freq;
