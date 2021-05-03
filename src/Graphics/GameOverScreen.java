@@ -14,6 +14,8 @@ public class GameOverScreen extends JFrame {
 
         f.add(p);
 
+
+
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(400, 110);
         f.setResizable(false);
