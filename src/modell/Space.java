@@ -26,6 +26,11 @@ public class Space implements java.io.Serializable{
     private boolean gameOver;
 
     /**
+     * Az éppen körön lévő actor
+     */
+    private int currentActor;
+
+    /**
      * Hány körönként jön a napszél
      */
     private int sunStormFreq;
@@ -48,6 +53,7 @@ public class Space implements java.io.Serializable{
      */
     public Space(int settlerCnt,int ufoCnt, int sameCnt, int freq){
         gameOver = false;
+        currentActor = 0;
         this.aliveSettlerCnt = settlerCnt;
         sunStormFreq = freq;
         turnsTillSunStorm = sunStormFreq;
@@ -72,6 +78,9 @@ public class Space implements java.io.Serializable{
         for(int i = 0; i < settlerCnt; i++){
             actors.add(new Settler());
         }
+        for(int i = 0; i < ufoCnt; i++){
+            actors.add(new Ufo());
+        }
 
         for (Actor c: actors) {
             asteroids.get(0).addActor(c);
@@ -79,6 +88,7 @@ public class Space implements java.io.Serializable{
     }
 
     public Space(int settlerCnt, int turnsTillSunStorm, int sunStormFreq, List<Asteroid> asteroids, List<Actor> actors){
+        currentActor = 0;
         this.aliveSettlerCnt = settlerCnt;
         this.turnsTillSunStorm = turnsTillSunStorm;
         this.sunStormFreq = sunStormFreq;
@@ -205,5 +215,13 @@ public class Space implements java.io.Serializable{
         }
         System.out.println(asteroids.size());
         System.out.println(actors.size());
+    }
+
+    public int getCurrentActor() {
+        return currentActor;
+    }
+
+    public void setCurrentActor(int currentActor) {
+        this.currentActor = currentActor;
     }
 }
