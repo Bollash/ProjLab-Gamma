@@ -1,12 +1,11 @@
 package Graphics;
 
-import modell.Space;
+import modell.*;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class SpaceInfo extends JFrame {
-    private JFrame f = new JFrame("SpaceInfo");
-
     private JTextField t1 = new JTextField(20);
     private JTextField t2 = new JTextField(20);
     private JTextField t3 = new JTextField(20);
@@ -15,9 +14,18 @@ public class SpaceInfo extends JFrame {
     private JTextField t6 = new JTextField(20);
 
     public SpaceInfo(Space space){
-        JPanel p1 = new JPanel();
-        JPanel p2 = new JPanel();
-        JPanel p3 = new JPanel();
+        JPanel panel = new JPanel();
+        JPanel p = new JPanel();
+        p.setLayout(new GridBagLayout());
+        panel.setLayout(new FlowLayout());
+
+        JPanel p0 = new JPanel(new FlowLayout());
+        JPanel p1 = new JPanel(new FlowLayout());
+        JPanel p2 = new JPanel(new FlowLayout());
+        JPanel p3 = new JPanel(new FlowLayout());
+        JPanel p4 = new JPanel(new FlowLayout());
+        JPanel p5 = new JPanel(new FlowLayout());
+        JPanel p6 = new JPanel(new FlowLayout());
 
         JLabel l0 = new JLabel("Space informations:");
         JLabel l1 = new JLabel("Number of asteroids:");
@@ -34,38 +42,62 @@ public class SpaceInfo extends JFrame {
         t5.setEditable(false);
         t6.setEditable(false);
 
-        /*t1.setText();
-        t2.setText();
-        t3.setText();
-        t4.setText();
-        t5.setText();
-        t6.setText();
-        t7.setText();*/
+        Integer settlercnt = 0;
+        Integer ufocnt = 0;
+        Integer robotcnt = 0;
+        Integer tpgatecnt = 0;
+        for (Actor a: space.getActors()) {
+            if(a instanceof Settler)
+                settlercnt += 1;
+            if(a instanceof modell.Robot)
+                robotcnt += 1;
+            if(a instanceof Ufo)
+                ufocnt += 1;
+            if(a instanceof TpGate)
+                tpgatecnt += 1;
+        }
 
-        p1.add(l0);
+        t1.setText(Integer.toString(space.getAsteroids().size()));
+        t2.setText(settlercnt.toString());
+        t3.setText(robotcnt.toString());
+        t4.setText(ufocnt.toString());
+        t5.setText(tpgatecnt.toString());
+        t6.setText(Integer.toString(space.getTurnsTillSunStorm()));
 
-        p2.add(l1);
+        p0.add(l0);
+
+        p1.add(l1);
         p2.add(l2);
-        p2.add(l3);
-        p2.add(l4);
-        p2.add(l5);
-        p2.add(l6);
+        p3.add(l3);
+        p4.add(l4);
+        p5.add(l5);
+        p6.add(l6);
 
-        p3.add(t1);
-        p3.add(t2);
+        p1.add(t1);
+        p2.add(t2);
         p3.add(t3);
-        p3.add(t4);
-        p3.add(t5);
-        p3.add(t6);
+        p4.add(t4);
+        p5.add(t5);
+        p6.add(t6);
 
-        f.add(p1, BorderLayout.NORTH);
-        f.add(p2, BorderLayout.WEST);
-        f.add(p3, BorderLayout.EAST);
+        p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
+        p.add(p0);
+        p.add(p1);
+        p.add(p2);
+        p.add(p3);
+        p.add(p4);
+        p.add(p5);
+        p.add(p6);
 
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(400, 110);
-        f.setResizable(false);
-        f.pack();
-        f.setVisible(true);
+        panel.add(p);
+
+        this.add(panel);
+
+        this.setTitle("Space Info");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(600, 330);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 }
