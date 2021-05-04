@@ -57,7 +57,7 @@ public class MainMenuScreen extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.dispose();
-            new LoadGameScreen(System.getProperty("user.dir") + "\\SaveGames");
+            new LoadGameScreen();
         }
     }
 

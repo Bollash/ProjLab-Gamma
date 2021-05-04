@@ -13,8 +13,8 @@ public class LoadGameScreen extends JFrame {
     private JComboBox<String> comboBox;
     private String filepath;
 
-    public LoadGameScreen(String filepath){
-        this.filepath = filepath;
+    public LoadGameScreen(){
+        this.filepath = System.getProperty("user.dir") + "\\SaveGames";
 
         JPanel panel = new JPanel();
         JPanel p2 = new JPanel();
