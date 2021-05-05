@@ -87,6 +87,47 @@ public class Space implements java.io.Serializable{
         }
     }
 
+    public Space(int settlerCount, int turnsTillStorm, int sunSFreq, int sameAstCount, int ufoCount){
+        aliveSettlerCnt = settlerCount;
+        turnsTillSunStorm = turnsTillStorm;
+        gameOver = false;
+        sunStormFreq = sunSFreq;
+        actors = new ArrayList<Actor>();
+        asteroids = new ArrayList<Asteroid>();
+        for(int i = 0; i < settlerCount; i++) {
+            actors.add(new Settler());
+        }
+        for(int i = 0; i < sameAstCount; i++) {
+            Random rand = new Random();
+            int randNum = rand.nextInt(3);
+            asteroids.add(new Asteroid(randNum, sunSFreq, turnsTillStorm, new Coal(), this));
+        }
+        for(int i = 0; i < sameAstCount; i++) {
+            Random rand = new Random();
+            int randNum = rand.nextInt(3);
+            asteroids.add(new Asteroid(randNum, sunSFreq, turnsTillStorm, new Iron(), this));
+        }
+        for(int i = 0; i < sameAstCount; i++) {
+            Random rand = new Random();
+            int randNum = rand.nextInt(3);
+            asteroids.add(new Asteroid(randNum, sunSFreq, turnsTillStorm, new Ice(), this));
+        }
+        for(int i = 0; i < sameAstCount; i++) {
+            Random rand = new Random();
+            int randNum = rand.nextInt(3);
+            asteroids.add(new Asteroid(randNum, sunSFreq, turnsTillStorm, new Uran(), this));
+        }
+        for(int i = 0; i < ufoCount; i++) {
+            actors.add(new Ufo());
+        }
+        for(int i = 0; i < actors.size(); i++) {
+            Random rand = new Random();
+            int randAst = rand.nextInt(asteroids.size());
+            asteroids.get(randAst).addActor(actors.get(i));
+        }
+    }
+
+
     public Space(int settlerCnt, int turnsTillSunStorm, int sunStormFreq, List<Asteroid> asteroids, List<Actor> actors){
         currentActor = 0;
         this.aliveSettlerCnt = settlerCnt;
