@@ -1,15 +1,10 @@
 package Graphics;
 
-import modell.Asteroid;
-import modell.MaterialType;
-import modell.Space;
 
-import javax.imageio.ImageIO;
+import modell.*;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 
 public class GameScreen extends JFrame {
 
@@ -18,58 +13,26 @@ public class GameScreen extends JFrame {
     JComboBox<String> info;
     JComboBox<String> act;
     JLabel infoLabel;
+    DrawGame gameDraw;
     boolean settlerActing; //??
     String[] infoCB = {"Space","Settler","Asteroid","Neighbour"};
     String[] actCB = {"Build Teleport Gate","Build Robot","Build Base","Drill","Mine","Move","Put Material Back","Put Teleport gate down"};
-    private BufferedImage ast1, ast1b1, ast1b2, ast1e,
-                          ast2, ast2b1, ast2b2, ast2e,
-                          astronaut, robot, ufo, background, invbox,
-                          coal, ice, iron, uran, uran2, uran3,
-                          coalIcon, iceIcon, ironIcon, uranIcon, uran2Icon, uran3Icon;
-
-
-
 
 
     public GameScreen(Space spaceField) {
         super("SpaceGame");
-        createDefaultSettings();
         space = spaceField;
         currentActor = 0;
         info = new JComboBox<>(infoCB);
         act =  new JComboBox<>(actCB);
         infoLabel = new JLabel();
         settlerActing = false;
-        try{
-            ast1 = ImageIO.read(new File("image/ast1.png"));
-            ast1b1 = ImageIO.read(new File("image/ast1b1.png"));
-            ast1b2 = ImageIO.read(new File("image/ast1b2.png"));
-            ast1e = ImageIO.read(new File("image/ast1e.png"));
-            ast2 = ImageIO.read(new File("image/ast2.png"));
-            ast2b1 = ImageIO.read(new File("image/ast2b1.png"));
-            ast2b2 = ImageIO.read(new File("image/ast2b2.png"));
-            ast2e = ImageIO.read(new File("image/ast2e.png"));
-            astronaut = ImageIO.read(new File("image/astronaut.png"));
-            robot = ImageIO.read(new File("image/robot.png"));
-            ufo = ImageIO.read(new File("image/ufo.png"));
-            background = ImageIO.read(new File("image/background.png"));
-            invbox = ImageIO.read(new File("image/invbox.png"));
-            coal = ImageIO.read(new File("image/coal.png"));
-            ice = ImageIO.read(new File("image/ice.png"));
-            iron = ImageIO.read(new File("image/iron.png"));
-            uran = ImageIO.read(new File("image/uran.png"));
-            uran2 = ImageIO.read(new File("image/uran2.png"));
-            uran3 = ImageIO.read(new File("image/uran3.png"));
-            coalIcon = ImageIO.read(new File("image/coalIcon.png"));
-            iceIcon = ImageIO.read(new File("image/iceIcon.png"));
-            ironIcon = ImageIO.read(new File("image/ironIcon.png"));
-            uranIcon = ImageIO.read(new File("image/uranIcon.png"));
-            uran2Icon = ImageIO.read(new File("image/uran2Icon.png"));
-            uran3Icon = ImageIO.read(new File("image/uran3Icon.png"));
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+        createDefaultSettings();
+        gameDraw = new DrawGame(space);
+        add(gameDraw);
+        gameDraw.repaint();
+        setVisible(true);
+        gameDraw.repaint();
     }
 
     public void createDefaultSettings() {
@@ -81,102 +44,4 @@ public class GameScreen extends JFrame {
     }
 
 
-
-    public void paintComponent(Graphics g){
-        if(!space.isGameOver()) {
-            drawGame(g);
-        }
-    }
-
-    public void drawGame(Graphics g) {
-        //Background
-        g.drawImage(background, 0, 0, null);
-        //Asteroid
-        Asteroid temp1 = space.getActors().get(currentActor).getCurrentAsteroid();
-        for(int i = 0; i < space.getAsteroids().size(); i++) {
-            if(space.getAsteroids().get(i) == temp1 && i%2 == 0) {
-                if(temp1.getLayer() == 3)
-                    g.drawImage(ast1, 425, 75, null);
-                if(temp1.getLayer() == 2)
-                    g.drawImage(ast1b1, 425, 75, null);
-                if(temp1.getLayer() == 1)
-                    g.drawImage(ast1b2, 425, 75, null);
-                if(temp1.getLayer() == 0)
-                    g.drawImage(ast1e, 425, 75, null);
-            }
-            else if(space.getAsteroids().get(i) == temp1 && i%2 == 1) {
-                if(temp1.getLayer() == 3)
-                    g.drawImage(ast2, 425, 75, null);
-                if(temp1.getLayer() == 2)
-                    g.drawImage(ast2b1, 425, 75, null);
-                if(temp1.getLayer() == 1)
-                    g.drawImage(ast2b2, 425, 75, null);
-                if(temp1.getLayer() == 0)
-                    g.drawImage(ast2e, 425, 75, null);
-            }
-        }
-        //core material (if not empty)
-        if(temp1.getLayer() == 0) {
-            if(temp1.getCoreMaterial().equals(MaterialType.Coal))
-                g.drawImage(coal, 650, 300, null);
-            if(temp1.getCoreMaterial().equals(MaterialType.Iron))
-                g.drawImage(iron, 650, 300, null);
-            if(temp1.getCoreMaterial().equals(MaterialType.Ice))
-                g.drawImage(ice, 650, 300, null);
-            if(temp1.getCoreMaterial().equals(MaterialType.Uran)) {
-                if(temp1.getCoreMaterial().getCounter() == 0)
-                    g.drawImage(uran, 650, 300, null);
-                if(temp1.getCoreMaterial().getCounter() == 1)
-                    g.drawImage(uran2, 650, 300, null);
-                if(temp1.getCoreMaterial().getCounter() == 2)
-                    g.drawImage(uran3, 650, 300, null);
-            }
-        }
-        //settler
-        g.drawImage(astronaut, 650, 125, null);
-        //Robot
-        for(int i = 0; i < space.getActors().size(); i++){
-            if(space.getActors().get(i).getType().equals("Robot")) {
-                g.drawImage(robot, 750, 175, null);
-                break;
-            }
-        }
-        //Ufo
-        for(int i = 0; i < space.getActors().size(); i++){
-            if(space.getActors().get(i).getType().equals("Ufo")) {
-                g.drawImage(ufo, 550, 175, null);
-                break;
-            }
-        }
-        //inventory slots
-        int posXchange = 0;
-        for(int i = 0; i < 10; i++) {
-            g.drawImage(invbox, 50 + posXchange, 725, null);
-            posXchange += 150;
-        }
-        //inventory fill
-        posXchange = 0;
-        for(int i = 0; i < space.getActors().get(currentActor).getMaterials().getMaterials().size(); i++) {
-            if(space.getActors().get(currentActor).getMaterials().getMaterials().get(i).getType() == MaterialType.Coal) {
-                g.drawImage(coalIcon, 50 + posXchange, 725, null);
-                posXchange += 150;
-            }
-            if(space.getActors().get(currentActor).getMaterials().getMaterials().get(i).getType() == MaterialType.Iron) {
-                g.drawImage(ironIcon, 50 + posXchange, 725, null);
-                posXchange += 150;
-            }
-            if(space.getActors().get(currentActor).getMaterials().getMaterials().get(i).getType() == MaterialType.Ice) {
-                g.drawImage(iceIcon, 50 + posXchange, 725, null);
-                posXchange += 150;
-            }if(space.getActors().get(currentActor).getMaterials().getMaterials().get(i).getType() == MaterialType.Uran) {
-                if(space.getActors().get(currentActor).getMaterials().getMaterials().get(i).getCounter() == 0)
-                    g.drawImage(uranIcon, 50 + posXchange, 725, null);
-                else if(space.getActors().get(currentActor).getMaterials().getMaterials().get(i).getCounter() == 1)
-                    g.drawImage(uran2Icon, 50 + posXchange, 725, null);
-                else if(space.getActors().get(currentActor).getMaterials().getMaterials().get(i).getCounter() == 2)
-                    g.drawImage(uran3Icon, 50 + posXchange, 725, null);
-                posXchange += 150;
-            }
-        }
-    }
 }

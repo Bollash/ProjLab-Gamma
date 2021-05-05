@@ -14,5 +14,7 @@ public class GraphicsTest {
         //new NeighbourInfo(ast);
         //new SaveGameScreen(new Space(0, 0, 0, 10));
         //System.out.println(MaterialType.Coal.toString());
+        Space spacee = new Space(5,20,20,20,70);
+        new GameScreen(spacee);
     }
 }
