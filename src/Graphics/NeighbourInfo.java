@@ -8,21 +8,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NeighbourInfo extends JFrame {
-    private JTextField t1 = new JTextField(20);
-    private JTextField t2 = new JTextField(20);
-    private JTextField t3 = new JTextField(20);
-    private JTextField t4 = new JTextField(20);
-    private JTextField t5 = new JTextField(20);
-    private JTextField t6 = new JTextField(20);
-    private JTextField t7 = new JTextField(20);
+    private JTextField t1 = new JTextField(4);
+    private JTextField t2 = new JTextField(4);
+    private JTextField t3 = new JTextField(4);
+    private JTextField t4 = new JTextField(4);
+    private JTextField t5 = new JTextField(4);
+    private JTextField t6 = new JTextField(4);
+    private JTextField t7 = new JTextField(4);
 
     private JButton list = new JButton("List");
     private JComboBox<Integer> neighbours = new JComboBox<>();
-
-    Asteroid ast;
+    private Asteroid ast;
+    private Asteroid pickedAst;
 
     public NeighbourInfo(Asteroid ast){
         this.ast = ast;
+        this.pickedAst = null;
 
         JPanel panel = new JPanel();
         JPanel pan = new JPanel();
@@ -122,7 +123,13 @@ public class NeighbourInfo extends JFrame {
                 Integer ufocnt = 0;
                 Integer robotcnt = 0;
                 Integer tpgatecnt = 0;
-                for (Actor a: ((Asteroid)neighbours.getSelectedItem()).getActorsOnSurface()) {
+                //TODO: Remélhetőléeg a getneighbour nem tér vissza olyan tpgate-el aminek a párja nincs lent
+                if(ast.getNeighbours().get((int)neighbours.getSelectedItem()) instanceof Asteroid){
+                    pickedAst = (Asteroid)ast.getNeighbours().get((int)neighbours.getSelectedItem());
+                }else{
+                    pickedAst = ((TpGate)ast.getNeighbours().get((int)neighbours.getSelectedItem())).getLinkedTpGate().getCurrentAsteroid();
+                }
+                for (Actor a: pickedAst.getActorsOnSurface()) {
                     if(a instanceof Settler)
                         settlercnt += 1;
                     if(a instanceof modell.Robot)
@@ -133,12 +140,12 @@ public class NeighbourInfo extends JFrame {
                         tpgatecnt += 1;
                 }
 
-                t1.setText(Integer.toString(((Asteroid)neighbours.getSelectedItem()).getLayer()));
-                t2.setText(((Asteroid)neighbours.getSelectedItem()).getCoreMaterial().getType().name());
+                t1.setText(Integer.toString(pickedAst.getLayer()));
+                t2.setText(pickedAst.getCoreMaterial().getType().name());
                 t3.setText(settlercnt.toString());
                 t4.setText(robotcnt.toString());
                 t5.setText(ufocnt.toString());
-                t6.setText(Integer.toString(((Asteroid)neighbours.getSelectedItem()).getCloseToSunFreq()));
+                t6.setText(Integer.toString(pickedAst.getCloseToSunFreq()));
                 t7.setText(tpgatecnt.toString());
             }
         }

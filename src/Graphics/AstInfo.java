@@ -18,10 +18,8 @@ public class AstInfo extends JFrame {
     private JTextField t7 = new JTextField(4);
 
     public AstInfo(Asteroid ast){
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new GridBagLayout());
         JPanel p = new JPanel();
-        p.setLayout(new GridBagLayout());
-        panel.setLayout(new FlowLayout());
 
         JPanel p0 = new JPanel(new FlowLayout());
         JPanel p1 = new JPanel(new FlowLayout());
@@ -101,12 +99,12 @@ public class AstInfo extends JFrame {
         p.add(p7);
 
         panel.add(p);
-
-        this.add(panel);
+        this.setLayout(new BorderLayout());
+        this.add(panel, BorderLayout.CENTER);
 
         this.setTitle("Asteroid Info");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 330);
+        this.setSize(3500, 2850);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);

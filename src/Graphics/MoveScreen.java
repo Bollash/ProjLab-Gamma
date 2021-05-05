@@ -17,8 +17,10 @@ public class MoveScreen extends JFrame {
     private Space space;
     private List<IAsteroid> iAsteroids;
     private JComboBox<Integer> comboBox;
+    private GameScreen screen;
 
-    public MoveScreen(Space space){
+    public MoveScreen(Space space, GameScreen scren){
+        this.screen = scren;
         this.space = space;
         JPanel panel = new JPanel();
         JPanel p2 = new JPanel();
@@ -88,7 +90,8 @@ public class MoveScreen extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.dispose();
-            new GameScreen(space);
+            screen.repaint();
+            screen.setVisible(true);
         }
     }
 }
