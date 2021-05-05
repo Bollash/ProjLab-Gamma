@@ -46,4 +46,6 @@ public abstract class Actor implements java.io.Serializable{
     }
 
     public abstract void status();
+
+    public abstract String getType();
 }

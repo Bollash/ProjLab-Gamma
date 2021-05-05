@@ -85,4 +85,9 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
         System.out.println(space.getActors().indexOf(this));
         System.out.println(space.getAsteroids().indexOf(currentAsteroid));
     }
+
+    @Override
+    public String getType(){
+        return "Robot";
+    }
 }

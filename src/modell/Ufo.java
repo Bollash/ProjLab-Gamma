@@ -49,4 +49,9 @@ public class Ufo extends Actor implements iMine{
         System.out.println(space.getActors().indexOf(this));
         System.out.println(space.getAsteroids().indexOf(currentAsteroid));
     }
+
+    @Override
+    public String getType(){
+        return "Ufo";
+    }
 }

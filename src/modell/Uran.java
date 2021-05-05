@@ -36,4 +36,13 @@ public class Uran extends Material implements java.io.Serializable{
             ast.explode();
         }
     }
+
+
+    /**
+     * Getter a counter attribútumra.
+     */
+    @Override
+    public int getCounter() {
+        return counter;
+    }
 }

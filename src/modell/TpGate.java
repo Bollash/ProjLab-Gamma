@@ -156,4 +156,9 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
     public void setActivated(boolean b){
         activated = b;
     }
+
+    @Override
+    public String getType(){
+        return "TpGate";
+    }
 }

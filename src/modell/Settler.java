@@ -189,4 +189,9 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         }
     }
 
+    @Override
+    public String getType(){
+        return "Settler";
+    }
+
 }
