@@ -32,6 +32,7 @@ public class MainMenuScreen extends JFrame {
         this.add(p2);
         this.setSize(new Dimension(300, 100));
         this.setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private class NewGameButtonActionListener implements ActionListener {

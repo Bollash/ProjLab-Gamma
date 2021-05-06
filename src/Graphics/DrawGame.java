@@ -90,19 +90,21 @@ public class DrawGame extends JPanel {
         }
         //core material (if not empty)
         if(temp1.getLayer() == 0) {
-            if(temp1.getCoreMaterial().getType().equals(MaterialType.Coal))
-                g.drawImage(coalIcon, 725, 375, null);
-            if(temp1.getCoreMaterial().getType().equals(MaterialType.Iron))
-                g.drawImage(ironIcon, 725, 375, null);
-            if(temp1.getCoreMaterial().getType().equals(MaterialType.Ice))
-                g.drawImage(iceIcon, 725, 375, null);
-            if(temp1.getCoreMaterial().getType().equals(MaterialType.Uran)) {
-                if(temp1.getCoreMaterial().getCounter() == 0)
-                    g.drawImage(uranIcon, 725, 375, null);
-                if(temp1.getCoreMaterial().getCounter() == 1)
-                    g.drawImage(uran2Icon, 725, 375, null);
-                if(temp1.getCoreMaterial().getCounter() == 2)
-                    g.drawImage(uran3Icon, 725, 375, null);
+            if(temp1.getCoreMaterial() != null){
+                if(temp1.getCoreMaterial().getType().equals(MaterialType.Coal))
+                    g.drawImage(coalIcon, 725, 375, null);
+                if(temp1.getCoreMaterial().getType().equals(MaterialType.Iron))
+                    g.drawImage(ironIcon, 725, 375, null);
+                if(temp1.getCoreMaterial().getType().equals(MaterialType.Ice))
+                    g.drawImage(iceIcon, 725, 375, null);
+                if(temp1.getCoreMaterial().getType().equals(MaterialType.Uran)) {
+                    if(temp1.getCoreMaterial().getCounter() == 0)
+                        g.drawImage(uranIcon, 725, 375, null);
+                    if(temp1.getCoreMaterial().getCounter() == 1)
+                        g.drawImage(uran2Icon, 725, 375, null);
+                    if(temp1.getCoreMaterial().getCounter() == 2)
+                        g.drawImage(uran3Icon, 725, 375, null);
+                }
             }
         }
         //settler

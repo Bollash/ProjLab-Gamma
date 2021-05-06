@@ -46,6 +46,7 @@ public class LoadGameScreen extends JFrame {
         this.setResizable(false);
         this.add(p2);
         this.setSize(new Dimension(300, 100));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -69,7 +70,9 @@ public class LoadGameScreen extends JFrame {
                 fileIn.close();
 
                 frame.dispose();
-                new GameScreen(space);
+                GameScreen screen = new GameScreen(space);
+                screen.actOne();
+                screen.repaint();
 
             } catch (ClassNotFoundException c) {
                 System.out.println("Space class not found");

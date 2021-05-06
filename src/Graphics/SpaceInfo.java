@@ -40,10 +40,10 @@ public class SpaceInfo extends JFrame {
         t5.setEditable(false);
         t6.setEditable(false);
 
-        Integer settlercnt = 0;
-        Integer ufocnt = 0;
-        Integer robotcnt = 0;
-        Integer tpgatecnt = 0;
+        int settlercnt = 0;
+        int ufocnt = 0;
+        int robotcnt = 0;
+        int tpgatecnt = 0;
         for (Actor a: space.getActors()) {
             if(a instanceof Settler)
                 settlercnt += 1;
@@ -56,10 +56,10 @@ public class SpaceInfo extends JFrame {
         }
 
         t1.setText(Integer.toString(space.getAsteroids().size()));
-        t2.setText(settlercnt.toString());
-        t3.setText(robotcnt.toString());
-        t4.setText(ufocnt.toString());
-        t5.setText(tpgatecnt.toString());
+        t2.setText(Integer.toString(settlercnt));
+        t3.setText(Integer.toString(robotcnt));
+        t4.setText(Integer.toString(ufocnt));
+        t5.setText(Integer.toString(tpgatecnt));
         t6.setText(Integer.toString(space.getTurnsTillSunStorm()));
 
         p0.add(l0);
@@ -92,7 +92,6 @@ public class SpaceInfo extends JFrame {
         this.add(panel, BorderLayout.CENTER);
 
         this.setTitle("Space Info");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(350, 285);
         this.setResizable(false);
         this.setLocationRelativeTo(null);

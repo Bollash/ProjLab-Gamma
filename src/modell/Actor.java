@@ -1,8 +1,7 @@
 package modell;
 
 import modell.exceptions.MoveFailedException;
-import modell.exceptions.NoDrillableNeighbourException;
-import java.io.Serializable;
+import modell.exceptions.SettlerActingException;
 
 public abstract class Actor implements java.io.Serializable{
 
@@ -25,7 +24,7 @@ public abstract class Actor implements java.io.Serializable{
         System.out.println("Az aktor az aszteroidára mozgott.");
     }
 
-    public abstract void act();
+    public abstract void act() throws SettlerActingException;
 
     public abstract void putMaterialBack(Material mat);
 

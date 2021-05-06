@@ -5,6 +5,7 @@ import modell.Space;
 import modell.exceptions.CantBeMinedException;
 import modell.exceptions.LayerNot0Exception;
 import modell.exceptions.MoveFailedException;
+import modell.exceptions.SettlerActingException;
 
 import java.io.*;
 import java.util.Arrays;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class Comms {
-    public static void main(String[] args){
+    public static void main(String[] args) throws SettlerActingException {
         cmdProg(System.in, System.out);
     }
 
@@ -24,7 +25,7 @@ public class Comms {
      * Parancs kezelő program
      * @param source System.in vagy new FileInputStream(new File(filename))
      */
-    public static void cmdProg(InputStream source, PrintStream out){
+    public static void cmdProg(InputStream source, PrintStream out) throws SettlerActingException {
         System.setOut(out);
         Scanner input = new Scanner(source);
         while(input.hasNextLine()){
@@ -161,7 +162,7 @@ public class Comms {
      * Act parancs feldolgozására szolgáló metódus.
      * @param cmd Parancs maradék része. Egy integer vagy egy üres integer tömb.
      */
-    public static void act(String[] cmd){
+    public static void act(String[] cmd) throws SettlerActingException {
         if(cmd.length == 0){
             if(currentActor == space.getActors().size()){
                 currentActor = 0;
@@ -176,7 +177,7 @@ public class Comms {
                     space.getActors().get(idx).act();
                     return;
                 }
-            }catch(NumberFormatException e){
+            }catch(NumberFormatException | SettlerActingException e){
                 System.out.println("Nem létezik actor ezzel az indexxel.");
                 return;
             }

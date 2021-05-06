@@ -1,9 +1,6 @@
 package modell;
 
-import modell.exceptions.CantBeMinedException;
-import modell.exceptions.CoreFullException;
-import modell.exceptions.LayerNot0Exception;
-import modell.exceptions.NotEnoughMaterialException;
+import modell.exceptions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,8 +64,8 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
 
     //Todo
     @Override
-    public void act() {
-        System.out.println("Az actor telepes.");
+    public void act() throws SettlerActingException {
+        throw new SettlerActingException("Settler acts");
     }
 
     /**

@@ -16,8 +16,10 @@ public class PutBackMaterial extends JFrame {
     private Space space;
     private JComboBox<String> comboBox;
     private Settler currentSettler;
+    private GameScreen screen;
 
-    public PutBackMaterial(Space space) {
+    public PutBackMaterial(Space space, GameScreen screen) {
+        this.screen = screen;
         this.space = space;
         JPanel panel = new JPanel();
         JPanel p2 = new JPanel();
@@ -104,8 +106,10 @@ public class PutBackMaterial extends JFrame {
                 }
 
                 frame.dispose();
-
-                new GameScreen(space);
+                screen.actOne();
+                screen.repaint();
+                screen.setVisible(true);
+                setDefaultCloseOperation(EXIT_ON_CLOSE);
             }
 
         }
@@ -131,8 +135,7 @@ public class PutBackMaterial extends JFrame {
         public void actionPerformed(ActionEvent e) {
 
             frame.dispose();
-
-            new GameScreen(space);
+            screen.setVisible(true);
 
         }
 

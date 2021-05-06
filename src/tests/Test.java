@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
 import command.Comms;
+import modell.exceptions.SettlerActingException;
 
 public class Test {
     public static void main(String[] args) throws IOException {
@@ -36,7 +37,7 @@ public class Test {
         try {
             File output = new File("outputs\\" + num + ".txt");
             Comms.cmdProg(new FileInputStream("inputs\\" + num + ".txt"), new PrintStream(output));
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | SettlerActingException e) {
             e.printStackTrace();
         }
     }

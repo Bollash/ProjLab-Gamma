@@ -70,10 +70,11 @@ public class NewGameScreen extends JFrame {
 
         this.setTitle("New Game");
         this.setLocationRelativeTo(null);
-        //this.setResizable(false);
+        this.setResizable(false);
         this.add(panel);
         this.pack();
         this.setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private class BackButtonActionListener implements ActionListener {
@@ -102,7 +103,9 @@ public class NewGameScreen extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             Space space = new Space(Integer.parseInt(settlerCnt.getText()), Integer.parseInt(ufoCnt.getText()), Integer.parseInt(sameAstCnt.getText()), Integer.parseInt(solarWindFreq.getText()));
-            new GameScreen(space);
+            GameScreen screen = new GameScreen(space);
+            screen.actOne();
+            screen.repaint();
             frame.dispose();
         }
     }
