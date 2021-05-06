@@ -25,10 +25,8 @@ public class NeighbourInfo extends JFrame {
         this.ast = ast;
         this.pickedAst = null;
 
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new GridBagLayout());
         JPanel pan = new JPanel();
-        pan.setLayout(new GridBagLayout());
-        panel.setLayout(new FlowLayout());
 
         JPanel p = new JPanel(new FlowLayout());
         JPanel p0 = new JPanel(new FlowLayout());
@@ -104,12 +102,12 @@ public class NeighbourInfo extends JFrame {
         pan.add(p7);
 
         panel.add(pan);
-
-        this.add(panel);
+        this.setLayout(new BorderLayout());
+        this.add(panel, BorderLayout.CENTER);
 
         this.setTitle("Neighbour Info");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 330);
+        this.setSize(350, 285);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);

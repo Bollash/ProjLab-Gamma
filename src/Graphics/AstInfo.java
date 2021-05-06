@@ -4,9 +4,6 @@ import modell.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Robot;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AstInfo extends JFrame {
     private JTextField t1 = new JTextField(4);
@@ -104,7 +101,7 @@ public class AstInfo extends JFrame {
 
         this.setTitle("Asteroid Info");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(3500, 2850);
+        this.setSize(350, 285);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);

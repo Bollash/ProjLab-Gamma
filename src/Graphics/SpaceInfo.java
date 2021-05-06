@@ -6,18 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SpaceInfo extends JFrame {
-    private JTextField t1 = new JTextField(20);
-    private JTextField t2 = new JTextField(20);
-    private JTextField t3 = new JTextField(20);
-    private JTextField t4 = new JTextField(20);
-    private JTextField t5 = new JTextField(20);
-    private JTextField t6 = new JTextField(20);
+    private JTextField t1 = new JTextField(4);
+    private JTextField t2 = new JTextField(4);
+    private JTextField t3 = new JTextField(4);
+    private JTextField t4 = new JTextField(4);
+    private JTextField t5 = new JTextField(4);
+    private JTextField t6 = new JTextField(4);
 
     public SpaceInfo(Space space){
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new GridBagLayout());
         JPanel p = new JPanel();
-        p.setLayout(new GridBagLayout());
-        panel.setLayout(new FlowLayout());
 
         JPanel p0 = new JPanel(new FlowLayout());
         JPanel p1 = new JPanel(new FlowLayout());
@@ -90,12 +88,12 @@ public class SpaceInfo extends JFrame {
         p.add(p6);
 
         panel.add(p);
-
-        this.add(panel);
+        this.setLayout(new BorderLayout());
+        this.add(panel, BorderLayout.CENTER);
 
         this.setTitle("Space Info");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(600, 330);
+        this.setSize(350, 285);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
