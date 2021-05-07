@@ -4,13 +4,13 @@ Add Asteroid Iron
 Add Robot 0
 Neighbour 0 1
 Mod Layer 0 0
-Countdown 0 
-Countdown 0 
-Countdown 0 
-Countdown 0 
-Countdown 0 
-Countdown 0 
-Countdown 0 
-Countdown 0 
-Countdown 0 
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
+Countdown 0
 Status All

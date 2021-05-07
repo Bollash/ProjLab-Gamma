@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +18,7 @@ public class DrawGame extends JPanel {
 
     private BufferedImage ast1, ast1b1, ast1b2, ast1e,
             ast2, ast2b1, ast2b2, ast2e,
-            astronaut, robot, ufo, background, invbox, tpgate,
+            astronaut, robot, ufo, background, background2, invbox, tpgate,
             coal, ice, iron, uran, uran2, uran3,
             coalIcon, iceIcon, ironIcon, uranIcon, uran2Icon, uran3Icon;
     private Space space;
@@ -108,11 +110,11 @@ public class DrawGame extends JPanel {
             }
         }
         //settler
-        g.drawImage(astronaut, 650, 125, null);
+        g.drawImage(astronaut, 700, 125, null);
         //Robot
         for(int i = 0; i < space.getActors().size(); i++){
             if(space.getActors().get(i).getType().equals("Robot")) {
-                g.drawImage(robot, 750, 175, null);
+                g.drawImage(robot, 800, 175, null);
                 break;
             }
         }

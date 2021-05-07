@@ -36,6 +36,7 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         turnsTillCloseToSun = 3;
         coreMaterial = new Iron();
         this.space = space;
+        space.addAsteroid(this);
     }
 
     public Asteroid(int layer, int closeToSunFreq, int turnsTillCloseToSun, Material core, Space space){

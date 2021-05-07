@@ -80,6 +80,7 @@ public class GameScreen extends JFrame {
             try {
                 //új kör kezdődik
                 if(space.getCurrentActor() == space.getActors().size()){
+                    space.setCurrentActor(0);
                     space.handleCountDown();
                     for(Asteroid ast : space.getAsteroids()){
                         ast.handleCountDown();
