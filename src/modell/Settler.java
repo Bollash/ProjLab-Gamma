@@ -24,17 +24,21 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
 
     /**
      * Kibányássza az asteroida magját, és beteszi a nyersanyagok közé, ha ott még 10 nél kevesebb darab van.
-     * @throws CantBeMinedException Ha az aszteroidát nem lehet bányászni ilyen exceptiont dobunk.
      */
-    public void mine() throws CantBeMinedException, LayerNot0Exception {
+    public void mine(){
         Material material;
-        material = currentAsteroid.getMined();
-        System.out.println("Telepes bányászott.");
-        if(materials.getMaterials().size() < 10){
-            materials.addMaterial(material);
-            System.out.println("A nyersanyag el lett tárolva");
-        }else{
-            System.out.println("A nyersanyagnak nincs hely ezért elpusztult.");
+        try {
+            material = currentAsteroid.getMined();
+            space.incrementCurrentActor();
+            System.out.println("Telepes bányászott.");
+            if(materials.getMaterials().size() < 10){
+                materials.addMaterial(material);
+                System.out.println("A nyersanyag el lett tárolva");
+            }else{
+                System.out.println("A nyersanyagnak nincs hely ezért elpusztult.");
+            }
+        } catch (CantBeMinedException | LayerNot0Exception e) {
+            System.out.println("Cant be mined");
         }
     }
 
@@ -73,6 +77,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
      */
     public void buildBase(){
         if(currentAsteroid.countMaterialsOnSurface().canBuildBase()){
+            space.incrementCurrentActor();
             space.setGameOver(true);
             System.out.println("Felépült a bázis. Nyertek a telepesek");
         }else{
@@ -88,6 +93,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
             TpGate[] gates;
             try {
                 gates = materials.buildGates();
+                space.incrementCurrentActor();
                 gates[0].setLinkedTpGate(gates[1]);
                 gates[0].setInSettler(this);
                 gates[1].setLinkedTpGate(gates[0]);
@@ -113,6 +119,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
     public void craftRobot(){
         try{
             Robot r = materials.buildRobot();
+            space.incrementCurrentActor();
             space.addActor(r);
             currentAsteroid.addActor(r);
             r.setCurrentAsteroid(currentAsteroid);
@@ -131,6 +138,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         if(materials.getMaterials().contains(mat)){
             try {
                 currentAsteroid.addCore(mat);
+                space.incrementCurrentActor();
                 System.out.println("Telepes visszatette a nyersanyagot.");
                 materials.getMaterials().remove(mat);
             } catch (CoreFullException e) {
@@ -151,15 +159,12 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
             currentAsteroid.addNeighbour(tpGates.get(0));
             tpGates.get(0).setInSettler(null);
             tpGates.remove(0);
+            space.incrementCurrentActor();
         }
     }
 
     public MaterialArray getMaterials() {
         return materials;
-    }
-
-    public void setMaterialArray(MaterialArray arr) {
-        materials = arr;
     }
 
     public void addTpGate(TpGate tpg1) {
@@ -169,6 +174,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
     @Override
     public void drill() {
         currentAsteroid.getDrilled();
+        space.incrementCurrentActor();
     }
 
     public List<TpGate> getTpGates(){

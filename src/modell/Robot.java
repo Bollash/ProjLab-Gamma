@@ -47,6 +47,7 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
     public void act(){
         if(currentAsteroid.getLayer() > 0){
             drill();
+            space.incrementCurrentActor();
             return;
         }
         try {
@@ -69,6 +70,7 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
         }catch (MoveFailedException e){
             e.printStackTrace();
         }
+        space.incrementCurrentActor();
     }
 
     @Override

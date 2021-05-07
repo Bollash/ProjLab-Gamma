@@ -161,13 +161,7 @@ public class GameScreen extends JFrame {
                     screen.repaint();
                     break;
                 case "Mine":
-                    try {
-                        ((Settler)space.getActors().get(space.getCurrentActor())).mine();
-                    } catch (CantBeMinedException cantBeMinedException) {
-                        infoLabel.setText("Asteroid cant be mined");
-                    } catch (LayerNot0Exception layerNot0Exception) {
-                        infoLabel.setText("Layer is not 0");
-                    }
+                    ((Settler)space.getActors().get(space.getCurrentActor())).mine();
                     screen.actOne();
                     screen.repaint();
                     break;

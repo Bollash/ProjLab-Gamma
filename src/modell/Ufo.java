@@ -34,6 +34,7 @@ public class Ufo extends Actor implements iMine{
                 System.out.println("Az actor nem tud szomszédos aszteroidára mozogni.");
             }
         }
+        space.incrementCurrentActor();
     }
 
     @Override

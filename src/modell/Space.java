@@ -173,6 +173,7 @@ public class Space implements java.io.Serializable{
     public void addActor(Actor actor){
         if(!actors.contains(actor)){
             actors.add(actor);
+            actor.setSpace(this);
         }
     }
 
@@ -236,14 +237,6 @@ public class Space implements java.io.Serializable{
 
     public void setTurnsTillSunStorm(int c){ turnsTillSunStorm = c; }
 
-    public int asteroidCount() {
-        return asteroids.size();
-    }
-
-    public int actorCount() {
-        return actors.size();
-    }
-
     public void status(){
         System.out.println("Space");
         System.out.println(aliveSettlerCnt);
@@ -264,5 +257,9 @@ public class Space implements java.io.Serializable{
 
     public void setCurrentActor(int currentActor) {
         this.currentActor = currentActor;
+    }
+
+    public void incrementCurrentActor(){
+        currentActor++;
     }
 }
