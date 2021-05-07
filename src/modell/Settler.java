@@ -29,7 +29,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         Material material;
         try {
             material = currentAsteroid.getMined();
-            space.incrementCurrentActor();
+
             System.out.println("Telepes bányászott.");
             if(materials.getMaterials().size() < 10){
                 materials.addMaterial(material);
@@ -40,6 +40,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         } catch (CantBeMinedException | LayerNot0Exception e) {
             System.out.println("Cant be mined");
         }
+        space.incrementCurrentActor();
     }
 
     /**
