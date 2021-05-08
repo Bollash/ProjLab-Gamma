@@ -9,14 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MoveScreen extends JFrame {
 
     private Space space;
-    private List<Asteroid> asteroids;
+    private List<IAsteroid> iAsteroids;
     private JComboBox<Integer> comboBox;
     private GameScreen screen;
 
@@ -27,7 +25,7 @@ public class MoveScreen extends JFrame {
         JPanel p2 = new JPanel();
         p2.setLayout(new GridBagLayout());
         panel.setLayout(new FlowLayout());
-        iAsteroids = space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getAsteroidNeighbours();
+        iAsteroids = space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getValidNeighbours();
         int n = iAsteroids.size();
         Integer[] list = new Integer[n];
         if(n > 0){
@@ -71,7 +69,7 @@ public class MoveScreen extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if((int)comboBox.getSelectedItem() != -1){
                 try {
-                    asteroids.get((int)comboBox.getSelectedItem()).addActor(space.getActors().get(space.getCurrentActor()));
+                    iAsteroids.get((int)comboBox.getSelectedItem()).addActor(space.getActors().get(space.getCurrentActor()));
                 } catch (MoveFailedException moveFailedException) {
                     moveFailedException.printStackTrace();
                 }

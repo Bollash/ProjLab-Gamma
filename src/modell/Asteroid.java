@@ -236,8 +236,8 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         return neighbours;
     }
 
-    public List<Asteroid> getAsteroidNeighbours() {
-        ArrayList<Asteroid> astList = new ArrayList<>();
+    public List<IAsteroid> getValidNeighbours() {
+        ArrayList<IAsteroid> astList = new ArrayList<>();
         for(IAsteroid ast : neighbours) {
             if(ast instanceof Asteroid) {
                 astList.add((Asteroid)ast);
@@ -245,7 +245,7 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
             else {
                 Asteroid neigh = ((TpGate)ast).getLinkedTpGate().getCurrentAsteroid();
                 if (neigh!= null) {
-                    astList.add(neigh);
+                    astList.add(ast);
                 }
             }
         }
