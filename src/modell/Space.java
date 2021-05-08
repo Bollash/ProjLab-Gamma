@@ -69,7 +69,9 @@ public class Space implements java.io.Serializable{
         while(asts.size() != 0){
             int idx = rnd.nextInt(asts.size());
             if(asteroids.size() != 0){
-                asteroids.get(rnd.nextInt(asteroids.size())).addNeighbour(asts.get(idx));
+                Asteroid randN = asteroids.get(rnd.nextInt(asteroids.size()));
+                randN.addNeighbour(asts.get(idx));
+                asts.get(idx).addNeighbour(randN);
             }
             asteroids.add(asts.get(idx));
             asts.remove(idx);

@@ -23,15 +23,19 @@ public class NewGameScreen extends JFrame {
 
         JLabel set = new JLabel("Enter the number of players:");
         settlerCnt = new JTextField(4);
+        settlerCnt.setText("10");
 
         JLabel ufo = new JLabel("Enter the number of UFOs:");
         ufoCnt = new JTextField(4);
+        ufoCnt.setText("3");
 
         JLabel astCnt = new JLabel("Enter how much asteroid will be holding a certain type of material");
         sameAstCnt = new JTextField(4);
+        sameAstCnt.setText("10");
 
         JLabel solarWind  = new JLabel("Enter the solar wind frequency");
         solarWindFreq = new JTextField(4);
+        solarWindFreq.setText("15");
 
         JButton startGame = new JButton("Start Game");
         startGame.addActionListener(new StartGameButtonActionListener(this));

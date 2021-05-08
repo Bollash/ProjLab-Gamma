@@ -64,7 +64,12 @@ public class AstInfo extends JFrame {
 
         t0.setText(Integer.toString(ast.getSpace().getAsteroids().indexOf(ast)));
         t1.setText(Integer.toString(ast.getLayer()));
-        t2.setText(ast.getCoreMaterial().getType().name());
+        if (ast.getCoreMaterial() != null) {
+            t2.setText(ast.getCoreMaterial().getType().name());
+        }else{
+            t2.setText("Nothing");
+        }
+
         t3.setText(settlercnt.toString());
         t4.setText(robotcnt.toString());
         t5.setText(ufocnt.toString());

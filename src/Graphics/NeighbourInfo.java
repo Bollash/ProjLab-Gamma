@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NeighbourInfo extends JFrame {
+    private JTextField t0 = new JTextField(4);
     private JTextField t1 = new JTextField(4);
     private JTextField t2 = new JTextField(4);
     private JTextField t3 = new JTextField(4);
@@ -39,7 +40,7 @@ public class NeighbourInfo extends JFrame {
         JPanel p7 = new JPanel(new FlowLayout());
 
         JLabel l = new JLabel("Choose a neighbour:");
-        JLabel l0 = new JLabel("Asteroid informations:");
+        JLabel l0 = new JLabel("Asteroid id:");
         JLabel l1 = new JLabel("Layer:");
         JLabel l2 = new JLabel("Core material:");
         JLabel l3 = new JLabel("Number of settlers on surface:");
@@ -56,6 +57,7 @@ public class NeighbourInfo extends JFrame {
 
         neighbours = new JComboBox(neigh);
 
+        t0.setEditable(false);
         t1.setEditable(false);
         t2.setEditable(false);
         t3.setEditable(false);
@@ -73,7 +75,6 @@ public class NeighbourInfo extends JFrame {
         p.add(list);
 
         p0.add(l0);
-
         p1.add(l1);
         p2.add(l2);
         p3.add(l3);
@@ -82,6 +83,7 @@ public class NeighbourInfo extends JFrame {
         p6.add(l6);
         p7.add(l7);
 
+        p0.add(t0);
         p1.add(t1);
         p2.add(t2);
         p3.add(t3);
@@ -137,8 +139,13 @@ public class NeighbourInfo extends JFrame {
                         tpgatecnt += 1;
                 }
 
+                t0.setText(Integer.toString(ast.getSpace().getAsteroids().indexOf(ast)));
                 t1.setText(Integer.toString(pickedAst.getLayer()));
-                t2.setText(pickedAst.getCoreMaterial().getType().name());
+                if (ast.getCoreMaterial() != null) {
+                    t2.setText(pickedAst.getCoreMaterial().getType().name());
+                }else{
+                    t2.setText("Nothing");
+                }
                 t3.setText(settlercnt.toString());
                 t4.setText(robotcnt.toString());
                 t5.setText(ufocnt.toString());
