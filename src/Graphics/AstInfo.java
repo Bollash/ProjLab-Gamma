@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AstInfo extends JFrame {
+    private JTextField t0 = new JTextField(4);
     private JTextField t1 = new JTextField(4);
     private JTextField t2 = new JTextField(4);
     private JTextField t3 = new JTextField(4);
@@ -27,7 +28,7 @@ public class AstInfo extends JFrame {
         JPanel p6 = new JPanel(new FlowLayout());
         JPanel p7 = new JPanel(new FlowLayout());
 
-        JLabel l0 = new JLabel("Asteroid informations:");
+        JLabel l0 = new JLabel("Asteroid id:");
         JLabel l1 = new JLabel("Layer:");
         JLabel l2 = new JLabel("Core material:");
         JLabel l3 = new JLabel("Number of settlers on surface:");
@@ -36,6 +37,8 @@ public class AstInfo extends JFrame {
         JLabel l6 = new JLabel("Turns till the asteroid gets close to sun:");
         JLabel l7 = new JLabel("Number of teleport gates on surface:");
 
+
+        t0.setEditable(false);
         t1.setEditable(false);
         t2.setEditable(false);
         t3.setEditable(false);
@@ -59,6 +62,7 @@ public class AstInfo extends JFrame {
                 tpgatecnt += 1;
         }
 
+        t0.setText(Integer.toString(ast.getSpace().getAsteroids().indexOf(ast)));
         t1.setText(Integer.toString(ast.getLayer()));
         t2.setText(ast.getCoreMaterial().getType().name());
         t3.setText(settlercnt.toString());
@@ -68,7 +72,6 @@ public class AstInfo extends JFrame {
         t7.setText(tpgatecnt.toString());
 
         p0.add(l0);
-
         p1.add(l1);
         p2.add(l2);
         p3.add(l3);
@@ -77,6 +80,7 @@ public class AstInfo extends JFrame {
         p6.add(l6);
         p7.add(l7);
 
+        p0.add(t0);
         p1.add(t1);
         p2.add(t2);
         p3.add(t3);

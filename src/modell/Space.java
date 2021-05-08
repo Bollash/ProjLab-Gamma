@@ -78,19 +78,14 @@ public class Space implements java.io.Serializable{
         for(int i = 0; i < settlerCnt; i++){
             actors.add(new Settler());
         }
-        for (Actor c: actors) {
-            asteroids.get(0).addActor(c);
-            c.setSpace(this);
-        }
-        ArrayList<Ufo> ufoList = new ArrayList<>();
+
         for(int i = 0; i < ufoCnt; i++){
             Ufo u = new Ufo();
             actors.add(u);
-            ufoList.add(u);
         }
-        for(Ufo u : ufoList){
-            asteroids.get(rnd.nextInt(asteroids.size())).addActor(u);
-            u.setSpace(this);
+        for (Actor c: actors) {
+            asteroids.get(rnd.nextInt(asteroids.size())).addActor(c);
+            c.setSpace(this);
         }
 
 

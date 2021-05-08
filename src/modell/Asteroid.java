@@ -295,4 +295,8 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
             System.out.println(n);
         }
     }
+
+    public Space getSpace() {
+        return space;
+    }
 }
