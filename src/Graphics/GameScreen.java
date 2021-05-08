@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 public class GameScreen extends JFrame {
 
     Space space;
-    int currentActor;
     JComboBox<String> info;
     JComboBox<String> act;
     JLabel infoLabel;
@@ -27,7 +26,6 @@ public class GameScreen extends JFrame {
     public GameScreen(Space spaceField) {
         super("SpaceGame");
         space = spaceField;
-        currentActor = 0;
         info = new JComboBox<>(infoCB);
         JButton infoButton = new JButton("Info");
         infoButton.addActionListener(new InfoButtonActionListener());

@@ -60,10 +60,10 @@ public class Space implements java.io.Serializable{
         List<Asteroid> asts = new ArrayList<>();
         Random rnd = new Random(System.currentTimeMillis());
         for(int i = 0; i < sameCnt; i++){
-            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Iron(), this));
-            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Ice(), this));
-            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Coal(), this));
-            asts.add(new Asteroid(rnd.nextInt(6), 10, rnd.nextInt(10), new Uran(), this));
+            asts.add(new Asteroid(rnd.nextInt(4), 10, rnd.nextInt(10), new Iron(), this));
+            asts.add(new Asteroid(rnd.nextInt(4), 10, rnd.nextInt(10), new Ice(), this));
+            asts.add(new Asteroid(rnd.nextInt(4), 10, rnd.nextInt(10), new Coal(), this));
+            asts.add(new Asteroid(rnd.nextInt(4), 10, rnd.nextInt(10), new Uran(), this));
         }
         asteroids = new ArrayList<>();
         while(asts.size() != 0){
@@ -80,6 +80,7 @@ public class Space implements java.io.Serializable{
         }
         for (Actor c: actors) {
             asteroids.get(0).addActor(c);
+            c.setSpace(this);
         }
         ArrayList<Ufo> ufoList = new ArrayList<>();
         for(int i = 0; i < ufoCnt; i++){
@@ -89,6 +90,7 @@ public class Space implements java.io.Serializable{
         }
         for(Ufo u : ufoList){
             asteroids.get(rnd.nextInt(asteroids.size())).addActor(u);
+            u.setSpace(this);
         }
 
 
@@ -127,10 +129,10 @@ public class Space implements java.io.Serializable{
         for(int i = 0; i < ufoCount; i++) {
             actors.add(new Ufo());
         }
-        for(int i = 0; i < actors.size(); i++) {
+        for (Actor actor : actors) {
             Random rand = new Random();
             int randAst = rand.nextInt(asteroids.size());
-            asteroids.get(randAst).addActor(actors.get(i));
+            asteroids.get(randAst).addActor(actor);
         }
     }
 
@@ -268,5 +270,6 @@ public class Space implements java.io.Serializable{
 
     public void incrementCurrentActor(){
         currentActor++;
+        System.out.println(currentActor);
     }
 }
