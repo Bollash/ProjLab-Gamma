@@ -17,7 +17,7 @@ public class GameScreen extends JFrame {
     Space space;
     JComboBox<String> info;
     JComboBox<String> act;
-    JLabel infoLabel;
+    JTextField infoLabel;
     DrawGame gameDraw;
     String[] infoCB = {"Space","Asteroid","Neighbour"};
     String[] actCB = {"Build Teleport Gate","Build Robot","Build Base","Drill","Mine","Move","Put Material Back","Put Teleport gate down"};
@@ -42,12 +42,15 @@ public class GameScreen extends JFrame {
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(new ExitButtonActionListener(this));
 
-        infoLabel = new JLabel(" ");
+        JLabel id = new JLabel("Settler id:");
+        infoLabel = new JTextField(3);
+        infoLabel.setEditable(false);
         createDefaultSettings();
 
         tempPanel.add(info);
         tempPanel.add(infoButton);
 
+        tempPanel.add(id);
         tempPanel.add(infoLabel);
 
         tempPanel.add(act);
@@ -89,6 +92,7 @@ public class GameScreen extends JFrame {
                 }
                 space.getActors().get(space.getCurrentActor()).act();
             } catch (SettlerActingException e) {
+                infoLabel.setText(Integer.toString(space.getCurrentActor()));
                 break;
             }
         }

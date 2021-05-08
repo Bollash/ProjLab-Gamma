@@ -73,7 +73,7 @@ public class AstInfo extends JFrame {
         t3.setText(settlercnt.toString());
         t4.setText(robotcnt.toString());
         t5.setText(ufocnt.toString());
-        t6.setText(Integer.toString(ast.getCloseToSunFreq()));
+        t6.setText(Integer.toString(ast.getTurnsTillCloseToSun()));
         t7.setText(tpgatecnt.toString());
 
         p0.add(l0);

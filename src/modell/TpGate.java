@@ -123,6 +123,7 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
         }else{
             System.out.println("A TpGate nem csinál semmit.");
         }
+        space.incrementCurrentActor();
     }
 
     @Override
