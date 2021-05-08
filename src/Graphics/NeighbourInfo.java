@@ -108,7 +108,7 @@ public class NeighbourInfo extends JFrame {
         this.add(panel, BorderLayout.CENTER);
 
         this.setTitle("Neighbour Info");
-        this.setSize(350, 285);
+        this.setSize(370, 330);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
