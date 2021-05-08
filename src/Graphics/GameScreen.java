@@ -83,9 +83,7 @@ public class GameScreen extends JFrame {
                 if(space.getCurrentActor() == space.getActors().size()){
                     space.setCurrentActor(0);
                     space.handleCountDown();
-                    for(Asteroid ast : space.getAsteroids()){
-                        ast.handleCountDown();
-                    }
+                    space.getAsteroids().removeIf(Asteroid::handleCountDown);
                 }
                 if(space.isGameOver()){
                     handleGameOver();

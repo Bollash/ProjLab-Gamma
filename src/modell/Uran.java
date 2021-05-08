@@ -1,5 +1,7 @@
 package modell;
 
+import modell.exceptions.ExplodeException;
+
 public class Uran extends Material implements java.io.Serializable{
 
     private int counter;
@@ -27,13 +29,13 @@ public class Uran extends Material implements java.io.Serializable{
      * @param ast az adott aszteroida, amiben az Uran van.
      */
     @Override
-    public void closeToSunAction(Asteroid ast) {
+    public void closeToSunAction(Asteroid ast) throws ExplodeException {
         counter++;
         if(counter != 3) {
             System.out.println("Az urán számlálója eggyel nőtt.");
         }else{
             System.out.println("Az aszteroida felrobbant.");
-            ast.explode();
+            throw new ExplodeException("Bumm");
         }
     }
 

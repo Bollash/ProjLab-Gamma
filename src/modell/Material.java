@@ -1,7 +1,9 @@
 package modell;
 
+import modell.exceptions.ExplodeException;
+
 public abstract class Material implements java.io.Serializable{
-    public void closeToSunAction(Asteroid ast){}
+    public void closeToSunAction(Asteroid ast) throws ExplodeException {}
 
     public abstract MaterialType getType();
 

@@ -132,7 +132,6 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         for(IAsteroid ast : getNeighbours()){
             ast.removeNeighbour(this);
         }
-        space.getAsteroids().remove(this);
     }
 
     /**
@@ -147,23 +146,26 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
      * Csökkenti a napközelségi számlálót. Ha a számláló 0 lesz és a kéreg is át van fúrva, akkor meghívja
      * a magban lévő nyersanyag closeToSunAction-jét, majd visszaállítja a számlálót.
      */
-    public void handleCountDown(){
+    public boolean handleCountDown(){
         turnsTillCloseToSun = turnsTillCloseToSun -1;
         if(turnsTillCloseToSun == 0)
             {
             System.out.println("Napközelbe került az aszteroida.");
             if(layer == 0){
                 if(coreMaterial != null){
-                    coreMaterial.closeToSunAction(this);
+                    try {
+                        coreMaterial.closeToSunAction(this);
+                    } catch (ExplodeException e) {
+                        explode();
+                        return true;
+                    }
                 }
-                //System.out.println("Napközelbe került az aszteroida.");
-            }else{
-                //System.out.println("Napközelbe került az aszteroida.");
             }
-            turnsTillCloseToSun = closeToSunFreq;
+                turnsTillCloseToSun = closeToSunFreq;
         }else{
             System.out.println("A napközeli számláló eggyel csökkent.");
         }
+        return false;
     }
 
     /**

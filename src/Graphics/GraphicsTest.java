@@ -35,7 +35,7 @@ public class GraphicsTest {
         spacexd.getActors().get(0).getMaterials().addMaterial(new Coal());
         //settlerAddAst
         spacexd.getAsteroids().get(0).addActor(spacexd.getActors().get(0));
-        //new GameScreen(spacexd);
-        new GameOverScreen("asd123");
+        new GameScreen(spacexd);
+        //new GameOverScreen("asd123");
     }
 }
