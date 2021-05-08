@@ -236,6 +236,22 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         return neighbours;
     }
 
+    public List<Asteroid> getAsteroidNeighbours() {
+        ArrayList<Asteroid> astList = new ArrayList<>();
+        for(IAsteroid ast : neighbours) {
+            if(ast instanceof Asteroid) {
+                astList.add((Asteroid)ast);
+            }
+            else {
+                Asteroid neigh = ((TpGate)ast).getLinkedTpGate().getCurrentAsteroid();
+                if (neigh!= null) {
+                    astList.add(neigh);
+                }
+            }
+        }
+        return astList;
+    }
+
     /**
      * napvihar söpör végig az aszteroidán. Minden actorra meghívódik a getSunStormed().
      */
@@ -298,5 +314,10 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
 
     public Space getSpace() {
         return space;
+    }
+
+
+    public void setCloseToSunFreq(int closeToSunFreq) {
+        this.closeToSunFreq = closeToSunFreq;
     }
 }

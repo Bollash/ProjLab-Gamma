@@ -175,7 +175,7 @@ public class GameScreen extends JFrame {
                     new PutBackMaterial(space, screen);
                     screen.setVisible(false);
                     break;
-                case "Put Teleport Gate Down":
+                case "Put Teleport gate down":
                     space.getActors().get(space.getCurrentActor()).putTpGateDown();
                     screen.actOne();
                     screen.repaint();

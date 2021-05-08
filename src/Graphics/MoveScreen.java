@@ -1,5 +1,6 @@
 package Graphics;
 
+import modell.Asteroid;
 import modell.IAsteroid;
 import modell.Space;
 import modell.exceptions.MoveFailedException;
@@ -15,7 +16,7 @@ import java.util.List;
 public class MoveScreen extends JFrame {
 
     private Space space;
-    private List<IAsteroid> iAsteroids;
+    private List<Asteroid> asteroids;
     private JComboBox<Integer> comboBox;
     private GameScreen screen;
 
@@ -26,7 +27,7 @@ public class MoveScreen extends JFrame {
         JPanel p2 = new JPanel();
         p2.setLayout(new GridBagLayout());
         panel.setLayout(new FlowLayout());
-        iAsteroids = space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getNeighbours();
+        iAsteroids = space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getAsteroidNeighbours();
         int n = iAsteroids.size();
         Integer[] list = new Integer[n];
         if(n > 0){
@@ -70,7 +71,7 @@ public class MoveScreen extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if((int)comboBox.getSelectedItem() != -1){
                 try {
-                    iAsteroids.get((int)comboBox.getSelectedItem()).addActor(space.getActors().get(space.getCurrentActor()));
+                    asteroids.get((int)comboBox.getSelectedItem()).addActor(space.getActors().get(space.getCurrentActor()));
                 } catch (MoveFailedException moveFailedException) {
                     moveFailedException.printStackTrace();
                 }
