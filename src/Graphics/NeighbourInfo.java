@@ -51,7 +51,7 @@ public class NeighbourInfo extends JFrame {
 
         Integer[] neigh = new Integer[ast.neighborCount()];
 
-        for(int i = 0; i < ast.neighborCount(); i++) {
+        for(int i = 0; i < ast.getValidNeighbours().size(); i++) {
             neigh[i] = i;
         }
 
@@ -123,7 +123,7 @@ public class NeighbourInfo extends JFrame {
                 Integer robotcnt = 0;
                 Integer tpgatecnt = 0;
                 //TODO: Remélhetőléeg a getneighbour nem tér vissza olyan tpgate-el aminek a párja nincs lent
-                if(ast.getNeighbours().get((int)neighbours.getSelectedItem()) instanceof Asteroid){
+                if(ast.getValidNeighbours().get((int)neighbours.getSelectedItem()) instanceof Asteroid){
                     pickedAst = (Asteroid)ast.getNeighbours().get((int)neighbours.getSelectedItem());
                 }else{
                     pickedAst = ((TpGate)ast.getNeighbours().get((int)neighbours.getSelectedItem())).getLinkedTpGate().getCurrentAsteroid();
