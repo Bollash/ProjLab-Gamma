@@ -18,13 +18,18 @@ public class DrawGame extends JPanel {
 
     private BufferedImage ast1, ast1b1, ast1b2, ast1e,
             ast2, ast2b1, ast2b2, ast2e,
-            astronaut, robot, ufo, background, invbox, tpgate3, tpgate2, tpgate1, tpgate0,
+            astronaut, astronaut2, astronaut3, astronaut4,
+            robot, ufo, background, invbox, tpgate3, tpgate2, tpgate1, tpgate0,
             coal, ice, iron, uran, uran2, uran3,
             coalIcon, iceIcon, ironIcon, uranIcon, uran2Icon, uran3Icon;
+
     private Space space;
+
+    private int astNum;
 
     public DrawGame(Space spaceField) {
         space = spaceField;
+        astNum = 0;
         try{
             ast1 = ImageIO.read(new File("image/ast1.png"));
             ast1b1 = ImageIO.read(new File("image/ast1b1.png"));
@@ -35,6 +40,9 @@ public class DrawGame extends JPanel {
             ast2b2 = ImageIO.read(new File("image/ast2b2.png"));
             ast2e = ImageIO.read(new File("image/ast2e.png"));
             astronaut = ImageIO.read(new File("image/astronaut.png"));
+            astronaut2 = ImageIO.read(new File("image/astronaut2.png"));
+            astronaut3 = ImageIO.read(new File("image/astronaut3.png"));
+            astronaut4 = ImageIO.read(new File("image/astronaut4.png"));
             robot = ImageIO.read(new File("image/robot.png"));
             ufo = ImageIO.read(new File("image/ufo.png"));
             background = ImageIO.read(new File("image/background.png"));
@@ -113,7 +121,22 @@ public class DrawGame extends JPanel {
             }
         }
         //settler
-        g.drawImage(astronaut, 700, 125, null);
+        if(astNum == 0) {
+            g.drawImage(astronaut, 700, 125, null);
+            astNum = 1;
+        }
+        if(astNum == 1) {
+            g.drawImage(astronaut2, 700, 125, null);
+            astNum = 2;
+        }
+        if(astNum == 2) {
+            g.drawImage(astronaut3, 700, 125, null);
+            astNum++;
+        }
+        if(astNum == 3){
+            g.drawImage(astronaut4, 700, 125, null);
+            astNum = 0;
+        }
         //Robot
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().size(); i++){
             if(space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().get(i).getType().equals("Robot")) {
@@ -142,7 +165,7 @@ public class DrawGame extends JPanel {
                 posXchange += 100;
             }
             if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getType() == MaterialType.Iron) {
-                g.drawImage(ironIcon, 300 + posXchange, 757, null);
+                g.drawImage(ironIcon, 310 + posXchange, 770, null);
                 posXchange += 100;
             }
             if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getType() == MaterialType.Ice) {

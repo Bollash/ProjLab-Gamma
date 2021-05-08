@@ -45,4 +45,7 @@ public class Uran extends Material implements java.io.Serializable{
     public int getCounter() {
         return counter;
     }
+
+    @Override
+    public void setCounter(int newValue){counter = newValue;}
 }

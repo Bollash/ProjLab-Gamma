@@ -19,18 +19,18 @@ public class GraphicsTest {
         Space spacexd = new Space(0,0,0,10);
         spacexd.addAsteroid(new Asteroid(spacexd));
         spacexd.addAsteroid(new Asteroid(spacexd));
+        //cm
+        spacexd.getAsteroids().get(0).setCoreMaterial(null);
+        spacexd.getAsteroids().get(1).setCoreMaterial(new Iron());
+        //neighbor
         spacexd.getAsteroids().get(0).addNeighbour(spacexd.getAsteroids().get(1));
         spacexd.getAsteroids().get(1).addNeighbour(spacexd.getAsteroids().get(0));
-        spacexd.getAsteroids().get(0).setCoreMaterial(new Coal());
-        spacexd.getAsteroids().get(1).setCoreMaterial(new Coal());
+        //settler
         spacexd.addActor(new Settler());
-        ((Settler)spacexd.getActors().get(spacexd.getCurrentActor())).addTpGate(new TpGate());
-        ((Settler)spacexd.getActors().get(spacexd.getCurrentActor())).addTpGate(new TpGate());
-        spacexd.addActor(new Ufo());
-        spacexd.addActor(new Robot());
-        spacexd.getAsteroids().get(1).addActor(spacexd.getActors().get(0));
-        spacexd.getAsteroids().get(0).addActor(spacexd.getActors().get(1));
-        spacexd.getAsteroids().get(0).addActor(spacexd.getActors().get(2));
+        spacexd.addActor(new Settler());
+        //settlerAddAst
+        spacexd.getAsteroids().get(0).addActor(spacexd.getActors().get(0));
+        spacexd.getAsteroids().get(1).addActor(spacexd.getActors().get(1));
         //new GameScreen(spacexd);
         new MainMenuScreen();
     }
