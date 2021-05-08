@@ -87,7 +87,7 @@ public class GameScreen extends JFrame {
                 }
                 if(space.isGameOver()){
                     handleGameOver();
-                    break;
+                    return;
                 }
                 space.getActors().get(space.getCurrentActor()).act();
             } catch (SettlerActingException e) {
@@ -95,14 +95,11 @@ public class GameScreen extends JFrame {
                 break;
             }
         }
-        if(space.isGameOver()){
-            handleGameOver();
-        }
     }
 
     private void handleGameOver() {
         if(space.getAliveSettlerCnt() >= 2){
-            new GameOverScreen("Victory");
+            new GameOverScreen("Epikus victory royal");
         }else{
             new GameOverScreen("Defeat");
         }

@@ -52,6 +52,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         int value = space.getAliveSettlerCnt() - 1;
         space.setAliveSettlerCnt(value);
         if(value <= 1) space.setGameOver(true);
+        System.out.println("adios");
         return true;
     }
 

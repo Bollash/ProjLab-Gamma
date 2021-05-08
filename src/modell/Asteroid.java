@@ -178,7 +178,7 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
             if(actor.currentAsteroid != null){
                 actor.currentAsteroid.removeActor(actor);
             }
-            actor.currentAsteroid = this;
+            actor.setCurrentAsteroid(this);
             actorsOnSurface.add(actor);
         }
     }
