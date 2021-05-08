@@ -149,7 +149,7 @@ public class NeighbourInfo extends JFrame {
                     t3.setText(Integer.toString(settlercnt));
                     t4.setText(Integer.toString(robotcnt));
                     t5.setText(Integer.toString(ufocnt));
-                    t6.setText(Integer.toString(pickedAst.getCloseToSunFreq()));
+                    t6.setText(Integer.toString(pickedAst.getTurnsTillCloseToSun()));
                     t7.setText(Integer.toString(tpgatecnt));
                 }
             //}
