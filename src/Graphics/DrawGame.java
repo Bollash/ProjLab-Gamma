@@ -18,7 +18,7 @@ public class DrawGame extends JPanel {
 
     private BufferedImage ast1, ast1b1, ast1b2, ast1e,
             ast2, ast2b1, ast2b2, ast2e,
-            astronaut, robot, ufo, background, background2, invbox, tpgate,
+            astronaut, robot, ufo, background, invbox, tpgate3, tpgate2, tpgate1, tpgate0,
             coal, ice, iron, uran, uran2, uran3,
             coalIcon, iceIcon, ironIcon, uranIcon, uran2Icon, uran3Icon;
     private Space space;
@@ -39,7 +39,10 @@ public class DrawGame extends JPanel {
             ufo = ImageIO.read(new File("image/ufo.png"));
             background = ImageIO.read(new File("image/background.png"));
             invbox = ImageIO.read(new File("image/invbox.png"));
-            tpgate = ImageIO.read(new File("image/tpgateicon.png"));
+            tpgate3 = ImageIO.read(new File("image/tpgateicon3.png"));
+            tpgate2 = ImageIO.read(new File("image/tpgateicon2.png"));
+            tpgate1 = ImageIO.read(new File("image/tpgateicon1.png"));
+            tpgate0 = ImageIO.read(new File("image/tpgateicon0.png"));
             coal = ImageIO.read(new File("image/coal.png"));
             ice = ImageIO.read(new File("image/ice.png"));
             iron = ImageIO.read(new File("image/iron.png"));
@@ -94,27 +97,27 @@ public class DrawGame extends JPanel {
         if(temp1.getLayer() == 0) {
             if(temp1.getCoreMaterial() != null){
                 if(temp1.getCoreMaterial().getType().equals(MaterialType.Coal))
-                    g.drawImage(coalIcon, 725, 375, null);
+                    g.drawImage(coal, 725, 400, null);
                 if(temp1.getCoreMaterial().getType().equals(MaterialType.Iron))
-                    g.drawImage(ironIcon, 725, 375, null);
+                    g.drawImage(iron, 725, 400, null);
                 if(temp1.getCoreMaterial().getType().equals(MaterialType.Ice))
-                    g.drawImage(iceIcon, 725, 375, null);
+                    g.drawImage(ice, 725, 400, null);
                 if(temp1.getCoreMaterial().getType().equals(MaterialType.Uran)) {
                     if(temp1.getCoreMaterial().getCounter() == 0)
-                        g.drawImage(uranIcon, 725, 375, null);
+                        g.drawImage(uran, 725, 400, null);
                     if(temp1.getCoreMaterial().getCounter() == 1)
-                        g.drawImage(uran2Icon, 725, 375, null);
+                        g.drawImage(uran2, 725, 400, null);
                     if(temp1.getCoreMaterial().getCounter() == 2)
-                        g.drawImage(uran3Icon, 725, 375, null);
+                        g.drawImage(uran3, 725, 400, null);
                 }
             }
         }
         //settler
         g.drawImage(astronaut, 700, 125, null);
         //Robot
-        for(int i = 0; i < space.getActors().size(); i++){
-            if(space.getActors().get(i).getType().equals("Robot")) {
-                g.drawImage(robot, 800, 175, null);
+        for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().size(); i++){
+            if(space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().get(i).getType().equals("Robot")) {
+                g.drawImage(robot, 850, 175, null);
                 break;
             }
         }
@@ -128,34 +131,45 @@ public class DrawGame extends JPanel {
         //inventory slots
         int posXchange = 0;
         for(int i = 0; i < 10; i++) {
-            g.drawImage(invbox, 50 + posXchange, 725, null);
-            posXchange += 150;
+            g.drawImage(invbox, 300 + posXchange, 750, null);
+            posXchange += 100;
         }
         //inventory fill
         posXchange = 0;
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().size(); i++) {
             if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getType() == MaterialType.Coal) {
-                g.drawImage(coalIcon, 50 + posXchange, 725, null);
-                posXchange += 150;
+                g.drawImage(coalIcon, 300 + posXchange, 757, null);
+                posXchange += 100;
             }
             if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getType() == MaterialType.Iron) {
-                g.drawImage(ironIcon, 50 + posXchange, 725, null);
-                posXchange += 150;
+                g.drawImage(ironIcon, 300 + posXchange, 757, null);
+                posXchange += 100;
             }
             if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getType() == MaterialType.Ice) {
-                g.drawImage(iceIcon, 50 + posXchange, 725, null);
-                posXchange += 150;
+                g.drawImage(iceIcon, 300 + posXchange, 757, null);
+                posXchange += 100;
             }if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getType() == MaterialType.Uran) {
                 if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getCounter() == 0)
-                    g.drawImage(uranIcon, 50 + posXchange, 725, null);
+                    g.drawImage(uranIcon, 300 + posXchange, 757, null);
                 else if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getCounter() == 1)
-                    g.drawImage(uran2Icon, 50 + posXchange, 725, null);
+                    g.drawImage(uran2Icon, 300 + posXchange, 757, null);
                 else if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getCounter() == 2)
-                    g.drawImage(uran3Icon, 50 + posXchange, 725, null);
-                posXchange += 150;
+                    g.drawImage(uran3Icon, 300 + posXchange, 757, null);
+                posXchange += 100;
             }
         }
         //TpGate
-        g.drawImage(tpgate, 50 + posXchange, 575, null);
+        if(((Settler)space.getActors().get(space.getCurrentActor())).getTpGates().size() == 3) {
+            g.drawImage(tpgate3, 0 , 600, null);
+        }
+        else if(((Settler)space.getActors().get(space.getCurrentActor())).getTpGates().size() == 2) {
+            g.drawImage(tpgate2, 0 , 600, null);
+        }
+        else if(((Settler)space.getActors().get(space.getCurrentActor())).getTpGates().size() == 1) {
+            g.drawImage(tpgate1, 0 , 600, null);
+        }
+        else if(((Settler)space.getActors().get(space.getCurrentActor())).getTpGates().size() == 0) {
+            g.drawImage(tpgate0, 0 , 600, null);
+        }
     }
 }
