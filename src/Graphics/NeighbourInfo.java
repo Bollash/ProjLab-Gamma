@@ -18,7 +18,7 @@ public class NeighbourInfo extends JFrame {
     private JTextField t7 = new JTextField(4);
 
     private JButton list = new JButton("List");
-    private JComboBox<Integer> neighbours = new JComboBox<>();
+    private JComboBox<Integer> neighbours;
     private Asteroid ast;
     private Asteroid pickedAst;
 
@@ -55,7 +55,7 @@ public class NeighbourInfo extends JFrame {
             neigh[i] = i;
         }
 
-        neighbours = new JComboBox(neigh);
+        neighbours = new JComboBox<>(neigh);
 
         t0.setEditable(false);
         t1.setEditable(false);
@@ -117,41 +117,42 @@ public class NeighbourInfo extends JFrame {
     public class ListButtonActionListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            if (e.getActionCommand().equals("List")) {
-                Integer settlercnt = 0;
-                Integer ufocnt = 0;
-                Integer robotcnt = 0;
-                Integer tpgatecnt = 0;
-                //TODO: Remélhetőléeg a getneighbour nem tér vissza olyan tpgate-el aminek a párja nincs lent
-                if(ast.getValidNeighbours().get((int)neighbours.getSelectedItem()) instanceof Asteroid){
-                    pickedAst = (Asteroid)ast.getNeighbours().get((int)neighbours.getSelectedItem());
-                }else{
-                    pickedAst = ((TpGate)ast.getNeighbours().get((int)neighbours.getSelectedItem())).getLinkedTpGate().getCurrentAsteroid();
-                }
-                for (Actor a: pickedAst.getActorsOnSurface()) {
-                    if(a instanceof Settler)
-                        settlercnt += 1;
-                    if(a instanceof modell.Robot)
-                        robotcnt += 1;
-                    if(a instanceof Ufo)
-                        ufocnt += 1;
-                    if(a instanceof TpGate)
-                        tpgatecnt += 1;
-                }
+            //if (e.getActionCommand().equals("List")) {
+                int settlercnt = 0;
+                int ufocnt = 0;
+                int robotcnt = 0;
+                int tpgatecnt = 0;
+                if(neighbours.getSelectedItem() != null){
+                    if(ast.getValidNeighbours().get((int)neighbours.getSelectedItem()) instanceof Asteroid){
+                        pickedAst = (Asteroid)ast.getNeighbours().get((int)neighbours.getSelectedItem());
+                    }else{
+                        pickedAst = ((TpGate)ast.getNeighbours().get((int)neighbours.getSelectedItem())).getLinkedTpGate().getCurrentAsteroid();
+                    }
+                    for (Actor a: pickedAst.getActorsOnSurface()) {
+                        if(a instanceof Settler)
+                            settlercnt += 1;
+                        if(a instanceof modell.Robot)
+                            robotcnt += 1;
+                        if(a instanceof Ufo)
+                            ufocnt += 1;
+                        if(a instanceof TpGate)
+                            tpgatecnt += 1;
+                    }
 
-                t0.setText(Integer.toString(ast.getSpace().getAsteroids().indexOf(ast)));
-                t1.setText(Integer.toString(pickedAst.getLayer()));
-                if (ast.getCoreMaterial() != null) {
-                    t2.setText(pickedAst.getCoreMaterial().getType().name());
-                }else{
-                    t2.setText("Nothing");
+                    t0.setText(Integer.toString(pickedAst.getSpace().getAsteroids().indexOf(ast)));
+                    t1.setText(Integer.toString(pickedAst.getLayer()));
+                    if (ast.getCoreMaterial() != null) {
+                        t2.setText(pickedAst.getCoreMaterial().getType().name());
+                    }else{
+                        t2.setText("Nothing");
+                    }
+                    t3.setText(Integer.toString(settlercnt));
+                    t4.setText(Integer.toString(robotcnt));
+                    t5.setText(Integer.toString(ufocnt));
+                    t6.setText(Integer.toString(pickedAst.getCloseToSunFreq()));
+                    t7.setText(Integer.toString(tpgatecnt));
                 }
-                t3.setText(settlercnt.toString());
-                t4.setText(robotcnt.toString());
-                t5.setText(ufocnt.toString());
-                t6.setText(Integer.toString(pickedAst.getCloseToSunFreq()));
-                t7.setText(tpgatecnt.toString());
-            }
+            //}
         }
     }
 }

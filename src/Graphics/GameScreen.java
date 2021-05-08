@@ -89,6 +89,7 @@ public class GameScreen extends JFrame {
                 }
                 if(space.isGameOver()){
                     handleGameOver();
+                    break;
                 }
                 space.getActors().get(space.getCurrentActor()).act();
             } catch (SettlerActingException e) {
