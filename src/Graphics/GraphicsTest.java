@@ -31,6 +31,7 @@ public class GraphicsTest {
         spacexd.getAsteroids().get(1).addActor(spacexd.getActors().get(0));
         spacexd.getAsteroids().get(0).addActor(spacexd.getActors().get(1));
         spacexd.getAsteroids().get(0).addActor(spacexd.getActors().get(2));
-        new GameScreen(spacexd);
+        //new GameScreen(spacexd);
+        new MainMenuScreen();
     }
 }
