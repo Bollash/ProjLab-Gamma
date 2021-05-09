@@ -193,6 +193,9 @@ public class GameScreen extends JFrame {
         }
     }
 
+    /**
+     * Save Button nyomásakor lezajló művelet
+     */
     private class SaveButtonActionListener implements ActionListener{
 
         @Override
@@ -200,7 +203,9 @@ public class GameScreen extends JFrame {
             new SaveGameScreen(space);
         }
     }
-
+    /**
+     * Exit Button nyomásakor lezajló művelet
+     */
     private class ExitButtonActionListener implements ActionListener{
 
         private GameScreen screen;

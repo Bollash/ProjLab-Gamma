@@ -38,6 +38,9 @@ public class MainMenuScreen extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    /**
+     * New Button nyomásakor lezajló művelet
+     */
     private class NewGameButtonActionListener implements ActionListener {
         private JFrame frame;
 
@@ -52,6 +55,9 @@ public class MainMenuScreen extends JFrame {
         }
     }
 
+    /**
+     * Save Button nyomásakor lezajló művelet
+     */
     private class LoadGameButtonActionListener implements ActionListener {
         private JFrame frame;
 
@@ -66,6 +72,9 @@ public class MainMenuScreen extends JFrame {
         }
     }
 
+    /**
+     * Exit Button nyomásakor lezajló művelet
+     */
     private class ExitButtonActionListener implements ActionListener {
 
         @Override

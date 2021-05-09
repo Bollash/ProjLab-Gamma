@@ -52,7 +52,9 @@ public class LoadGameScreen extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-
+    /**
+     * Load Button nyomásakor lezajló művelet
+     */
     private class LoadButtonActionListener implements ActionListener{
 
         private JFrame frame;
@@ -86,6 +88,9 @@ public class LoadGameScreen extends JFrame {
         }
     }
 
+    /**
+     * Back Button nyomásakor lezajló művelet, melynek hatására visszalépünk
+     */
     private class BackButtonActionListener implements ActionListener{
 
         JFrame frame;
