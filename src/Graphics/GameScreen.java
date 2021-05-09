@@ -23,6 +23,10 @@ public class GameScreen extends JFrame {
     String[] actCB = {"Build Teleport Gate","Build Robot","Build Base","Drill","Mine","Move","Put Material Back","Put Teleport gate down"};
 
 
+    /**
+     * Játék futása során látott képernyő
+     * @param spaceField Játék során használt képernyő
+     */
     public GameScreen(Space spaceField) {
         super("SpaceGame");
         space = spaceField;
@@ -68,6 +72,9 @@ public class GameScreen extends JFrame {
 
     }
 
+    /**
+     * Alap beállítások
+     */
     public void createDefaultSettings() {
         //Setting the default look.
         setResizable(false);
@@ -76,6 +83,9 @@ public class GameScreen extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Addig actolunk ameddig settlerhez nem jutunk sorra
+     */
     public void actOne(){
         while(!space.isGameOver()){
             try {
@@ -97,6 +107,9 @@ public class GameScreen extends JFrame {
         }
     }
 
+    /**
+     * Ha vége van a játéknak meghívja a gameOverScreent a megfelelő szöveggel
+     */
     private void handleGameOver() {
         if(space.getAliveSettlerCnt() >= 2){
             new GameOverScreen("Epikus victory royal");
@@ -107,7 +120,6 @@ public class GameScreen extends JFrame {
     }
 
     private class InfoButtonActionListener implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             switch((String) info.getSelectedItem()){

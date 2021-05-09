@@ -8,6 +8,10 @@ import java.io.IOException;
 
 public class GameOverScreen extends JFrame {
 
+    /**
+     * Játék végét jelző ablak
+     * @param message Ezt a szöveget írjuk a képernyőre
+     */
     public GameOverScreen(String message){
         super("Game over");
         JPanel p = new JPanel();

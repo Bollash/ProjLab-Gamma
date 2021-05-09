@@ -6,15 +6,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AstInfo extends JFrame {
-    private JTextField t0 = new JTextField(4);
-    private JTextField t1 = new JTextField(4);
-    private JTextField t2 = new JTextField(4);
-    private JTextField t3 = new JTextField(4);
-    private JTextField t4 = new JTextField(4);
-    private JTextField t5 = new JTextField(4);
-    private JTextField t6 = new JTextField(4);
-    private JTextField t7 = new JTextField(4);
 
+    /**
+     * Asteroidifo grafikus megjelenítése
+     * @param ast Az aszteroid amiről információkat adjuk
+     */
     public AstInfo(Asteroid ast){
         JPanel panel = new JPanel(new GridBagLayout());
         JPanel p = new JPanel();
@@ -38,19 +34,27 @@ public class AstInfo extends JFrame {
         JLabel l7 = new JLabel("Number of teleport gates on surface:");
 
 
+        JTextField t0 = new JTextField(4);
         t0.setEditable(false);
+        JTextField t1 = new JTextField(4);
         t1.setEditable(false);
+        JTextField t2 = new JTextField(4);
         t2.setEditable(false);
+        JTextField t3 = new JTextField(4);
         t3.setEditable(false);
+        JTextField t4 = new JTextField(4);
         t4.setEditable(false);
+        JTextField t5 = new JTextField(4);
         t5.setEditable(false);
+        JTextField t6 = new JTextField(4);
         t6.setEditable(false);
+        JTextField t7 = new JTextField(4);
         t7.setEditable(false);
 
-        Integer settlercnt = 0;
-        Integer ufocnt = 0;
-        Integer robotcnt = 0;
-        Integer tpgatecnt = 0;
+        int settlercnt = 0;
+        int ufocnt = 0;
+        int robotcnt = 0;
+        int tpgatecnt = 0;
         for (Actor a: ast.getActorsOnSurface()) {
             if(a instanceof Settler)
                 settlercnt += 1;
@@ -70,11 +74,11 @@ public class AstInfo extends JFrame {
             t2.setText("Nothing");
         }
 
-        t3.setText(settlercnt.toString());
-        t4.setText(robotcnt.toString());
-        t5.setText(ufocnt.toString());
+        t3.setText(Integer.toString(settlercnt));
+        t4.setText(Integer.toString(robotcnt));
+        t5.setText(Integer.toString(ufocnt));
         t6.setText(Integer.toString(ast.getTurnsTillCloseToSun()));
-        t7.setText(tpgatecnt.toString());
+        t7.setText(Integer.toString(tpgatecnt));
 
         p0.add(l0);
         p1.add(l1);

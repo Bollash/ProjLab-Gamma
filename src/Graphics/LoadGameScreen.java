@@ -13,6 +13,9 @@ public class LoadGameScreen extends JFrame {
     private JComboBox<String> comboBox;
     private String filepath;
 
+    /**
+     * Játék betöltéséért felelős ablak
+     */
     public LoadGameScreen(){
         this.filepath = System.getProperty("user.dir") + "\\SaveGames";
 

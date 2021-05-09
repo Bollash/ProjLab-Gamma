@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenuScreen extends JFrame {
+    /**
+     * Főmenü megjelenítéséért felelős ablak
+     */
     public MainMenuScreen(){
         JPanel panel = new JPanel();
         JPanel p2 = new JPanel();
