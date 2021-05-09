@@ -1,10 +1,7 @@
 package Graphics;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
 public class GameOverScreen extends JFrame {
 

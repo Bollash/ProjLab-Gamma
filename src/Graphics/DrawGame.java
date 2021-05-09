@@ -1,18 +1,14 @@
 package Graphics;
 
-
 import modell.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 
 public class DrawGame extends JPanel {
 
@@ -77,9 +73,7 @@ public class DrawGame extends JPanel {
 
 
     public void drawGame(Graphics g) {
-        //Background
         g.drawImage(background, 0, 0, null);
-        //Asteroid
         Asteroid temp1 = space.getActors().get(space.getCurrentActor()).getCurrentAsteroid();
         if(space.getAsteroids().indexOf(temp1) % 2 == 0) {
             if(temp1.getLayer() == 3)
@@ -101,7 +95,6 @@ public class DrawGame extends JPanel {
             if(temp1.getLayer() == 0)
                 g.drawImage(ast2e, 425, 75, null);
         }
-        //core material (if not empty)
         if(temp1.getLayer() == 0) {
             if(temp1.getCoreMaterial() != null){
                 if(temp1.getCoreMaterial().getType().equals(MaterialType.Coal))
@@ -120,7 +113,6 @@ public class DrawGame extends JPanel {
                 }
             }
         }
-        //settler
         if(astNum == 0) {
             g.drawImage(astronaut, 700, 125, null);
             astNum = 1;
@@ -137,27 +129,23 @@ public class DrawGame extends JPanel {
             g.drawImage(astronaut4, 700, 125, null);
             astNum = 0;
         }
-        //Robot
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().size(); i++){
             if(space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().get(i).getType().equals("Robot")) {
                 g.drawImage(robot, 850, 175, null);
                 break;
             }
         }
-        //Ufo
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().size(); i++){
             if(space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().get(i).getType().equals("Ufo") && space.getActors().get(i).getType().equals("Ufo")) {
                 g.drawImage(ufo, 550, 175, null);
                 break;
             }
         }
-        //inventory slots
         int posXchange = 0;
         for(int i = 0; i < 10; i++) {
             g.drawImage(invbox, 300 + posXchange, 750, null);
             posXchange += 100;
         }
-        //inventory fill
         posXchange = 0;
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().size(); i++) {
             if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getType() == MaterialType.Coal) {
@@ -181,7 +169,6 @@ public class DrawGame extends JPanel {
                 posXchange += 100;
             }
         }
-        //TpGate
         if(((Settler)space.getActors().get(space.getCurrentActor())).getTpGates().size() == 3) {
             g.drawImage(tpgate3, 0 , 600, null);
         }
