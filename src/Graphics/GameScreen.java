@@ -2,8 +2,6 @@ package Graphics;
 
 
 import modell.*;
-import modell.exceptions.CantBeMinedException;
-import modell.exceptions.LayerNot0Exception;
 import modell.exceptions.SettlerActingException;
 
 import javax.swing.*;
@@ -76,7 +74,6 @@ public class GameScreen extends JFrame {
      * Alap beállítások
      */
     public void createDefaultSettings() {
-        //Setting the default look.
         setResizable(false);
         setSize(1600, 900);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -89,7 +86,6 @@ public class GameScreen extends JFrame {
     public void actOne(){
         while(!space.isGameOver()){
             try {
-                //új kör kezdődik
                 if(space.getCurrentActor() == space.getActors().size()){
                     space.setCurrentActor(0);
                     space.handleCountDown();
@@ -145,7 +141,6 @@ public class GameScreen extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //{"Build Teleport Gate","Build Robot","Build Base","Drill","Mine","Move","Put Material Back","Put Teleport gate down"}
             switch((String) act.getSelectedItem()){
                 case "Build Teleport Gate":
                     ((Settler)space.getActors().get(space.getCurrentActor())).craftGates();
@@ -220,6 +215,4 @@ public class GameScreen extends JFrame {
             new MainMenuScreen();
         }
     }
-
-
 }
