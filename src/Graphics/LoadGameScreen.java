@@ -66,6 +66,9 @@ public class LoadGameScreen extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             String filename = filepath + "\\" + comboBox.getSelectedItem();
+            if(comboBox.getSelectedItem().equals("No saved games")){
+                return;
+            }
 
             try {
                 FileInputStream fileIn = new FileInputStream(filename);
