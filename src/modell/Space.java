@@ -166,10 +166,8 @@ public class Space implements java.io.Serializable{
                 asteroids.get(i).sunStorm();
             }
             turnsTillSunStorm = sunStormFreq;
-            System.out.println("A számláló elérte a nullát és napszél lett. A számláló visszaállt a kiindulási állapotba.");
             return;
         }
-        System.out.println("A napszél számláló eggyel csökkent.");
     }
 
     /**
