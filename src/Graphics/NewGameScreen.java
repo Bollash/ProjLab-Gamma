@@ -6,8 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
+/**
+ * A NewGameScreen-en választhatjuk ki, hogy a játék hogyan inicializálódjon, vagyis miből mennyit szeretnénk
+ */
 public class NewGameScreen extends JFrame {
 
     private JTextField settlerCnt;
@@ -15,6 +17,9 @@ public class NewGameScreen extends JFrame {
     private JTextField sameAstCnt;
     private JTextField solarWindFreq;
 
+    /**
+     * NewGameScreen konstruktora, inicializáljuk a NewGameScreen-t
+     */
     public NewGameScreen(){
         JPanel panel = new JPanel();
         JPanel p2 = new JPanel();
@@ -81,6 +86,9 @@ public class NewGameScreen extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    /**
+     * A Back gomb hatását definiálja, vagyis ha rányomunk a back-re visszaugrunk a GameScreen-re
+     */
     private class BackButtonActionListener implements ActionListener {
 
         JFrame frame;
@@ -96,6 +104,9 @@ public class NewGameScreen extends JFrame {
         }
     }
 
+    /**
+     * A Star gomb hatását definiálja, vagyis ha rányomunk a start-ra elindul a játék, és a megadott értékekkel inicializálja azt
+     */
     private class StartGameButtonActionListener implements ActionListener{
 
         JFrame frame;

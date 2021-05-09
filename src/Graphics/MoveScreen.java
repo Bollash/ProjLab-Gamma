@@ -1,6 +1,5 @@
 package Graphics;
 
-import modell.Asteroid;
 import modell.IAsteroid;
 import modell.Space;
 import modell.exceptions.MoveFailedException;
@@ -11,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * MoveScreen-en választhatjuk ki, hogy melyik aszteroidára mozogjunk
+ */
 public class MoveScreen extends JFrame {
 
     private Space space;
@@ -18,8 +20,13 @@ public class MoveScreen extends JFrame {
     private JComboBox<Integer> comboBox;
     private GameScreen screen;
 
-    public MoveScreen(Space space, GameScreen scren){
-        this.screen = scren;
+    /**
+     * MoveScreen konstruktora, MoveScreeen-t inicializálja
+     * @param space a játék space
+     * @param screen a GameScreen
+     */
+    public MoveScreen(Space space, GameScreen screen){
+        this.screen = screen;
         this.space = space;
         JPanel panel = new JPanel();
         JPanel p2 = new JPanel();
@@ -57,6 +64,9 @@ public class MoveScreen extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    /**
+     * A Move gomb hatását definiálja, vagyis ha rányomunk a move-ra mozgunk a kiválasztott aszteroidára
+     */
     private class MoveButtonActionListener implements ActionListener{
 
         JFrame frame;
@@ -81,6 +91,9 @@ public class MoveScreen extends JFrame {
         }
     }
 
+    /**
+     * A Back gomb hatását definiálja, vagyis ha rányomunk a back-re visszaugrunk a GameScreen-re
+     */
     private class BackButtonActionListener implements ActionListener {
 
         JFrame frame;

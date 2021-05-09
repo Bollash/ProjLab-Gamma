@@ -13,6 +13,10 @@ public class SpaceInfo extends JFrame {
     private JTextField t5 = new JTextField(4);
     private JTextField t6 = new JTextField(4);
 
+    /**
+     * SpaceInfo grafikus megjelenítése
+     * @param space a játék space-e, aminek az infóit nézzük
+     */
     public SpaceInfo(Space space){
         JPanel panel = new JPanel(new GridBagLayout());
         JPanel p = new JPanel();

@@ -11,11 +11,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+/**
+ * SaveGameScreen segítségével tudunk megadni, hogy milyen néven mentjük el a játékot
+ */
 public class SaveGameScreen extends JFrame {
     private Space space;
 
     private JTextField name;
 
+    /**
+     * SaveGameScreen konstruktora, inicializáljuk a SaveGameScreen-t
+     * @param space a játék space-e
+     */
     public SaveGameScreen(Space space){
         this.space = space;
 
@@ -38,6 +45,9 @@ public class SaveGameScreen extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * A Save gomb hatását definiálja, vagyis a beírt néven elmenti a játékot
+     */
     private class SaveButtonActionListener implements ActionListener{
 
         JFrame frame;

@@ -103,7 +103,6 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         return materialArray;
     }
 
-
     /**
      * Ha az aszteroida magja üres, akkor a kapott nyersanyagot beteszi a magjába, egyébként kivételt dob.
      * @param material Ezt teszi be a magba
@@ -268,8 +267,16 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
 
     public void setTurnsTillCloseToSun(int c) { turnsTillCloseToSun = c;}
 
+    public int getCloseToSunFreq() {
+        return closeToSunFreq;
+    }
+
     public int neighborCount() {
         return neighbours.size();
+    }
+
+    public int actorsOnSurfaceCount() {
+        return actorsOnSurface.size();
     }
 
     public List<Actor> getActorsOnSurface() {
@@ -310,4 +317,8 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         return space;
     }
 
+
+    public void setCloseToSunFreq(int closeToSunFreq) {
+        this.closeToSunFreq = closeToSunFreq;
+    }
 }

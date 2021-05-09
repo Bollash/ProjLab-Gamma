@@ -1,23 +1,29 @@
 package Graphics;
 
 import modell.*;
-import modell.exceptions.MoveFailedException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * PutBackMaterial segítségével tudunk kiválasztani egy nyersanyagot, amelyet visszatehetünk az aszteroidára
+ */
 public class PutBackMaterial extends JFrame {
     private Space space;
     private JComboBox<String> comboBox;
     private Settler currentSettler;
     private GameScreen screen;
 
+    /**
+     * PutBackMaterial konstruktora, inicializáljuk a PutBackMaterial screen-t
+     * @param space a játék space-e
+     * @param screen a GameScreen
+     */
     public PutBackMaterial(Space space, GameScreen screen) {
         this.screen = screen;
         this.space = space;
@@ -27,19 +33,16 @@ public class PutBackMaterial extends JFrame {
         panel.setLayout(new FlowLayout());
         currentSettler = (Settler) space.getActors().get(space.getCurrentActor());
 
-        //Huh ez ritka csúnya, de lesz még csúnyább nem sokárra. Megszedjük a materialokat és bedobjuk egy setbe. Ezt átalakítjuk String[]-é és ezt adjuk a cbboxnak.
         List<Material> arr = currentSettler.getMaterials().getMaterials();
         if(arr.size() > 0){
             Set<String> set = new HashSet<>();
             for (Material mat : arr) {
                 set.add(mat.getType().toString());
             }
-            //Alapból 0 volt a string[] paramétere, de szerintem így kell
             comboBox = new JComboBox<>(new DefaultComboBoxModel<>(set.toArray(new String[set.size()])));
         }else{
             comboBox = new JComboBox<>(new String[]{"Nothing"});
         }
-
 
         JButton putBackButton = new JButton("Put Back");
         putBackButton.addActionListener(new PutBackButtonActionListener(this));
@@ -60,25 +63,19 @@ public class PutBackMaterial extends JFrame {
         this.setVisible(true);
     }
 
-
+    /**
+     * A PutBack gomb hatását definiálja, vagyis ha rányomunk a PutBack-re a kiválasztott nyersanyagot visszatesszük az aszteroidára
+     */
     private class PutBackButtonActionListener implements ActionListener {
-
 
         JFrame frame;
 
-
         public PutBackButtonActionListener(JFrame frame) {
-
             this.frame = frame;
-
         }
 
-
         @Override
-
         public void actionPerformed(ActionEvent e) {
-            //Na akkor hol is kezdjem? Switchel megszedjuk, hogy melyik materialról van szó. Hú de jó csináltunk egy getCoal/ice etc metódust. Na ez az indexxel tér vissza.
-            //A settler putbackje meg valamiért Material objectet vár. Na ezt kell a switch alatti csúnya részben megcsinálni.
             if(comboBox.getSelectedItem() != null){
                 String pick = (String) comboBox.getSelectedItem();
                 int idx = 0;
@@ -111,32 +108,24 @@ public class PutBackMaterial extends JFrame {
                 screen.setVisible(true);
                 setDefaultCloseOperation(EXIT_ON_CLOSE);
             }
-
         }
-
     }
 
-
+    /**
+     * A Back gomb hatását definiálja, vagyis ha rányomunk a back-re visszaugrunk a GameScreen-re
+     */
     private class BackButtonActionListener implements ActionListener {
-
 
         JFrame frame;
 
-
         public BackButtonActionListener(JFrame frame) {
-
             this.frame = frame;
-
         }
 
-
         @Override
-
         public void actionPerformed(ActionEvent e) {
-
             frame.dispose();
             screen.setVisible(true);
-
         }
 
     }
