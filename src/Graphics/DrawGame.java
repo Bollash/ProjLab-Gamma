@@ -2,6 +2,7 @@ package Graphics;
 
 
 import modell.*;
+import modell.exceptions.MoveFailedException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,6 +18,9 @@ import java.util.Random;
 
 public class DrawGame extends JPanel {
 
+    /**
+     * A játékhoz használt képfájlok
+     */
     private BufferedImage ast1, ast1b1, ast1b2, ast1e,
             ast2, ast2b1, ast2b2, ast2e,
             ast3, ast3b1, ast3b2, ast3e,
@@ -26,13 +30,18 @@ public class DrawGame extends JPanel {
             coal, ice, iron, uran, uran2, uran3,
             coalIcon, iceIcon, ironIcon, uranIcon, uran2Icon, uran3Icon;
 
+    /**
+     * A játékhoz használt space
+     */
     private Space space;
 
-    private int astNum;
-
+    /**
+     * A játékot kirajzoló osztály
+     * @param spaceField: kívülről megkapja a spacet amin éppen játszunk
+     * konstruktora a DrawGame classnak
+     */
     public DrawGame(Space spaceField) {
         space = spaceField;
-        astNum = 0;
         try{
             ast1 = ImageIO.read(new File("image/ast1.png"));
             ast1b1 = ImageIO.read(new File("image/ast1b1.png"));
@@ -81,16 +90,29 @@ public class DrawGame extends JPanel {
     }
 
 
+    /**
+     * A JPanel paintComponentjét overrideoló föggvény
+     * @param g: Graphics típusú objektum
+     */
     @Override
     public void paintComponent(Graphics g){
         drawGame(g);
     }
 
-
+    /**
+     * A játékot kirajzoló függvény
+     * @param g: Graphics típusú objektum
+     * background, aszteroida, settler, ufo, robot, materialok és inventory kirajzolása
+     */
     public void drawGame(Graphics g) {
-        //Background
+        /**
+         * A background kirajzolása
+         */
         g.drawImage(background, 0, 0, null);
-        //Asteroid
+        /**
+         * Az aszteroid kirajzolása
+         * Modulo 4 alapján választja ki, hogy melyik textúrát használja.
+         */
         Asteroid temp1 = space.getActors().get(space.getCurrentActor()).getCurrentAsteroid();
         if(space.getAsteroids().indexOf(temp1) % 4 == 0) {
             if(temp1.getLayer() == 3)
@@ -132,7 +154,9 @@ public class DrawGame extends JPanel {
             if(temp1.getLayer() == 0)
                 g.drawImage(ast4e, 425, 75, null);
         }
-        //core material (if not empty)
+        /**
+         * Az aszteroida magjában lévő nyersanyag kirajzolása, ha nem üres
+         */
         if(temp1.getLayer() == 0) {
             if(temp1.getCoreMaterial() != null){
                 if(temp1.getCoreMaterial().getType().equals(MaterialType.Coal))
@@ -151,7 +175,9 @@ public class DrawGame extends JPanel {
                 }
             }
         }
-        //settler
+        /**
+         * A settler kirajzolása
+         */
         Random r = new Random();
         int randInt = r.nextInt(4);
         switch(randInt) {
@@ -160,27 +186,35 @@ public class DrawGame extends JPanel {
             case 2: g.drawImage(astronaut3, 700, 125, null); break;
             case 3: g.drawImage(astronaut4, 700, 125, null); break;
         }
-        //Robot
+        /**
+         * A robot kirajzolása, ha van éppen az aszteroidán
+         */
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().size(); i++){
             if(space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().get(i).getType().equals("Robot")) {
                 g.drawImage(robot, 850, 175, null);
                 break;
             }
         }
-        //Ufo
+        /**
+         * Az ufo kirajzolása, ha van éppen az aszteroidán
+         */
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().size(); i++){
             if(space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().get(i).getType().equals("Ufo") && space.getActors().get(i).getType().equals("Ufo")) {
                 g.drawImage(ufo, 550, 175, null);
                 break;
             }
         }
-        //inventory slots
+        /**
+         * Inventory kirajzolása
+         */
         int posXchange = 0;
         for(int i = 0; i < 10; i++) {
             g.drawImage(invbox, 300 + posXchange, 750, null);
             posXchange += 100;
         }
-        //inventory fill
+        /**
+         * Az inventoryba az alapanyagok berajzolása
+         */
         posXchange = 0;
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().size(); i++) {
             if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getType() == MaterialType.Coal) {
@@ -204,7 +238,9 @@ public class DrawGame extends JPanel {
                 posXchange += 100;
             }
         }
-        //TpGate
+        /**
+         * Teleportkapu ikon kirajzolása
+         */
         if(((Settler)space.getActors().get(space.getCurrentActor())).getTpGates().size() == 3) {
             g.drawImage(tpgate3, 0 , 600, null);
         }
