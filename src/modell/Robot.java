@@ -27,9 +27,12 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
         }
     }
 
+    /**
+     * Napvihar éri a robotot és ha nem tud elbújni, akkor meghal és leveszi magát a spaceről
+     * @return boolean érték
+     */
     @Override
     public boolean getSunStormed() {
-        // Ha meghal leveszi magát a spaceről
         if(currentAsteroid.getLayer() != 0 || currentAsteroid.getCoreMaterial() != null){
             space.removeActor(this);
             return true;

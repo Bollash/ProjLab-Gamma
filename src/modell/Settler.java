@@ -52,7 +52,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         int value = space.getAliveSettlerCnt() - 1;
         space.setAliveSettlerCnt(value);
         if(value <= 1) space.setGameOver(true);
-        System.out.println("adios");
+        System.out.println("A telepes meghal");
         return true;
     }
 
@@ -68,7 +68,6 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         return false;
     }
 
-    //Todo
     @Override
     public void act() throws SettlerActingException {
         throw new SettlerActingException("Settler acts");
@@ -88,7 +87,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
     }
 
     /**
-     * gyárt egy kapupárt ha van nyersanyag, és nála nincs 1 darab kapu se
+     * Gyárt egy kapupárt ha van nyersanyag, és nála nincs 1 darab kapu se
      */
     public void craftGates(){
         if(tpGates.size() <= 1){
