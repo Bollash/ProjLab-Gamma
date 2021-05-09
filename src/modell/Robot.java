@@ -53,21 +53,15 @@ public class Robot extends Actor implements iDrill, java.io.Serializable{
             return;
         }
         try {
-            //Szomszédos fúrható aszteroidára mozog
             currentAsteroid.getDrillableNeighbour().addActor(this);
-            System.out.println("Az actor egy szomszédos aszteroidára mozgott.");
-        //Nincs fúrható aszteroida szomszéd
         }catch (NoDrillableNeighbourException ex){
             if(currentAsteroid.getNeighbours().size() != 0){
                 try {
-                    //Random szomszédos aszteroidára mozgott
                     currentAsteroid.getNeighbours().get(0).addActor(this);
-                    System.out.println("Az actor egy szomszédos aszteroidára mozgott.");
                 } catch (MoveFailedException e) {
                     e.printStackTrace();
                 }
             }else{
-                System.out.println("Az actor nem tud szomszédos aszteroidára mozogni.");
             }
         }catch (MoveFailedException e){
             e.printStackTrace();

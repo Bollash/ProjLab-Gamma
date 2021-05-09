@@ -29,16 +29,11 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         Material material;
         try {
             material = currentAsteroid.getMined();
-
-            System.out.println("Telepes bányászott.");
             if(materials.getMaterials().size() < 10){
                 materials.addMaterial(material);
-                System.out.println("A nyersanyag el lett tárolva");
             }else{
-                System.out.println("A nyersanyagnak nincs hely ezért elpusztult.");
             }
         } catch (CantBeMinedException | LayerNot0Exception e) {
-            System.out.println("Cant be mined");
         }
         space.incrementCurrentActor();
     }
@@ -52,7 +47,6 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         int value = space.getAliveSettlerCnt() - 1;
         space.setAliveSettlerCnt(value);
         if(value <= 1) space.setGameOver(true);
-        System.out.println("A telepes meghal");
         return true;
     }
 
@@ -80,9 +74,7 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
         if(currentAsteroid.countMaterialsOnSurface().canBuildBase()){
             space.incrementCurrentActor();
             space.setGameOver(true);
-            System.out.println("Felépült a bázis. Nyertek a telepesek");
         }else{
-            System.out.println("Nem sikerült a bázis építés, mert nincs elég nyersanyag az aszteroidán.");
         }
     }
 
@@ -104,7 +96,6 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
                 space.addActor(gates[1]);
                 gates[0].setSpace(space);
                 gates[1].setSpace(space);
-                System.out.println("A telepes teleportkapukat épített.");
             } catch (NotEnoughMaterialException e) {
                 System.out.println("Nem sikerült a teleportkapu építés, mert nincs elég nyersanyag.");
             }
@@ -125,7 +116,6 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
             currentAsteroid.addActor(r);
             r.setCurrentAsteroid(currentAsteroid);
             r.setSpace(space);
-            System.out.println("A telepes robotot épített.");
         }catch(NotEnoughMaterialException e){
             System.out.println("Nem sikerült a robot építés, mert nincs elég nyersanyag.");
         }
@@ -140,7 +130,6 @@ public class Settler extends Actor implements iDrill, iMine, java.io.Serializabl
             try {
                 currentAsteroid.addCore(mat);
                 space.incrementCurrentActor();
-                System.out.println("Telepes visszatette a nyersanyagot.");
                 materials.getMaterials().remove(mat);
             } catch (CoreFullException e) {
                 System.out.println("Nem sikerült a visszatétel, mert a mag nem volt üres.");
