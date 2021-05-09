@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.io.Serializable;
 
 public class Space implements java.io.Serializable{
 
@@ -158,9 +157,7 @@ public class Space implements java.io.Serializable{
         turnsTillSunStorm--;
 
         if(turnsTillSunStorm == 0){
-            // megkeverjük
             Collections.shuffle(asteroids);
-            // Ha páratlan hosszó akkor 1 ha nem akkor 0. Ezzel lehet biztosítani hogy mindig a fele + 0.5 aszteroidán van vihar
             int correction = asteroids.size() % 2 == 0?0:1;
             for(int i = 0; i < asteroids.size() / 2 + correction; i++){
                 asteroids.get(i).sunStorm();
@@ -261,6 +258,5 @@ public class Space implements java.io.Serializable{
 
     public void incrementCurrentActor(){
         currentActor++;
-        System.out.println(currentActor);
     }
 }
