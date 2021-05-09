@@ -56,16 +56,14 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
     public void getDrilled(){
         if(layer != 0) {
             layer = layer-1;
-            System.out.println("Az actor megfúrta az aszteroidát.");
             return;
         }
-        System.out.println("Nem sikerült fúrni, mert az aszteroida kérge már 0.");
     }
 
     /**
      * Ha már át lett fúrva a kéreg, akkor kiveszi a materialt és a meghívó megkapja azt.
      * @return Magjában lévő material
-     * @throws CantBeMinedException
+     * @throws CantBeMinedException-t dob
      */
     public Material getMined() throws CantBeMinedException, LayerNot0Exception {
         if (layer == 0) {
@@ -102,7 +100,6 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         }
         return materialArray;
     }
-
 
     /**
      * Ha az aszteroida magja üres, akkor a kapott nyersanyagot beteszi a magjába, egyébként kivételt dob.
@@ -150,7 +147,6 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
         turnsTillCloseToSun = turnsTillCloseToSun -1;
         if(turnsTillCloseToSun == 0)
             {
-            System.out.println("Napközelbe került az aszteroida.");
             if(layer == 0){
                 if(coreMaterial != null){
                     try {
@@ -163,7 +159,6 @@ public class Asteroid implements IAsteroid, java.io.Serializable{
             }
                 turnsTillCloseToSun = closeToSunFreq;
         }else{
-            System.out.println("A napközeli számláló eggyel csökkent.");
         }
         return false;
     }

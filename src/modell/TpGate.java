@@ -66,13 +66,16 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
     public void removeNeighbour(IAsteroid asteroid) {
     }
 
+    /**
+     * Ha le van téve a tp gate akkor visszatér a párja layerével
+     * Ha nincs akkor -1 es visszatéréssel jelezzük, hogy ez nem valid úticél
+     */
+
     @Override
     public int getLayer() {
-        // Ha le van téve a tp gate akkor visszatér a párja layerével
         if(linkedTpGate.currentAsteroid != null){
             return linkedTpGate.currentAsteroid.getLayer();
         }
-        // Ha nincs akkor -1 es visszatéréssel jelezzük, hogy ez nem valid uticél
         return -1;
     }
 
@@ -88,22 +91,27 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
         space.removeActor(this);
     }
 
+    /**
+     * Napvihar: Aktiváljuk
+     * A tpgate sose hal meg a napviharban
+     * @return boolean
+     */
     @Override
     public boolean getSunStormed() {
-        // Aktiváljuk
         if(!activated) activated = true;
-        // A tpgate nem hal meg sose napviharban
         return false;
     }
 
+    /**
+     * Ha van legalább egy szomszéd akkor mozog
+     * Ellenőrizzük, hogy magára ne lépjen hanem az első lehetőségre
+     */
     @Override
     public void act(){
         if(activated){
             try {
-                //Ha van legalább egy szomszéd akkor mozog
                 if(currentAsteroid.getValidNeighbours().size() != 0){
                     for(int i = 0; i < currentAsteroid.getValidNeighbours().size(); i++){
-                        // ellenőrizzük, hogy magára ne lépjen hanem az első lehetőségre
                         if(currentAsteroid.getValidNeighbours().get(i) != this){
                             move(currentAsteroid.getValidNeighbours().get(i));
                             System.out.println("xdxd");
@@ -145,10 +153,6 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
         }else{
             System.out.println("False");
         }
-    }
-
-    public Settler getInSettler() {
-        return inSettler;
     }
 
     public void setInSettler(Settler inSettler) {

@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * NeighbourInfo-n a kiválasztott szomszédos aszteroida információit megtekinthetjük
+ */
 public class NeighbourInfo extends JFrame {
     private JTextField t0 = new JTextField(4);
     private JTextField t1 = new JTextField(4);
@@ -22,6 +25,10 @@ public class NeighbourInfo extends JFrame {
     private Asteroid ast;
     private Asteroid pickedAst;
 
+    /**
+     * NeighbourInfo konstruktora, inicializálja a NeighbourInfo ablakot
+     * @param ast az aktuális aszteroida, amelyiken állunk
+     */
     public NeighbourInfo(Asteroid ast){
         this.ast = ast;
         this.pickedAst = null;
@@ -114,45 +121,46 @@ public class NeighbourInfo extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * A List gomb hatását definiálja, vagyis ha rányomunk a list-re kilistázzuk a kiválasztott aszteroida adatait
+     */
     public class ListButtonActionListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            //if (e.getActionCommand().equals("List")) {
-                int settlercnt = 0;
-                int ufocnt = 0;
-                int robotcnt = 0;
-                int tpgatecnt = 0;
-                if(neighbours.getSelectedItem() != null){
-                    if(ast.getValidNeighbours().get((int)neighbours.getSelectedItem()) instanceof Asteroid){
-                        pickedAst = (Asteroid)ast.getNeighbours().get((int)neighbours.getSelectedItem());
-                    }else{
-                        pickedAst = ((TpGate)ast.getNeighbours().get((int)neighbours.getSelectedItem())).getLinkedTpGate().getCurrentAsteroid();
-                    }
-                    for (Actor a: pickedAst.getActorsOnSurface()) {
-                        if(a instanceof Settler)
-                            settlercnt += 1;
-                        if(a instanceof modell.Robot)
-                            robotcnt += 1;
-                        if(a instanceof Ufo)
-                            ufocnt += 1;
-                        if(a instanceof TpGate)
-                            tpgatecnt += 1;
-                    }
-
-                    t0.setText(Integer.toString(pickedAst.getSpace().getAsteroids().indexOf(ast)));
-                    t1.setText(Integer.toString(pickedAst.getLayer()));
-                    if (ast.getCoreMaterial() != null) {
-                        t2.setText(pickedAst.getCoreMaterial().getType().name());
-                    }else{
-                        t2.setText("Nothing");
-                    }
-                    t3.setText(Integer.toString(settlercnt));
-                    t4.setText(Integer.toString(robotcnt));
-                    t5.setText(Integer.toString(ufocnt));
-                    t6.setText(Integer.toString(pickedAst.getTurnsTillCloseToSun()));
-                    t7.setText(Integer.toString(tpgatecnt));
+            int settlercnt = 0;
+            int ufocnt = 0;
+            int robotcnt = 0;
+            int tpgatecnt = 0;
+            if(neighbours.getSelectedItem() != null){
+                if(ast.getValidNeighbours().get((int)neighbours.getSelectedItem()) instanceof Asteroid){
+                    pickedAst = (Asteroid)ast.getNeighbours().get((int)neighbours.getSelectedItem());
+                }else{
+                    pickedAst = ((TpGate)ast.getNeighbours().get((int)neighbours.getSelectedItem())).getLinkedTpGate().getCurrentAsteroid();
                 }
-            //}
+                for (Actor a: pickedAst.getActorsOnSurface()) {
+                    if(a instanceof Settler)
+                        settlercnt += 1;
+                    if(a instanceof modell.Robot)
+                        robotcnt += 1;
+                    if(a instanceof Ufo)
+                        ufocnt += 1;
+                    if(a instanceof TpGate)
+                        tpgatecnt += 1;
+                }
+
+                t0.setText(Integer.toString(pickedAst.getSpace().getAsteroids().indexOf(ast)));
+                t1.setText(Integer.toString(pickedAst.getLayer()));
+                if (ast.getCoreMaterial() != null) {
+                    t2.setText(pickedAst.getCoreMaterial().getType().name());
+                }else{
+                    t2.setText("Nothing");
+                }
+                t3.setText(Integer.toString(settlercnt));
+                t4.setText(Integer.toString(robotcnt));
+                t5.setText(Integer.toString(ufocnt));
+                t6.setText(Integer.toString(pickedAst.getTurnsTillCloseToSun()));
+                t7.setText(Integer.toString(tpgatecnt));
+            }
         }
     }
 }

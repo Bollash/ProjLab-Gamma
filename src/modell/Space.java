@@ -237,10 +237,6 @@ public class Space implements java.io.Serializable{
         return turnsTillSunStorm;
     }
 
-    public int getSunStormFreq() {
-        return sunStormFreq;
-    }
-
     public void setTurnsTillSunStorm(int c){ turnsTillSunStorm = c; }
 
     public void status(){

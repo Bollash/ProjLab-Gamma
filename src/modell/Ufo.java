@@ -23,7 +23,6 @@ public class Ufo extends Actor implements iMine{
             mine();
             System.out.println("Az actor bányászik");
         } catch (CantBeMinedException | LayerNot0Exception e) {
-            //TODO: Jelenleg az első szomszédosra mozog. Jelenleg így működik, de ha hasznosra akarnánk csinálni akkor randomizálni kéne. De ez a teszteknél kiszámíthatatlan lenne.
             if(currentAsteroid.getNeighbours().size() != 0){
                 try {
                     move(currentAsteroid.getNeighbours().get(0));
