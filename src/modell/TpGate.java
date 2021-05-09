@@ -115,21 +115,12 @@ public class TpGate extends Actor implements IAsteroid, java.io.Serializable {
                         if(currentAsteroid.getValidNeighbours().get(i) != this){
                             move(currentAsteroid.getValidNeighbours().get(i));
                             return;
-                        }else{
-                            if(currentAsteroid.getNeighbours().size() == 1){
-                                System.out.println("Az actor nem tud szomszédos aszteroidára mozogni.");
-                            }
                         }
                     }
-                }else{
-                    System.out.println("Az actor nem tud szomszédos aszteroidára mozogni.");
                 }
-
             } catch (MoveFailedException e) {
                 e.printStackTrace();
             }
-        }else{
-            System.out.println("A TpGate nem csinál semmit.");
         }
         space.incrementCurrentActor();
     }

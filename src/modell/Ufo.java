@@ -12,16 +12,22 @@ public class Ufo extends Actor implements iMine{
         return true;
     }
 
+    /**
+     * Túléli az ufó
+     * @return false-> nem hal meg
+     */
     @Override
     public boolean getSunStormed() {
         return false;
     }
 
+    /**
+     * Ha tud bányászik, ha nem akkor mozog
+     */
     @Override
     public void act(){
         try {
             mine();
-            System.out.println("Az actor bányászik");
         } catch (CantBeMinedException | LayerNot0Exception e) {
             if(currentAsteroid.getNeighbours().size() != 0){
                 try {
@@ -29,18 +35,26 @@ public class Ufo extends Actor implements iMine{
                 } catch (MoveFailedException moveFailedException) {
                     moveFailedException.printStackTrace();
                 }
-            }else{
-                System.out.println("Az actor nem tud szomszédos aszteroidára mozogni.");
             }
         }
     }
 
+    /**
+     * Bányászik az ufo
+     * @throws CantBeMinedException
+     * @throws LayerNot0Exception
+     */
     @Override
     public void mine() throws CantBeMinedException, LayerNot0Exception {
         currentAsteroid.getMined();
         space.incrementCurrentActor();
     }
 
+    //Nem csinálunk semmit, és ennek nem is kéne itt lennie, de utólsó nap nem változtátnék ezen
+    /**
+     * Nem csinál semmit.
+     * @param mat
+     */
     @Override
     public void putMaterialBack(Material mat){}
 
