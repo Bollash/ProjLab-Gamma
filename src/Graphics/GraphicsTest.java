@@ -4,7 +4,7 @@ import modell.*;
 
 public class GraphicsTest {
     public static void main(String[] args){
-        //new MainMenuScreen();
+        new MainMenuScreen();
         //new NewGameScreen();
         //System.out.println(MaterialType.Coal.toString());
         //Space sp = new Space(3, 4, 5, 6);
@@ -16,6 +16,8 @@ public class GraphicsTest {
         Space spacee = new Space(5,20,20,20,70);
         new GameScreen(spacee);
         */
+
+        /*
         Space spacexd = new Space(0,0,0,1);
         spacexd.setAliveSettlerCnt(2);
 
@@ -57,5 +59,7 @@ public class GraphicsTest {
 
         new GameScreen(spacexd);
        // new GameOverScreen("asd123");
+
+         */
     }
 }
