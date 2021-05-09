@@ -5,6 +5,9 @@ import modell.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * SpaceInfo segítségével tudjuk megnézni a space-ünk információit
+ */
 public class SpaceInfo extends JFrame {
     private JTextField t1 = new JTextField(4);
     private JTextField t2 = new JTextField(4);
