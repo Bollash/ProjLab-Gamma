@@ -69,7 +69,7 @@ public class MoveScreen extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if((int)comboBox.getSelectedItem() != -1){
                 try {
-                    iAsteroids.get((int)comboBox.getSelectedItem()).addActor(space.getActors().get(space.getCurrentActor()));
+                    space.getActors().get(space.getCurrentActor()).move(iAsteroids.get((int)comboBox.getSelectedItem()));
                 } catch (MoveFailedException moveFailedException) {
                     moveFailedException.printStackTrace();
                 }
