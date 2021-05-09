@@ -1,19 +1,26 @@
 package Graphics;
 
+
 import modell.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
+
 
 public class DrawGame extends JPanel {
 
     private BufferedImage ast1, ast1b1, ast1b2, ast1e,
             ast2, ast2b1, ast2b2, ast2e,
+            ast3, ast3b1, ast3b2, ast3e,
+            ast4, ast4b1, ast4b2, ast4e,
             astronaut, astronaut2, astronaut3, astronaut4,
             robot, ufo, background, invbox, tpgate3, tpgate2, tpgate1, tpgate0,
             coal, ice, iron, uran, uran2, uran3,
@@ -35,6 +42,14 @@ public class DrawGame extends JPanel {
             ast2b1 = ImageIO.read(new File("image/ast2b1.png"));
             ast2b2 = ImageIO.read(new File("image/ast2b2.png"));
             ast2e = ImageIO.read(new File("image/ast2e.png"));
+            ast3 = ImageIO.read(new File("image/ast3.png"));
+            ast3b1 = ImageIO.read(new File("image/ast3b1.png"));
+            ast3b2 = ImageIO.read(new File("image/ast3b2.png"));
+            ast3e = ImageIO.read(new File("image/ast3e.png"));
+            ast4 = ImageIO.read(new File("image/ast4.png"));
+            ast4b1 = ImageIO.read(new File("image/ast4b1.png"));
+            ast4b2 = ImageIO.read(new File("image/ast4b2.png"));
+            ast4e = ImageIO.read(new File("image/ast4e.png"));
             astronaut = ImageIO.read(new File("image/astronaut.png"));
             astronaut2 = ImageIO.read(new File("image/astronaut2.png"));
             astronaut3 = ImageIO.read(new File("image/astronaut3.png"));
@@ -73,9 +88,11 @@ public class DrawGame extends JPanel {
 
 
     public void drawGame(Graphics g) {
+        //Background
         g.drawImage(background, 0, 0, null);
+        //Asteroid
         Asteroid temp1 = space.getActors().get(space.getCurrentActor()).getCurrentAsteroid();
-        if(space.getAsteroids().indexOf(temp1) % 2 == 0) {
+        if(space.getAsteroids().indexOf(temp1) % 4 == 0) {
             if(temp1.getLayer() == 3)
                 g.drawImage(ast1, 425, 75, null);
             if(temp1.getLayer() == 2)
@@ -85,7 +102,7 @@ public class DrawGame extends JPanel {
             if(temp1.getLayer() == 0)
                 g.drawImage(ast1e, 425, 75, null);
         }
-        else if(space.getAsteroids().indexOf(temp1) % 2 == 1) {
+        else if(space.getAsteroids().indexOf(temp1) % 4 == 1) {
             if(temp1.getLayer() == 3)
                 g.drawImage(ast2, 425, 75, null);
             if(temp1.getLayer() == 2)
@@ -95,6 +112,27 @@ public class DrawGame extends JPanel {
             if(temp1.getLayer() == 0)
                 g.drawImage(ast2e, 425, 75, null);
         }
+        else if(space.getAsteroids().indexOf(temp1) % 4 == 2) {
+            if(temp1.getLayer() == 3)
+                g.drawImage(ast3, 425, 75, null);
+            if(temp1.getLayer() == 2)
+                g.drawImage(ast3b1, 425, 75, null);
+            if(temp1.getLayer() == 1)
+                g.drawImage(ast3b2, 425, 75, null);
+            if(temp1.getLayer() == 0)
+                g.drawImage(ast3e, 425, 75, null);
+        }
+        else if(space.getAsteroids().indexOf(temp1) % 4 == 3) {
+            if(temp1.getLayer() == 3)
+                g.drawImage(ast4, 425, 75, null);
+            if(temp1.getLayer() == 2)
+                g.drawImage(ast4b1, 425, 75, null);
+            if(temp1.getLayer() == 1)
+                g.drawImage(ast4b2, 425, 75, null);
+            if(temp1.getLayer() == 0)
+                g.drawImage(ast4e, 425, 75, null);
+        }
+        //core material (if not empty)
         if(temp1.getLayer() == 0) {
             if(temp1.getCoreMaterial() != null){
                 if(temp1.getCoreMaterial().getType().equals(MaterialType.Coal))
@@ -113,39 +151,36 @@ public class DrawGame extends JPanel {
                 }
             }
         }
-        if(astNum == 0) {
-            g.drawImage(astronaut, 700, 125, null);
-            astNum = 1;
+        //settler
+        Random r = new Random();
+        int randInt = r.nextInt(4);
+        switch(randInt) {
+            case 0: g.drawImage(astronaut, 700, 125, null); break;
+            case 1: g.drawImage(astronaut2, 700, 125, null); break;
+            case 2: g.drawImage(astronaut3, 700, 125, null); break;
+            case 3: g.drawImage(astronaut4, 700, 125, null); break;
         }
-        if(astNum == 1) {
-            g.drawImage(astronaut2, 700, 125, null);
-            astNum = 2;
-        }
-        if(astNum == 2) {
-            g.drawImage(astronaut3, 700, 125, null);
-            astNum++;
-        }
-        if(astNum == 3){
-            g.drawImage(astronaut4, 700, 125, null);
-            astNum = 0;
-        }
+        //Robot
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().size(); i++){
             if(space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().get(i).getType().equals("Robot")) {
                 g.drawImage(robot, 850, 175, null);
                 break;
             }
         }
+        //Ufo
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().size(); i++){
             if(space.getActors().get(space.getCurrentActor()).getCurrentAsteroid().getActorsOnSurface().get(i).getType().equals("Ufo") && space.getActors().get(i).getType().equals("Ufo")) {
                 g.drawImage(ufo, 550, 175, null);
                 break;
             }
         }
+        //inventory slots
         int posXchange = 0;
         for(int i = 0; i < 10; i++) {
             g.drawImage(invbox, 300 + posXchange, 750, null);
             posXchange += 100;
         }
+        //inventory fill
         posXchange = 0;
         for(int i = 0; i < space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().size(); i++) {
             if(space.getActors().get(space.getCurrentActor()).getMaterials().getMaterials().get(i).getType() == MaterialType.Coal) {
@@ -169,6 +204,7 @@ public class DrawGame extends JPanel {
                 posXchange += 100;
             }
         }
+        //TpGate
         if(((Settler)space.getActors().get(space.getCurrentActor())).getTpGates().size() == 3) {
             g.drawImage(tpgate3, 0 , 600, null);
         }
